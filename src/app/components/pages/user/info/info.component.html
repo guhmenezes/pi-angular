@@ -1,0 +1,24 @@
+<h2> Dados </h2>
+
+<table class="table table-striped bg-light">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nome</th>
+      <th>Senha</th>
+      <th>Data de Nascimento</th>
+      <th>E-mail</th>
+      <th>Telefone</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of users ">
+      <td>{{ user.cpf }}</td>
+      <td>{{ user.name }}</td>
+      <td>{{ user.password }}</td>
+      <td>{{ user.birthDate }}</td>
+      <td>{{ user.email }}</td>
+      <td> {{ user.phoneNumber }}</td>
+    </tr>
+  </tbody>
+</table>

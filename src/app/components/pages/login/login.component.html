@@ -1,0 +1,61 @@
+<!-- <div>
+  <form id="sign-in" autocomplete="off">
+  
+    <h2 class="h4">Acesse a plataforma</h2>
+    <div class="text-right">   
+       <label>CPF/CNPJ:</label>
+       <input class="login" type="text" id="login" name="login" maxlength="18">
+    </div>
+    <div class="float-end">
+        <label>Senha:</label>
+        <input class="login" type="password" id="senha" name="senha">
+    </div>
+      <a class="float-end" href="#">Esqueceu sua senha?</a>
+    <button class="btn btn-light w-100" type="button" id="login" >Acessar</button><br>
+    <button class="btn btn-light w-100" type="button" id="register">Cadastre-se</button>
+    <p>Novo no Clube de Vantagens?<br><a href="cadastropf.html">Cadastre-se gratuitamente</a>.</p> 
+  </form>
+</div> -->
+
+<div class="border border-light my-5 mx-auto">
+  <div class=" border border-light m-1">
+    <h2 class="h4 text-center mt-5 mb-3 mx-5">Acesse a plataforma</h2>
+    <form autocomplete="off">
+      <div class="row my-4 mx-auto col-9">
+        <div class="form-floating">
+          <input
+            type="text"
+            class="form-control px-4 bg-dark text-light"
+            
+            id="cpf-cnpj"
+            placeholder=" "
+            maxlength="18"
+          />
+          <label class="mx-3" for="floatingInput">CPF ou CNPJ</label>
+        </div>
+      </div>
+      <div class="row my-4 mb-3 mx-auto col-9">
+        <div class="form-floating ">
+          <input
+            type="password"
+            class="form-control px-4 bg-dark text-light"
+            
+            id="password"
+            placeholder=" "
+          />
+          <label class="mx-3" for="floatingInput">Senha</label>
+        </div>
+      </div>
+      <div class="row my-4 mx-auto col-8">
+        <div class="form-group mt-2">
+          <button type="button" class="btn btn-outline-light float-end w-100 my-2"
+          [routerLink]="['/login']">Entrar</button>
+          <button type="button" class="btn btn-outline-light float-start w-100"
+          [routerLink]="['/cadastro']">Cadastrar</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+
