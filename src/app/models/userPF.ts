@@ -1,11 +1,10 @@
 export class UserPF{
-  id!: number; //increment no back
-  cpf!: string; // body{cpf: , senha: , nome: , dataNascimento: , email: , telefone: }
-  password!: string; 
-  name!: string;
-  birthDate!: Date;
+  nome!: string;
+  cpf!: string;
   email!: string;
-  phoneNumber!: string;
+  telefone!: string;
+  senha!: string;
+  data_nascimento!: string;
 }
 
 // export class UserPF {

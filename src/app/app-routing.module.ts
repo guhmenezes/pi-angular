@@ -6,6 +6,7 @@ import { CampaignComponent } from './components/pages/user/campaign/campaign.com
 import { CardsComponent } from './components/pages/user/cards/cards.component';
 import { InfoComponent } from './components/pages/user/info/info.component';
 import { UserComponent } from './components/pages/user/user.component';
+import { AuthGuard } from './services/auth.guard';
 
 const routes: Routes = [
   {
@@ -23,19 +24,23 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    component: UserComponent
+    component: UserComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'promocoes',
-    component: CampaignComponent
+    component: CampaignComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'cartoes',
-    component: CardsComponent
+    component: CardsComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'info',
-    component: InfoComponent
+    component: InfoComponent,
+    canActivate: [AuthGuard]
   },
   
 ];

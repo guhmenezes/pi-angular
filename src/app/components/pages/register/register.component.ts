@@ -35,11 +35,11 @@ export class RegisterComponent implements OnInit {
       confirmPassword: '',
       registerPF: this.fb.group({
         cpf: '',
-        password: '',
-        name:  ['', Validators.required],
-        birthDate:  ['', Validators.required],
+        senha: '',
+        nome:  ['', Validators.required],
+        data_nascimento:  ['', Validators.required],
         email: ['', [Validators.required, Validators.email]],
-        phoneNumber: ['', Validators.required],
+        telefone: ['', Validators.required],
       }),
       registerPJ: this.fb.group({
         cnpj: '',
@@ -52,21 +52,6 @@ export class RegisterComponent implements OnInit {
       }),
       accept: [false, [Validators.requiredTrue]],
     });
-    // this.registerPF = this.fb.group({
-    //   name:  ['', Validators.required],
-    //   birthDate:  ['', Validators.required],
-    //   email: ['', Validators.required, Validators.email],
-    //   phoneNumber: ['', Validators.required],
-    // }),
-    // this.registerPJ = this.fb.group({
-    //   cnpj: '',
-    //   password: '',
-    //   corporateName: '',
-    //   tradeName: '',
-    //   startDate:'',
-    //   email: '',
-    //   phoneNumber: ''
-    // })
   }
 
   ngOnInit(): void {
@@ -83,7 +68,7 @@ export class RegisterComponent implements OnInit {
         console.log('é cpf')
         this.cpf = value;
         this.registerForm.get('registerPF')?.patchValue({
-          cpf: value
+          cpf: value.replaceAll('.','').replaceAll('-','')
         })
         // this.isCpf = true
         break
@@ -127,7 +112,7 @@ export class RegisterComponent implements OnInit {
     if (createPassword.length >= 4 && createPassword === confirmPassword){
       console.log('bingo');
       this.registerForm.get('registerPF')?.patchValue({
-        password: confirmPassword  
+        senha: confirmPassword  
       })
       this.passwordValid = true;
     }
@@ -144,8 +129,20 @@ export class RegisterComponent implements OnInit {
   //   }
   // }
 
+  treatingInfo(){
+    let name = this.registerForm.get('registerPF')?.get('nome')?.value.toLowerCase();
+    let birthDate = this.registerForm.get('registerPF')?.get('data_nascimento')?.value.split('/');
+    console.log(birthDate)
+    this.registerForm.get('registerPF')?.patchValue({
+      nome: name,
+      data_nascimento: birthDate.reverse().join('-')
+    });
+  }
+
   createUser(){
+    this.treatingInfo()
     let bodyPF = this.registerForm.get('registerPF');
+    console.log(bodyPF)
     let bodyPJ = this.registerForm.get('registerPJ');
     if(bodyPF?.valid){
       this.register.createConsumer(bodyPF?.value).subscribe(

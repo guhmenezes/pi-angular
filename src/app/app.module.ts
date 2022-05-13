@@ -44,7 +44,7 @@ import { NgxMaskModule } from 'ngx-mask';
     HttpClientModule,
     AppRoutingModule,
     NgxMaskModule.forRoot({
-      dropSpecialCharacters: false,
+      // dropSpecialCharacters: false,
     })
   ],
   providers: [],

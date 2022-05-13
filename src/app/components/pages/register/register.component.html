@@ -8,7 +8,7 @@
       <!-- *ngIf="!isCpf" -->
     <div class="form-group">
       <input class="cpforcnpj" type="text" class="" name="cpforcnpj" formControlName="cpforcnpj" 
-      maxlength="20" mask="CPF_CNPJ">
+      maxlength="20" mask="CPF_CNPJ" [dropSpecialCharacters]="false">
       <button class="botao" type="button" (click)="getCpfOrCnpj()">Avançar</button> 
   
     </div>
@@ -23,7 +23,7 @@
           <label *ngIf="cpf else cnpj">CPF:</label>
           <ng-template #cnpj>CNPJ:</ng-template>
           <input type="text" class="form-control" name="cpf" 
-          [value]="registerForm.get('cpforcnpj')!.value" readonly />
+          [value]="registerForm.get('cpforcnpj')!.value"  readonly />
         </div>
         <div class="form-group mb-2">
           <label for="password">Senha:</label>
@@ -68,7 +68,7 @@
           class="form-control"
           id="name"
           name="name"
-          formControlName="name"
+          formControlName="nome"
         />
       </div>
       <div class="form-group">
@@ -78,7 +78,9 @@
           class="form-control"
           id="date"
           name="date"
-          formControlName="birthDate"
+          formControlName="data_nascimento"
+          mask="00/00/0000"
+          [dropSpecialCharacters]="false"
         />
       </div>
       <div class="form-group">
@@ -99,7 +101,8 @@
           class="form-control"
           id="phoneNumber"
           name="phoneNumber"
-          formControlName="phoneNumber"
+          formControlName="telefone"
+          mask="(00) 0 0000-0000 || (00) 0000-0000"
         />
       </div>
     </div>

@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { UserPF } from '../models/userPF';
 import { HttpClient } from '@angular/common/http'
-import { FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { UserPJ } from '../models/userPJ';
 
@@ -10,7 +9,7 @@ import { UserPJ } from '../models/userPJ';
 })
 export class RegisterService {
   getUsersUrl = 'http://localhost:3100/api/users'
-  createUserUrl = 'http://localhost:3100/api/register'
+  createUserUrl = 'http://localhost:8080/v1/usuarios'
   constructor(private httpClient: HttpClient) { }
 
   createConsumer(user: UserPF): Observable<UserPF>{
@@ -21,12 +20,12 @@ export class RegisterService {
     return this.httpClient.post<UserPJ>(this.createUserUrl, user)
   }
 
-  getAllConsumers(): Observable<UserPF[]>{
-    return this.httpClient.get<UserPF[]>(this.getUsersUrl)
-  }
+  // getAllConsumers(): Observable<UserPF[]>{
+  //   return this.httpClient.get<UserPF[]>(this.getUsersUrl)
+  // }
 
-  getAllCorporates(): Observable<UserPJ[]>{
-    return this.httpClient.get<UserPJ[]>(this.getUsersUrl)
-  }
+  // getAllCorporates(): Observable<UserPJ[]>{
+  //   return this.httpClient.get<UserPJ[]>(this.getUsersUrl)
+  // }
 }
 

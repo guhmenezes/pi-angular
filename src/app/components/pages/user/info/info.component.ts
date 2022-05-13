@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { UserPF } from 'src/app/models/userPF';
+import { LoginService } from 'src/app/services/login.service';
 import { RegisterService } from 'src/app/services/register.service';
 
 @Component({
@@ -10,14 +11,14 @@ import { RegisterService } from 'src/app/services/register.service';
 export class InfoComponent implements OnInit {
   users: UserPF[] = [];
 
-  constructor(private register: RegisterService) { }
+  constructor(private info: LoginService) { }
 
   ngOnInit(): void {
     this.getUser()
   }
 
   getUser(): void {
-    this.register.getAllConsumers().subscribe({
+    this.info.getAllConsumers().subscribe({
       next: users => {
         this.users = users;
         console.log(users);
