@@ -146,14 +146,22 @@ export class RegisterComponent implements OnInit {
     let bodyPJ = this.registerForm.get('registerPJ');
     if(bodyPF?.valid){
       this.register.createConsumer(bodyPF?.value).subscribe(
-        () => {
+        response => {
+          if (response.status === 201){
             console.log('usou o createconsumer');
             console.log(bodyPF?.value)
             console.log(bodyPF?.valid)
+            console.log('Response =', response)
+            console.log('Status =', response.status)
             alert('Usuário cadastrado com sucesso');
-            this.registerForm.reset();
-            this.router.navigate(['/'])
-        }
+            // this.registerForm.reset();
+            // this.router.navigate(['/'])
+          }
+        },
+        error => {
+          console.log('deu ruim')
+          console.log('Erro', error.status) 
+          }
       )
     } else if(bodyPJ?.valid){
       this.register.createCorporate(bodyPJ?.value).subscribe(

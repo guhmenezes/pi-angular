@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { UserPF } from '../models/userPF';
-import { HttpClient } from '@angular/common/http'
+import { HttpClient, HttpParamsOptions, HttpResponse } from '@angular/common/http'
 import { Observable } from 'rxjs';
 import { UserPJ } from '../models/userPJ';
 
@@ -12,8 +12,8 @@ export class RegisterService {
   createUserUrl = 'http://localhost:8080/v1/usuarios'
   constructor(private httpClient: HttpClient) { }
 
-  createConsumer(user: UserPF): Observable<UserPF>{
-    return this.httpClient.post<UserPF>(this.createUserUrl, user)
+  createConsumer(user: UserPF): Observable<HttpResponse<Response>>{
+    return this.httpClient.post<Response>(this.createUserUrl, user, {observe: 'response'})
   }
 
   createCorporate(user: UserPJ): Observable<UserPJ>{
