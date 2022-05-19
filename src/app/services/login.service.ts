@@ -14,6 +14,7 @@ export class LoginService {
   private getUsersUrl = 'http://localhost:3100/api/users'
   private loginUrl = 'http://localhost:8080/login'
   private userAuth: boolean = false;
+  getUserInfo = 'http://localhost:8080/v1/usuarios/thiscpf'
 
   // showMenuEmitter = new EventEmitter<boolean>();
 
@@ -25,7 +26,7 @@ export class LoginService {
     //   // this.showMenuEmitter.emit(true);
       this.router.navigate(['/login'])
     } else {
-      this.userAuth = false;
+      this.userAuth = true;
     //   // this.showMenuEmitter.emit(false);
       alert('Usuário e/ou senha incorretos.')
     }
@@ -43,8 +44,8 @@ export class LoginService {
     return this.httpClient.get<UserPF[]>(this.getUsersUrl)
   }
 
-  getConsumer(cpf: string): Observable<UserPF>{
-    return this.httpClient.get<UserPF>(`${this.getUsersUrl}/${cpf}`)
+  getConsumer(): Observable<UserPF>{
+    return this.httpClient.get<UserPF>(`${this.getUserInfo}`)
   }
 
   getAllCorporates(): Observable<UserPJ[]>{

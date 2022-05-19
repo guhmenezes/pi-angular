@@ -21,15 +21,15 @@ export class LoginComponent implements OnInit {
   }
 
   login(){
-    this.loginService.getUser(this.user).subscribe(
-      response => {
-        console.log(response)
-        console.log(response.headers)
-        console.log(response.headers.get('authorization'))
-        let header:string = response.headers.get('Authorization')!
-        console.log(header)
-      }
-    )
+    // this.loginService.getUser(this.user).subscribe(
+    //   response => {
+    //     console.log(response)
+    //     console.log(response.headers)
+    //     console.log(response.headers.get('authorization'))
+    //     let header:string = response.headers.get('Authorization')!
+    //     console.log(header)
+    //   }
+    // )
   //   try{
   //   this.loginService.getConsumer(this.user.login!).subscribe({
   //     next: response => {

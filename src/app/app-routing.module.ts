@@ -25,22 +25,22 @@ const routes: Routes = [
   {
     path: 'login',
     component: UserComponent,
-    canActivate: [AuthGuard]
+    // canActivate: [AuthGuard]
   },
   {
     path: 'promocoes',
     component: CampaignComponent,
-    canActivate: [AuthGuard]
+    // canActivate: [AuthGuard]
   },
   {
     path: 'cartoes',
     component: CardsComponent,
-    canActivate: [AuthGuard]
+    // canActivate: [AuthGuard]
   },
   {
     path: 'info',
     component: InfoComponent,
-    canActivate: [AuthGuard]
+    // canActivate: [AuthGuard]
   },
   
 ];

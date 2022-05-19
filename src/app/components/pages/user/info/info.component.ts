@@ -9,7 +9,7 @@ import { RegisterService } from 'src/app/services/register.service';
   styleUrls: ['./info.component.css']
 })
 export class InfoComponent implements OnInit {
-  users: UserPF[] = [];
+  user!: UserPF;
 
   constructor(private info: LoginService) { }
 
@@ -18,9 +18,9 @@ export class InfoComponent implements OnInit {
   }
 
   getUser(): void {
-    this.info.getAllConsumers().subscribe({
-      next: users => {
-        this.users = users;
+    this.info.getConsumer()?.subscribe({
+      next: (users:any) => {
+        this.user = users
         console.log(users);
       }
     })
