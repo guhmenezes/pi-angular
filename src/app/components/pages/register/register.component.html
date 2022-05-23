@@ -1,181 +1,252 @@
-<div class="bg-success col-12">
+<section class="py-1 px-1 mt-4">
+  <div class="container d-flex bg-warning justify-content-center py-5 px-5">
 
-  <form autocomplete="off" [formGroup]="registerForm" (ngSubmit)="createUser()">
     
-    <h2 >Cadastro</h2>
-    
-    <div *ngIf="!cpf && !cnpj"><h3>Informe seu CPF ou CNPJ:</h3>
-      <!-- *ngIf="!isCpf" -->
-    <div class="form-group">
-      <input class="cpforcnpj" type="text" class="" name="cpforcnpj" formControlName="cpforcnpj" 
-      maxlength="20" mask="CPF_CNPJ" [dropSpecialCharacters]="false">
-      <button class="botao" type="button" (click)="getCpfOrCnpj()">Avançar</button> 
-  
-    </div>
-    </div>
+    <form class="text-center" autocomplete="off" [formGroup]="registerForm" (ngSubmit)="createUser()">
       
-    <div *ngIf="(cpf || cnpj) && !passwordValid">
-      <!-- *ngIf="cpf && !passwordValid" -->
-      <h2 class="titform">Crie sua Senha</h2>
-    
-      <div>
-        <div class="form-group mb-2">
-          <label *ngIf="cpf else cnpj">CPF:</label>
-          <ng-template #cnpj>CNPJ:</ng-template>
-          <input type="text" class="form-control" name="cpf" 
-          [value]="registerForm.get('cpforcnpj')!.value"  readonly />
-        </div>
-        <div class="form-group mb-2">
-          <label for="password">Senha:</label>
-          <input
-            type="password"
-            class="form-control"
-            id="password"
+      
+      <div *ngIf="!cpf && !cnpj">
+        <h1 class="h3 mb-3 fw-normal">Cadastro</h1>
+        <h2 class="h6 my-4 fw-normal text-center" >Informe seu CPF ou CNPJ:</h2>
+        <!-- *ngIf="!isCpf" -->
+      <div class="form-group cpforcnpj w-75 mx-auto">
+        <input type="text" class="form-control text-center" name="cpforcnpj" formControlName="cpforcnpj" 
+        mask="CPF_CNPJ" [dropSpecialCharacters]="false">        
+        <button class="btn-primary fa-solid fa-circle-arrow-right" type="submit" (click)="getCpfOrCnpj()">
+        </button>
+      </div>
+      </div>
+        
+      <div *ngIf="(cpf || cnpj) && !passwordValid" class="create-password mx-auto">
+        <!-- *ngIf="cpf && !passwordValid" -->
+        <h2 class="h3 mb-3 fw-normal text-center">Crie sua Senha</h2>
+      
+        <div class="d-flex justify-content-center align-items-center row">
+          <div class="h6 my-2 form-group text-center mx-auto">
+            <label *ngIf="cpf else cnpj">CPF:</label>
+            <ng-template #cnpj>CNPJ:</ng-template>
+            <!-- <input type="text" class="form-control w-50" name="cpf" 
+            [value]="registerForm.get('cpforcnpj')!.value"  readonly /> -->
+            <span class="w-50 value">{{ registerForm.get('cpforcnpj')?.value }}</span>
+          </div>
+          <div class="form-floating w-75 mt-3 mx-5">
+            <input type="password" class="form-control" placeholder=" "
             name="password"
-            maxlength="10"
-            data-required
+            id="password"
             formControlName="createPassword"
-            autocomplete="new-password"
-          />
-          <i (click)="showPass()">VerSenha</i>
-        </div>
-        <div class="form-group mb-2">
-          <label for="passwordConfirm">Confirme a Senha:</label>
-          <input
-            type="password"
-            class="form-control"
-            id="passwordConfirm"
+            maxlength="12">
+            <label for="floatingInput" class="mx-3" >Senha</label>
+          </div>
+          <div class="form-floating w-75 mx-5 mb-3">
+            <input type="password" class="form-control" id="floatingPassword" placeholder=" "
             name="passwordConfirm"
-            data-required
+            id="passwordConfirm"
             formControlName="confirmPassword"
-            autocomplete="new-password"
-          />
-        </div>
-        <div>
-          <button class="botao" type="button" (click)="back()">Voltar</button> 
-          <button class="botao" type="button" (click)="validPassword()">Avançar</button> 
+            maxlength="12">
+            <label for="floatingPassword" class="mx-3">Confirme sua senha</label>
+          </div>
+          <!-- <div class="form-group mb-2 d-flex justify-content-between align-items-center">
+            <label for="password">Senha:</label>
+            <input
+              type="password"
+              class="form-control pass-field w-50"
+              id="password"
+              name="password"
+              maxlength="10"
+              data-required
+              formControlName="createPassword"
+              autocomplete="new-password"
+            /> -->
+            <!-- <i class="fa-solid fa-eye" (click)="showPass()"></i>
+            <i class="fa-solid fa-eye-slash" (click)="hidePass()"></i> -->
+          <!-- </div> -->
+          <!-- <div class="form-group mb-2 d-flex justify-content-between align-items-center">
+            <label for="passwordConfirm">Confirme a Senha:</label>
+            <input
+              type="password"
+              class="form-control w-50"
+              id="passwordConfirm"
+              name="passwordConfirm"
+              data-required
+              formControlName="confirmPassword"
+              autocomplete="new-password"
+            />
+          </div> -->
+          <div class="d-flex justify-content-around">
+            <button class="btn-dark fa-solid fa-circle-arrow-left" type="button" (click)="back()"></button> 
+            <button class="btn-dark fa-solid fa-circle-arrow-right" type="submit" (click)="validPassword()"></button> 
+          </div>
         </div>
       </div>
-    </div>
-
-    <div *ngIf="cpf && passwordValid" formGroupName="registerPF">
-    <!-- *ngIf="cpf && passwordValid" -->
-      <h2>Dados Pessoais</h2>
-      <div class="form-group">
-        <label for="name">Nome Completo:</label>
-        <input
+  
+      <div *ngIf="cpf && passwordValid" formGroupName="registerPF">
+      <!-- *ngIf="cpf && passwordValid" -->
+        <h2>Dados Pessoais</h2>
+        <div class="form-floating w-75 mt-3 mx-5">
+          <input
           type="text"
           class="form-control"
+          placeholder=" "
           id="name"
           name="name"
           formControlName="nome"
-        />
-      </div>
-      <div class="form-group">
-        <label for="date">Data de Nascimento:</label>
-        <input
+          />
+          <label >Nome Completo:</label>
+        </div>
+        <div class="form-floating w-75 mx-5 my-1">
+          <input
           type="text"
           class="form-control"
+          placeholder=" "
           id="date"
           name="date"
           formControlName="data_nascimento"
           mask="00/00/0000"
           [dropSpecialCharacters]="false"
-        />
-      </div>
-      <div class="form-group">
-        <label for="email" >E-mail:</label>
-        <input
-          type="email"
+          />
+          <label for="date">Data de Nascimento:</label>
+        </div>
+        <div class="form-floating w-75 my-1 mx-5">
+          <input
+          type="text"
           class="form-control"
+          placeholder=" "
           id="email"
           name="email"
           autocomplete="off"
           formControlName="email"
-        />
-      </div>
-      <div class="form-group">
-        <label for="phoneNumber">Celular:</label>
-        <input
+          />
+          <label >E-mail:</label>
+        </div>
+        <div class="form-floating w-75 mt-1 mb-3 mx-5">
+          <input
           type="text"
           class="form-control"
+          placeholder=" "
+          type="text"
           id="phoneNumber"
           name="phoneNumber"
           formControlName="telefone"
           mask="(00) 0 0000-0000 || (00) 0000-0000"
-        />
-      </div>
-    </div>
-  
-      <div *ngIf="cnpj && passwordValid" formGroupName="registerPJ">
-        <!-- *ngIf="cpf && passwordValid" -->
-        <h2 class="titform">Dados da Empresa</h2>
-        <div class="form-group">
-          <label for="corporateName">Razão Social:</label>
+          />
+          <label> Celular:</label>
+        </div>
+        <!-- <div class="form-group mb-2 d-flex justify-content-between align-items-center"> -->
+          <!-- <label for="name">Nome Completo:</label>
           <input
             type="text"
-            class="form-control"
-            id="corporateName"
-            name="corporateName"
-            formControlName="corporateName"
+            class="form-control w-50"
+            id="name"
+            name="name"
+            formControlName="nome"
           />
         </div>
         <div class="form-group">
-          <label for="tradeName">Nome Fantasia:</label>
+          <label for="date">Data de Nascimento:</label>
           <input
             type="text"
             class="form-control"
-            id="tradeName"
-            name="tradeName"
-            formControlName="tradeName"
+            id="date"
+            name="date"
+            formControlName="data_nascimento"
+            mask="00/00/0000"
+            [dropSpecialCharacters]="false"
           />
         </div>
         <div class="form-group">
-          <label for="startDate">Data de Nascimento:</label>
-          <input
-            type="text"
-            class="form-control"
-            id="startDate"
-            name="startDate"
-            formControlName="startDate"
-          />
-        </div>
-        <div class="form-group">
-          <label for="emailPJ" >E-mail:</label>
+          <label for="email" >E-mail:</label>
           <input
             type="email"
             class="form-control"
-            id="emailPJ"
+            id="email"
             name="email"
             autocomplete="off"
             formControlName="email"
           />
         </div>
         <div class="form-group">
-          <label for="phoneNumberPJ">Celular:</label>
+          <label for="phoneNumber">Celular:</label>
           <input
             type="text"
             class="form-control"
-            id="phoneNumberPJ"
+            id="phoneNumber"
             name="phoneNumber"
-            formControlName="phoneNumber"
+            formControlName="telefone"
+            mask="(00) 0 0000-0000 || (00) 0000-0000"
           />
-        </div>
-        
+        </div> -->
       </div>
-          <div *ngIf="(cpf || cnpj) && passwordValid">
-            <!-- *ngIf="(cpf || cnpj) && passwordValid" -->
-          <input type="checkbox" formControlName="accept"/>Li e aceito os
-          <a target="_blank">termos de uso.</a><br />
-          <button type="submit" 
-          [disabled]="
-            !registerForm.get('registerPF')?.valid &&
-            !registerForm.get('registerPJ')?.valid ||
-            !registerForm.get('accept')?.valid"
-            >
-          Cadastrar
-          </button>
+    
+        <div *ngIf="cnpj && passwordValid" formGroupName="registerPJ">
+          <!-- *ngIf="cpf && passwordValid" -->
+          <h2 class="titform">Dados da Empresa</h2>
+          <div class="form-group">
+            <label for="corporateName">Razão Social:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="corporateName"
+              name="corporateName"
+              formControlName="corporateName"
+            />
+          </div>
+          <div class="form-group">
+            <label for="tradeName">Nome Fantasia:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="tradeName"
+              name="tradeName"
+              formControlName="tradeName"
+            />
+          </div>
+          <div class="form-group">
+            <label for="startDate">Data de Nascimento:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="startDate"
+              name="startDate"
+              formControlName="startDate"
+            />
+          </div>
+          <div class="form-group">
+            <label for="emailPJ" >E-mail:</label>
+            <input
+              type="email"
+              class="form-control"
+              id="emailPJ"
+              name="email"
+              autocomplete="off"
+              formControlName="email"
+            />
+          </div>
+          <div class="form-group">
+            <label for="phoneNumberPJ">Celular:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="phoneNumberPJ"
+              name="phoneNumber"
+              formControlName="phoneNumber"
+            />
+          </div>
+          
         </div>
-        
-      </form>
-</div>
+            <div *ngIf="(cpf || cnpj) && passwordValid">
+              <!-- *ngIf="(cpf || cnpj) && passwordValid" -->
+            <input type="checkbox" formControlName="accept"/>Li e aceito os
+            <a target="_blank">termos de uso.</a><br />
+            <button type="submit" 
+            [disabled]="
+              !registerForm.get('registerPF')?.valid &&
+              !registerForm.get('registerPJ')?.valid ||
+              !registerForm.get('accept')?.valid"
+              >
+            Cadastrar
+            </button>
+          </div>
+          
+        </form>
+  </div>
+</section>

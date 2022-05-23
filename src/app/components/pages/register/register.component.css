@@ -9,3 +9,71 @@
   float: right;
 
 } */
+
+form{
+  width: 400px;
+  padding: 0;
+  /* background-color: black; */
+}
+
+/* form input{
+  padding: 0 15px;
+} */
+
+.create-password{
+  width: 300px;
+}
+.cpforcnpj {
+  position: relative;
+}
+
+.cpforcnpj input{
+  border-top-right-radius: 20px !important;
+  border-bottom-right-radius: 20px !important;
+}
+
+.btn-primary{
+  background: transparent;
+  border: none;
+  font-size: 48px;
+  position: absolute;
+  color: #0275d8 !important;
+  right: -.7rem;
+  bottom: -.3rem;
+  user-select: none;
+}
+
+form .form-floating:focus-within {
+  z-index: 2;
+}
+
+form input[id="password"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+form input[id="passwordConfirm"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.value{
+  padding-left: 16px;
+}
+
+.btn-primary:hover{
+  right: -.75rem;
+  bottom: -.33rem;
+  font-size: 49px;
+  color: rgb(9, 97, 173) !important;
+}
+
+
+.btn-primary:focus{
+  border-style: 0 none !important;
+  border-color: transparent;
+  box-shadow: 0 0 !important;
+  outline: 0 !important;
+}

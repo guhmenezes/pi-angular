@@ -1,26 +1,45 @@
-<!-- <div>
-  <form id="sign-in" autocomplete="off">
-  
-    <h2 class="h4">Acesse a plataforma</h2>
-    <div class="text-right">   
-       <label>CPF/CNPJ:</label>
-       <input class="login" type="text" id="login" name="login" maxlength="18">
+<main class="border border-secondary rounded py-1 px-1 mt-4">
+  <div class="container d-flex bg-warning justify-content-center border border-secondary py-5 px-5">
+  <form class="text-center">
+    <!-- <img class="mb-4" src="/docs/5.2/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57"> -->
+    <h1 class="h3 mb-3 fw-normal">Acesse a plataforma</h1>
+    
+    <div class="form-floating">
+      <input type="text" class="form-control" placeholder=" "
+      [(ngModel)]="user.username"
+      name="login"
+      id="cpf-cnpj"
+      mask="CPF_CNPJ"
+      [dropSpecialCharacters]="true">
+      <label for="floatingInput">CPF ou CNPJ</label>
     </div>
-    <div class="float-end">
-        <label>Senha:</label>
-        <input class="login" type="password" id="senha" name="senha">
+    <div class="form-floating">
+      <input type="password" class="form-control" id="floatingPassword" placeholder=" "
+      [(ngModel)]="user.password"
+      name="password"
+      id="password"
+      maxlength="12">
+      <label for="floatingPassword">Senha</label>
     </div>
-      <a class="float-end" href="#">Esqueceu sua senha?</a>
-    <button class="btn btn-light w-100" type="button" id="login" >Acessar</button><br>
-    <button class="btn btn-light w-100" type="button" id="register">Cadastre-se</button>
-    <p>Novo no Clube de Vantagens?<br><a href="cadastropf.html">Cadastre-se gratuitamente</a>.</p> 
+    
+    <div class="options mb-3 mt-1 d-flex justify-content-between mx-1">
+      <label>
+        <input type="checkbox" value="remember-me" class="mx-1">Lembrar-me
+      </label>
+      <span class="forgot">Esqueci minha senha</span>
+    </div>
+    <button class="w-100 btn btn-lg btn-primary" type="button" (click)="login()">Entrar</button>
+    <button class="w-100 btn btn-lg btn-secondary mt-2" type="button" [routerLink]="['/cadastro']">Cadastrar</button>
   </form>
-</div> -->
+  </div>
+</main>
 
-<div class="border border-light my-5 mx-auto">
+
+
+
+<!-- <div class="border border-light my-5 mx-auto">
   <div class=" border border-light m-1">
     <h2 class="h4 text-center mt-5 mb-3 mx-5">Acesse a plataforma</h2>
-    <!-- <form autocomplete="off"> -->
       <div class="row my-4 mx-auto col-9">
         <div class="form-floating">
           <input
@@ -54,8 +73,7 @@
           [routerLink]="['/cadastro']">Cadastrar</button>
         </div>
       </div>
-    <!-- </form> -->
   </div>
-</div>
+</div> -->
 
 
