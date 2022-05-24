@@ -1,11 +1,11 @@
 <main class="border border-secondary rounded py-1 px-1 mt-4">
-  <div class="container d-flex bg-warning justify-content-center border border-secondary py-5 px-5">
+  <div class="container d-flex justify-content-center border border-secondary py-5 px-5">
   <form class="text-center">
     <!-- <img class="mb-4" src="/docs/5.2/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57"> -->
     <h1 class="h3 mb-3 fw-normal">Acesse a plataforma</h1>
     
     <div class="form-floating">
-      <input type="text" class="form-control" placeholder=" "
+      <input type="text" class="form-control px-4" placeholder=" "
       [(ngModel)]="user.username"
       name="login"
       id="cpf-cnpj"
@@ -14,7 +14,7 @@
       <label for="floatingInput">CPF ou CNPJ</label>
     </div>
     <div class="form-floating">
-      <input type="password" class="form-control" id="floatingPassword" placeholder=" "
+      <input type="password" class="form-control px-4" id="floatingPassword" placeholder=" "
       [(ngModel)]="user.password"
       name="password"
       id="password"

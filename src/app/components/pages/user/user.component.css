@@ -1,4 +1,8 @@
 .opt{
-    width: 30vw;
-    height: 30vw;
+    width: 150px;
+    height: 150px;
+}
+
+section{
+    width: 800px;
 }

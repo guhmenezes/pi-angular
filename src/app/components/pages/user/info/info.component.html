@@ -1,6 +1,33 @@
-<h2> Dados </h2>
+<section class="py-1 px-1 mt-4">
+  <div class="container d-flex justify-content-center py-3 px-4">
+    <form>
+      <div class="form-group justify-content-between d-flex align-items-center">
+        <label for="name">Nome Completo:</label>
+        <input type="text" class="form-control w-75" id="name"
+        name="name"
+        formControlName="nome"
+        >
+      </div>
+      <div class="form-group justify-content-between d-flex align-items-center">
+        <label for="email">E-mail:</label>
+        <input type="text" class="form-control w-75" id="email"
+        name="email"
+        formControlName="email"
+        >
+      </div>
+      <div class="form-group cpforcnpj justify-content-between d-flex align-items-center">
+        <label for="nome">Celular:</label>
+        <input type="text" class="form-control w-75" id="phoneNumber"
+        name="phoneNumber"
+        formControlName="telefone"
+        >
+      </div>
+      
+    </form>
+  </div>
+</section>
 
-<table class="table table-striped bg-light">
+<!-- <table class="table table-striped bg-light">
   <thead>
     <tr>
       <th>ID</th>
@@ -21,4 +48,4 @@
       <td> {{ user.telefone }}</td>
     </tr>
   </tbody>
-</table>
+</table> -->

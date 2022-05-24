@@ -12,7 +12,7 @@
 
 form{
   width: 400px;
-  padding: 0;
+  /* padding: 15px; */
   /* background-color: black; */
 }
 
@@ -22,17 +22,19 @@ form{
 
 .create-password{
   width: 300px;
+  position: relative;
 }
 .cpforcnpj {
   position: relative;
 }
 
 .cpforcnpj input{
-  border-top-right-radius: 20px !important;
-  border-bottom-right-radius: 20px !important;
+  border-radius: 20px !important;
+  padding-left: 1.75rem;
+  /* border-bottom-right-radius: 20px !important; */
 }
 
-.btn-primary{
+.btn-value{
   background: transparent;
   border: none;
   font-size: 48px;
@@ -63,7 +65,7 @@ form input[id="passwordConfirm"] {
   padding-left: 16px;
 }
 
-.btn-primary:hover{
+.btn-value:hover{
   right: -.75rem;
   bottom: -.33rem;
   font-size: 49px;
@@ -71,9 +73,14 @@ form input[id="passwordConfirm"] {
 }
 
 
-.btn-primary:focus{
+.btn-value:focus{
   border-style: 0 none !important;
   border-color: transparent;
   box-shadow: 0 0 !important;
   outline: 0 !important;
 }
+
+.checkbox{
+  margin-right: .5rem;
+}
+
