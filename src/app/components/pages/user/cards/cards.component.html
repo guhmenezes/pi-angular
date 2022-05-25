@@ -1,1 +1,69 @@
-<p>cards works!</p>
+<!-- <section *ngIf="cards">
+    <table *ngFor="let card of cards">
+        <td>Status: {{card.status}} </td>
+        <td>Descricao: {{card.descricao}} </td>
+        <td>Validade: {{card.dataValidade}}</td>
+        <td>Número de Carimbos: {{card.espacoCarimbado}}</td>
+        <td>Espaço Total: {{card.espacoTotal}}</td>
+    </table>
+</section> -->
+
+<section class="py-1 px-1 mt-4">
+    <div class="container d-flex justify-content-center row mx-auto">
+      <header class="my-4">
+        <h1 class="h3 mb-3 fw-normal text-center">Meus Cartões</h1>
+      </header>
+      <div class="cards">
+          <div id="card" class="" [ngClass]="flip" (click)="flipCard()" *ngFor="let card of cards">
+            <div id="front" class="face">
+              <div>
+                <h3 class="cname">Nome da Empresa</h3>
+                <p class="cdesc">{{card.descricao}}</p>
+                <p class="cdate">{{card.dataValidade | date:'dd/MM/YY'}} </p>
+              </div>
+            </div>
+            <div id="back" class="face">
+              <input
+                type="text"
+                class="idcard"
+                name="idcard"
+                style="display: none"
+                readonly
+              />
+              <ul>
+                <li class="stampfield">
+                  <div class="stamped" ></div>
+                </li>
+                <li class="stampfield">
+                  <div class="stamped" style="display: none"></div>
+                </li>
+                <li class="stampfield">
+                  <div class="stamped" style="display: none"></div>
+                </li>
+                <li class="stampfield">
+                  <div class="stamped" style="display: none"></div>
+                </li>
+                <li class="stampfield">
+                  <div class="stamped" style="display: none"></div>
+                </li>
+                <li class="stampfield">
+                  <div class="stamped" style="display: none"></div>
+                </li>
+                <li class="stampfield">
+                  <div class="stamped" style="display: none"></div>
+                </li>
+                <li class="stampfield">
+                  <div class="stamped" style="display: none"></div>
+                </li>
+                <li class="stampfield">
+                  <div class="stamped" style="display: none"></div>
+                </li>
+                <li class="stampfield">
+                  <div class="stamped" style="display: none"></div>
+                </li>
+              </ul>
+            </div>
+          </div>
+      </div>
+    </div>
+</section>

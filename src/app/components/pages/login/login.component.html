@@ -28,7 +28,7 @@
       </label>
       <span class="forgot">Esqueci minha senha</span>
     </div>
-    <button class="w-100 btn btn-lg btn-primary" type="button" (click)="login()">Entrar</button>
+    <button class="w-100 btn btn-lg btn-primary" type="button" (click)="login()" [routerLink]="['/login']">Entrar</button>
     <button class="w-100 btn btn-lg btn-secondary mt-2" type="button" [routerLink]="['/cadastro']">Cadastrar</button>
   </form>
   </div>

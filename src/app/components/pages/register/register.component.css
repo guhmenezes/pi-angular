@@ -12,6 +12,7 @@
 
 form{
   width: 400px;
+  min-height: 49vh;
   /* padding: 15px; */
   /* background-color: black; */
 }

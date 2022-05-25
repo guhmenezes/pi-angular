@@ -1,0 +1,132 @@
+.cards{
+    width: 800px;
+    height: 218px;
+    position: relative;
+}
+
+#card{
+    transform-style: preserve-3d;
+    display: flex;
+    justify-content: center;
+    transition: all 1.5s;
+}
+
+.flip{
+    transform: rotateY(180deg);
+}
+
+ .card{
+    background-color: rgba(0, 0, 0, 1);
+    border: solid 1px #303030;
+    border-radius: 30px;
+    height: 12rem;
+    width: 18rem;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5px;
+    padding: 30px;
+    box-shadow: 5px 5px rgba(0, 0, 0, 0.5);
+  } 
+  .face{
+    border-radius: 30px;
+    height: 11.8rem;
+    width: 18.05rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+  }
+  
+  #front{
+    background: linear-gradient(180deg, rgb(44, 66, 110), rgb(62, 82, 128));
+    transform: rotateY(180deg);
+    border: #303030 solid 1px;
+    box-shadow: 0px 5px rgba(0, 0, 0, 0.5);;
+  }
+  #back{
+    background: linear-gradient(180deg, rgb(44, 66, 110), rgb(62, 82, 128));
+    border: #303030 solid 1px;
+    backface-visibility: hidden;
+  }
+  .flip{
+    transform: rotateY(180deg);
+  }
+  .cdate{
+    color: white;
+    width: 4.5rem;
+    margin-left: auto;
+    margin-right: 1rem;
+  }
+  
+  #mycards .cname{
+    color:#d6d6d6;
+    margin-top: 1.5rem;
+    margin-bottom: 2rem; 
+  }
+  
+  .cdesc{
+    color: #d6d6d6;
+    font-size: 0.7rem;
+    width: 13rem;
+    height: 2rem;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  #mycards ul{
+    padding: 0;
+    margin: 0;
+  }
+  .stampfield{
+    width: 2.8rem;
+    height: 2.8rem;
+    background-color: #d6d6d6;
+    display: inline-block;
+    padding-left: 0;
+    margin: 0.1rem 0.1rem;
+  
+  }
+  .stamped{
+    width: 2.4rem;
+    height: 2.4rem;
+    background-color: #101010;
+    margin: auto;
+    margin-top: 0.2rem;
+  }
+  #alterar{
+    margin-top: 3rem;
+  }
+  #stampcard button,
+  #newcard button{
+    margin-top: 1.5rem;
+  }
+  #stampcard .labelbox,
+  #stampcard .halfbox,
+  #newcard .halfbox{
+    display: inline-flex;
+    align-items: center;
+    margin-top: 1rem;
+  }
+  #stampcard .halfbox label,
+  #newcard .halfbox label{
+    margin: 0;
+    padding: 0;
+    text-align: right;
+    padding-right: 1rem;
+    width: 20%;
+  }
+  #stampcard .labelbox label{
+    margin: 0;
+    font-size: 1rem;
+    padding: 0;
+    text-align: right;
+    padding-right: 1rem;
+  }
+  #stampcard select{
+    background-color: rgba(55, 89, 151, 0.384);
+    padding: 0.44rem 0.625rem 0.44rem 0.625rem;
+    width: 28%;
+    border-radius: 10px;
+    border-style: none;
+    overflow-y: auto;
+  }

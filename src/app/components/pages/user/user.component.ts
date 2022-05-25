@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-user',
@@ -7,11 +8,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserComponent implements OnInit {
 
-  name: string = 'Teste da Silva Sauro';
+  firstName: string = '';
+  lastName: string = '';
 
-  constructor() { }
+  constructor(private info: LoginService) { }
 
   ngOnInit(): void {
+    this.UserLogged()
+  }
+
+  UserLogged(){
+    this.info.getConsumer().subscribe(
+      data => {
+        let fullName = data.nome.split(" ");
+        this.firstName = fullName[0];
+        this.lastName = fullName[fullName.length-1]
+      }
+    )
   }
 
 }

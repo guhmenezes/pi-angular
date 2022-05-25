@@ -1,0 +1,13 @@
+form{
+    width: 500px;
+}
+
+label{
+    margin-right: 8px;
+    text-align: right;
+}
+
+textarea{
+    resize: none;
+    height: 6rem;
+}  

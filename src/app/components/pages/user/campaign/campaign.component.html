@@ -1,1 +1,48 @@
-<p>campaign works!</p>
+<section class="py-1 px-1 mt-4" *ngIf="promoList">
+    <div class="container d-flex justify-content-center row mx-auto">
+        <header class="my-4">
+        <h1 class="h3 mb-3 fw-normal text-center">Histórico de Promoções</h1>
+    </header>
+    <h2 class="h5 mb-3 fw-normal text-center">Em andamento</h2>
+        <div class="list-group mb-2" *ngFor="let promo of promoList">
+            <a *ngIf="compare(promo.dataValidade, date, true) " href="#" class="list-group-item list-group-item-action bg-primary px-4 py-3" aria-current="true">
+                <div class="d-flex w-100 align-items-center px-3 py-3">
+                    <div class="d-flex row">
+                <h3 class="h5 mb-3">Promoção criada por: {{promo.nomeFantasia | titlecase}}</h3>
+                <p class="mb-1">{{promo.descricao}}</p>
+                </div>
+                <p>Vigente até<br><strong>{{promo.dataValidade | date:"dd/MM/yyyy"}}</strong></p>
+            </div>
+            </a>
+
+            <!-- <a href="#" class="list-group-item list-group-item-action">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">List group item heading</h5>
+                    <small class="text-muted">3 days ago</small>
+                </div>
+                <p class="mb-1">Some placeholder content in a paragraph.</p>
+              <small class="text-muted">And some muted small print.</small>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action">
+              <div class="d-flex w-100 justify-content-between">
+                  <h5 class="mb-1">List group item heading</h5>
+                <small class="text-muted">3 days ago</small>
+            </div>
+            <p class="mb-1">Some placeholder content in a paragraph.</p>
+              <small class="text-muted">And some muted small print.</small>
+            </a> -->
+        </div>  
+        <h2 class="h5 mb-3 fw-normal text-center">Encerrados</h2>
+        <div class="list-group mb-2" *ngFor="let promo of promoList">
+            <a *ngIf="compare(promo.dataValidade, date, false) " href="#" class="list-group-item list-group-item-action bg-danger px-4 py-3" aria-current="true">
+                <div class="d-flex w-100 align-items-center px-3 py-3">
+                    <div class="d-flex row">
+                <h3 class="h5 mb-3">Promoção criada por: {{promo.nomeFantasia | titlecase}}</h3>
+                <p class="mb-1">{{promo.descricao}}</p>
+                </div>
+                <p>Vigente até<br><strong>{{promo.dataValidade | date:"dd/MM/yyyy"}}</strong></p>
+            </div>
+            </a>
+        </div>
+</div>
+</section>

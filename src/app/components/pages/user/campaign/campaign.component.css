@@ -1,0 +1,12 @@
+section{
+    width: 800px;
+}
+
+p.mb-1 {
+    width: 92%;
+}
+
+/* .list{
+    max-height: 50vh;
+    overflow-y: scroll;
+} */

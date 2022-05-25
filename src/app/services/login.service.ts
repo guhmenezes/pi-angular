@@ -6,6 +6,8 @@ import { Observable, tap } from 'rxjs';
 import { UserPF } from '../models/userPF';
 import { UserPJ } from '../models/userPJ';
 import { Login } from '../models/login';
+import { Card } from '../models/card';
+import { Promo } from '../models/promo';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +16,10 @@ export class LoginService {
   private getUsersUrl = 'http://localhost:3100/api/users'
   private loginUrl = 'http://localhost:8080/login'
   private userAuth: boolean = false;
-  getUserInfo = 'http://localhost:8080/v1/usuarios/thiscpf'
+  private getUserInfo = 'http://localhost:8080/v1/usuarios/thiscpf'
+  private getCardsUrl = 'http://localhost:8080/v1/usuarios/thiscpf/cartoes'
+  private getPromoUrl = 'http://localhost:8080/v1/promocao/promocaoid'
+  
 
   // showMenuEmitter = new EventEmitter<boolean>();
 
@@ -51,5 +56,14 @@ export class LoginService {
   getAllCorporates(): Observable<UserPJ[]>{
     return this.httpClient.get<UserPJ[]>(this.getUsersUrl)
   }
+
+  getAllCards(): Observable<Card[]>{
+  return this.httpClient.get<Card[]>(this.getCardsUrl)
+  }
+
+  getAllPromo(): Observable<Promo[]>{
+    return this.httpClient.get<Promo[]>(this.getPromoUrl)
+    }
+
 }
 

@@ -4,7 +4,10 @@ import { LoginComponent } from './components/pages/login/login.component';
 import { RegisterComponent } from './components/pages/register/register.component';
 import { CampaignComponent } from './components/pages/user/campaign/campaign.component';
 import { CardsComponent } from './components/pages/user/cards/cards.component';
+import { CreateCampaignComponent } from './components/pages/user/create-campaign/create-campaign.component';
+import { CreateCardComponent } from './components/pages/user/create-card/create-card.component';
 import { InfoComponent } from './components/pages/user/info/info.component';
+import { StampComponent } from './components/pages/user/stamp/stamp.component';
 import { UserComponent } from './components/pages/user/user.component';
 import { AuthGuard } from './services/auth.guard';
 
@@ -42,7 +45,21 @@ const routes: Routes = [
     component: InfoComponent,
     // canActivate: [AuthGuard]
   },
-  
+  {
+    path: 'create-campaign',
+    component: CreateCampaignComponent,
+    // canActivate: [AuthGuard]
+  },
+  {
+    path: 'generate-card',
+    component: CreateCardComponent,
+    // canActivate: [AuthGuard]
+  },
+  {
+    path: 'stamp',
+    component: StampComponent,
+    // canActivate: [AuthGuard]
+  },
 ];
 
 @NgModule({
