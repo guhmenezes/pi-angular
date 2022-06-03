@@ -1,16 +1,53 @@
 <section class="border border-secondary rounded py-1 px-1 mt-4">
-    <div class="container d-flex justify-content-center border border-secondary py-5 px-5 row mx-auto">
-        <header class="my-4">
-        <p>Olá, {{firstName | titlecase}} {{lastName | titlecase}} </p>
+  <div
+    class="container d-flex justify-content-center border border-secondary py-5 px-5 row mx-auto"
+  >
+    <header class="my-4">
+      <p>Olá, {{ firstName | titlecase }} {{ lastName | titlecase }}</p>
     </header>
-    <div class="justify-content-center align-items-center">        
-            <button class="opt mx-2" routerLink="/promocoes">Promoções PF</button>
-            <button class="opt mx-2" routerLink="/cartoes"> Meus Cartões PF </button>
-            <button class="opt mx-2" routerLink="/info"> Atualizar Dados</button>
-            <button class="opt mx-2" routerLink="/create-campaign">Criar Promoção PJ</button>
-            <button class="opt mx-2" routerLink="/generate-card"> Gerar Cartão PJ</button>
-            <button class="opt mx-2" routerLink="/stamp"> Carimbar Cartão PJ</button>
-            <button class="opt mx-2" routerLink=""> Sair </button>
+    <div class="justify-content-center align-items-center">
+      <button class="opt mx-2" routerLink="/promocoes">
+        <div
+          class="icon w-100 d-flex justify-content-center align-items-center"
+        >
+          <i class="fa-solid fa-square"></i><i class="fa-solid fa-percent"></i>
+        </div>
+        <p>Minhas Promoções</p>
+      </button>
+      <button class="opt mx-2" routerLink="/cartoes">
+        <i class="fa-solid fa-credit-card"></i>
+        <p>Meus Cartões</p>
+      </button>
+      <button class="opt mx-2" routerLink="/info">
+        <i class="fa-solid fa-user"></i>
+        <p>Atualizar Dados</p>
+      </button>
+      <button class="opt mx-2" routerLink="/create-campaign">
+        <div
+          class="icon d-inline-flex justify-content-center align-items-center"
+        >
+          <i class="fa-solid fa-square"></i><i class="fa-solid fa-percent"></i>
+          <i class="fa-solid fa-circle-plus text-success"></i>
+        </div>
+        <div><p>Criar Promoção</p></div>
+      </button>
+      <button class="opt mx-2" routerLink="/generate-card">
+        <div
+          class="icon d-inline-flex justify-content-center align-items-center"
+        >
+          <i class="fa-solid fa-credit-card"></i
+          ><i class="fa-solid fa-circle-plus text-success"></i>
+        </div>
+        <div><p>Gerar Cartão</p></div>
+      </button>
+      <button class="opt mx-2" routerLink="/stamp">
+        <i class="fa-solid fa-stamp"></i>
+        <p>Carimbar Cartão</p>
+      </button>
+      <button class="opt mx-2" routerLink="">
+        <i class="fa-solid fa-arrow-right-to-bracket"></i>
+        <p>Sair</p>
+      </button>
     </div>
-    </div>
+  </div>
 </section>

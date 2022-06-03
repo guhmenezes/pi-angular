@@ -4,14 +4,14 @@
         <h1 class="h3 mb-3 fw-normal text-center">Histórico de Promoções</h1>
     </header>
     <h2 class="h5 mb-3 fw-normal text-center">Em andamento</h2>
-        <div class="list-group mb-2" *ngFor="let promo of promoList">
-            <a *ngIf="compare(promo.dataValidade, date, true) " href="#" class="list-group-item list-group-item-action bg-primary px-4 py-3" aria-current="true">
+        <div class="list-group mb-2 bg-primary">
+            <a  href="#" class="list-group-item list-group-item-action px-4 py-3" aria-current="true">
                 <div class="d-flex w-100 align-items-center px-3 py-3">
                     <div class="d-flex row">
-                <h3 class="h5 mb-3">Promoção criada por: {{promo.nomeFantasia | titlecase}}</h3>
-                <p class="mb-1">{{promo.descricao}}</p>
+                <h3 class="h5 mb-3">Promoção criada por: </h3>
+                <p class="mb-1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam, sapiente reprehenderit! Voluptatibus quisquam tempora sed dicta incidunt nostrum facilis aliquid! Sed repellendus voluptate qui distinctio magnam commodi consectetur temporibus consequatur.</p>
                 </div>
-                <p>Vigente até<br><strong>{{promo.dataValidade | date:"dd/MM/yyyy"}}</strong></p>
+                <p>Vigente até<br><strong>00/00/0000</strong></p>
             </div>
             </a>
 
@@ -33,14 +33,14 @@
             </a> -->
         </div>  
         <h2 class="h5 mb-3 fw-normal text-center">Encerrados</h2>
-        <div class="list-group mb-2" *ngFor="let promo of promoList">
-            <a *ngIf="compare(promo.dataValidade, date, false) " href="#" class="list-group-item list-group-item-action bg-danger px-4 py-3" aria-current="true">
+        <div class="list-group mb-2 bg-danger">
+            <a  href="#" class="list-group-item list-group-item-action form-group px-4 py-3" aria-current="true">
                 <div class="d-flex w-100 align-items-center px-3 py-3">
                     <div class="d-flex row">
-                <h3 class="h5 mb-3">Promoção criada por: {{promo.nomeFantasia | titlecase}}</h3>
-                <p class="mb-1">{{promo.descricao}}</p>
+                <h3 class="h5 mb-3">Promoção criada por: </h3>
+                <p class="mb-1">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptas id dolores consequatur quisquam ratione tempore fugit reiciendis molestiae, officiis amet, eius esse accusamus. Eveniet, officiis! Possimus voluptatibus hic neque expedita?</p>
                 </div>
-                <p>Vigente até<br><strong>{{promo.dataValidade | date:"dd/MM/yyyy"}}</strong></p>
+                <p>Vigente até<br><strong>00/00/0000</strong></p>
             </div>
             </a>
         </div>

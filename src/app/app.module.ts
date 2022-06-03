@@ -19,6 +19,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxMaskModule } from 'ngx-mask';
+import { AccessibilityComponent } from './components/accessibility/accessibility.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { NgxMaskModule } from 'ngx-mask';
     CreateCampaignComponent,
     CreateCardComponent,
     StampComponent,
-    FooterComponent
+    FooterComponent,
+    AccessibilityComponent
   ],
   imports: [
     BrowserModule,
