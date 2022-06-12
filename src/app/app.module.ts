@@ -20,6 +20,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxMaskModule } from 'ngx-mask';
 import { AccessibilityComponent } from './components/accessibility/accessibility.component';
+import { SwiperModule } from 'swiper/angular';
+import { BackComponent } from './components/back/back.component';
+
+import {NgbPaginationModule, NgbAlertModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbdCarouselNavigation } from './components/pages/user/cards/carousel-navigation.component';
 
 @NgModule({
   declarations: [
@@ -37,12 +42,18 @@ import { AccessibilityComponent } from './components/accessibility/accessibility
     CreateCardComponent,
     StampComponent,
     FooterComponent,
-    AccessibilityComponent
+    AccessibilityComponent,
+    BackComponent,
+    NgbdCarouselNavigation
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
+    SwiperModule,
+    NgbPaginationModule, 
+    NgbAlertModule,
+    NgbModule,
     HttpClientModule,
     AppRoutingModule,
     NgxMaskModule.forRoot({
@@ -50,6 +61,7 @@ import { AccessibilityComponent } from './components/accessibility/accessibility
     })
   ],
   providers: [],
+  entryComponents: [ForgotPasswordComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

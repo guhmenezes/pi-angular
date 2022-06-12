@@ -1,7 +1,19 @@
 .cards{
-    width: 800px;
-    height: 218px;
+    /* width: 650px; */
+    height: 230px;
     position: relative;
+}
+
+/* .carousel-control-prev{
+  color: black ;
+} */
+
+section{
+  width: 600px;
+}
+
+i{
+  color: #000;
 }
 
 #card{
@@ -11,61 +23,119 @@
     transition: all 1.5s;
 }
 
+ngb-carousel:focus{
+  user-select: none;
+  border: none;
+  border-style: none !important;
+  border-color: transparent !important;
+  box-shadow: 0 0 !important;
+  outline: 0 !important;
+}
+
 .flip{
     transform: rotateY(180deg);
 }
 
- .card{
-    background-color: rgba(0, 0, 0, 1);
-    border: solid 1px #303030;
+ /* .card{ */
+    /* background-color: rgba(0, 0, 0, 1);
+    user-select: none;
+    border: solid 1px var(--text-color);
     border-radius: 30px;
     height: 12rem;
-    width: 18rem;
+    width: 21rem;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 5px;
     padding: 30px;
-    box-shadow: 5px 5px rgba(0, 0, 0, 0.5);
-  } 
+    box-shadow: 5px 5px var(--shadow-color); */
+  /* }  */
   .face{
     border-radius: 30px;
-    height: 11.8rem;
-    width: 18.05rem;
+    min-height: 95%;
+    width: 87%;
     display: flex;
     justify-content: center;
     align-items: center;
-    position: absolute;
+    position: fixed;
   }
   
   #front{
-    background: linear-gradient(180deg, rgb(44, 66, 110), rgb(62, 82, 128));
+    background: linear-gradient(180deg, rgb(108, 139, 201), rgb(87, 104, 146));
     transform: rotateY(180deg);
-    border: #303030 solid 1px;
-    box-shadow: 0px 5px rgba(0, 0, 0, 0.5);;
+    border: var(--text-color) solid 1px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 1);
+    backface-visibility: hidden;
   }
   #back{
-    background: linear-gradient(180deg, rgb(44, 66, 110), rgb(62, 82, 128));
-    border: #303030 solid 1px;
+    background: linear-gradient(180deg, rgb(108, 139, 201), rgb(87, 104, 146));
+    border: rgba(30,30,30,0.2) solid 1px;
     backface-visibility: hidden;
   }
   .flip{
     transform: rotateY(180deg);
   }
   .cdate{
-    color: white;
+    color: rgb(230, 230, 230);
     width: 4.5rem;
+    margin-top: 20px;
     margin-left: auto;
     margin-right: 1rem;
   }
   
-  #mycards .cname{
-    color:#d6d6d6;
-    margin-top: 1.5rem;
-    margin-bottom: 2rem; 
+  .cname{
+      background-image: linear-gradient(to bottom, rgb(160, 160, 160), rgb(201, 201, 201), rgb(156, 158, 157)) !important;
+      color: black;
+      margin-top: 30px;
+      margin-bottom: 35px;
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-stroke-width: 1px; /* largura da borda */
+      -webkit-text-stroke-color: rgb(66, 64, 64); /* cor da borda */
+    
+      /* Adicionado: */
+      -webkit-text-fill-color: transparent;
+    
+      font-size: 1.75rem;
+      font-weight: bold;
+      line-height: 1.1;
+    }
+
+  
+
+.pulse:hover {
+  animation: pulse 0.7s infinite;
+  margin: 0 auto;
+  display: table;
+  /* margin-top: 50px; */
+  animation-direction: alternate;
+  -webkit-animation-name: pulse;
+  animation-name: pulse;
+}
+
+@-webkit-keyframes pulse {
+  0% {
+    -webkit-transform: scale(1);
+    -webkit-filter: brightness(100%);
   }
+  100% {
+    -webkit-transform: scale(1.01);
+    -webkit-filter: brightness(120%);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    filter: brightness(100%);
+  }
+  100% {
+    transform: scale(1.01);
+    filter: brightness(120%);
+  }
+}
   
   .cdesc{
-    color: #d6d6d6;
+    color: rgb(230, 230, 230);
     font-size: 0.7rem;
     width: 13rem;
     height: 2rem;
@@ -73,60 +143,77 @@
     margin-left: auto;
     margin-right: auto;
   }
-  #mycards ul{
+  /* #mycards ul{
     padding: 0;
     margin: 0;
+  } */
+
+  ul.row{
+    padding: 0;
+    margin: 0;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto;
+    width: 15rem;
   }
+
+  .col{
+    flex: 0;
+    padding-right: 1rem;
+}
   .stampfield{
-    width: 2.8rem;
-    height: 2.8rem;
-    background-color: #d6d6d6;
-    display: inline-block;
-    padding-left: 0;
-    margin: 0.1rem 0.1rem;
-  
+    margin: 5px 5px;
+    width: 2.5rem;
+    height: 2.5rem;
+    background-color: #fff;
+    /* display: flex; */
+    /* margin: 0.1rem 0.1rem; */
+    list-style: none;
   }
-  .stamped{
-    width: 2.4rem;
-    height: 2.4rem;
-    background-color: #101010;
-    margin: auto;
-    margin-top: 0.2rem;
+  .stampfield i{
+    font-size: 2rem;
+    margin-top: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
-  #alterar{
+
+  /* button.carousel-control-prev{
+    height: 50px;
+} */
+  /* #alterar{
     margin-top: 3rem;
   }
   #stampcard button,
   #newcard button{
     margin-top: 1.5rem;
-  }
-  #stampcard .labelbox,
+  } */
+  /* #stampcard .labelbox,
   #stampcard .halfbox,
   #newcard .halfbox{
     display: inline-flex;
     align-items: center;
     margin-top: 1rem;
-  }
-  #stampcard .halfbox label,
+  } */
+  /* #stampcard .halfbox label,
   #newcard .halfbox label{
     margin: 0;
     padding: 0;
     text-align: right;
     padding-right: 1rem;
     width: 20%;
-  }
-  #stampcard .labelbox label{
+  } */
+  /* #stampcard .labelbox label{
     margin: 0;
     font-size: 1rem;
     padding: 0;
     text-align: right;
     padding-right: 1rem;
-  }
-  #stampcard select{
+  } */
+  /* #stampcard select{
     background-color: rgba(55, 89, 151, 0.384);
     padding: 0.44rem 0.625rem 0.44rem 0.625rem;
     width: 28%;
     border-radius: 10px;
     border-style: none;
     overflow-y: auto;
-  }
+  } */

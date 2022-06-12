@@ -12,6 +12,7 @@ import { Card } from '../models/card';
 export class RegisterService {
   private getUsersUrl = 'http://localhost:3100/api/users';
   private createUserUrl = 'http://localhost:8080/v1/usuarios';
+  private createUserPJUrl = 'http://localhost:8080/v1/empresas';
   private getUserInfo = 'http://localhost:8080/v1/usuarios/thiscpf';
   private updateInfo = 'http://localhost:8080/v1/usuarios/thiscpf/edit'; // construir endpoint atualizar
   private createPromoUrl = 'http://localhost:8080/v1/promocao';
@@ -38,7 +39,7 @@ export class RegisterService {
   }
 
   createCorporate(user: UserPJ): Observable<UserPJ>{
-    return this.httpClient.post<UserPJ>(this.createUserUrl, user)
+    return this.httpClient.post<UserPJ>(this.createUserPJUrl, user)
   }
 
   getConsumer(userAuth: boolean):Observable<UserPF> | any{

@@ -1,3 +1,5 @@
-<button class="btn btn-primary">Escurecer</button>
-<button class="btn btn-primary">Leitor</button>
-<button class="btn btn-primary" (click)="zoomIn()">Zoom</button>
+<div id="access" class="d-flex justify-content-end">
+    <button class="btn btn-outline-primary" (click)="toggleTheme()"><i class="fa-solid fa-circle-half-stroke"></i><caption style="display: none">Alterar cor de fundo</caption></button>
+    <button class="btn btn-outline-primary mx-1"><i class="fa-solid fa-play"></i><caption style="display: none">Leitor de tela</caption></button>
+    <button class="btn btn-outline-primary" (click)="zoomIn()"><i class="fa-solid fa-magnifying-glass-plus"></i><caption style="display: none">Ampliar texto</caption></button>
+</div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-forgot-password',
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ForgotPasswordComponent implements OnInit {
 
-  constructor() { }
+  title = 'Esqueceu a Senha ?'
+  
+  constructor(public bsModalRef: NgbModalRef) { }
 
   ngOnInit(): void {
+  }
+
+  onConfirm() {
+
+   }
+
+  onClose() { 
+    this.bsModalRef.hidden
   }
 
 }

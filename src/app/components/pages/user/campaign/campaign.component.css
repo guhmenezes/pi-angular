@@ -1,12 +1,21 @@
 section{
     width: 800px;
+    min-height: 58vh;
 }
 
 p.mb-1 {
     width: 92%;
 }
 
+#active a span:hover, #closed:hover{
+    /* border-right: 2px double black; */
+    text-decoration: underline;
+    /* color: var(--text-color); */
+}
 
+nav{
+    margin-left: 1rem;
+}
 
 /* .list{
     max-height: 50vh;

@@ -28,37 +28,37 @@ const routes: Routes = [
   {
     path: 'login',
     component: UserComponent,
-    // canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
   },
   {
     path: 'promocoes',
     component: CampaignComponent,
-    // canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
   },
   {
     path: 'cartoes',
     component: CardsComponent,
-    // canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
   },
   {
     path: 'info',
     component: InfoComponent,
-    // canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
   },
   {
     path: 'create-campaign',
     component: CreateCampaignComponent,
-    // canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
   },
   {
     path: 'generate-card',
     component: CreateCardComponent,
-    // canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
   },
   {
     path: 'stamp',
     component: StampComponent,
-    // canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
   },
 ];
 

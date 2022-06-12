@@ -3,7 +3,7 @@ export class Card{
     promocaoId!: string;
     dataValidade!: string;
     descricao!: string;
-    espacoTotal!: number;
+    espacoTotal!: number | number[];
     espacoCarimbado!: number;
     status!: string | boolean
 }

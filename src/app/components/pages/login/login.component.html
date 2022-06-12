@@ -23,8 +23,9 @@
     </div>
     
     <div class="options mb-3 mt-1 d-flex justify-content-between mx-1">
-      <label>
-        <input type="checkbox" value="remember-me" class="mx-1">Lembrar-me
+      <label class="d-inline-flex my-0 align-items-center">
+        <input type="checkbox" id="remember-me" [(ngModel)]="user.remember" name="remember"  class="check mx-1 py-5">
+        <p>Lembrar-me</p>
       </label>
       <span class="forgot">Esqueci minha senha</span>
     </div>

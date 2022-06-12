@@ -5,6 +5,7 @@ export class UserPF{
   telefone!: string;
   senha!: string;
   data_nascimento!: string;
+  cnpj?: string
 }
 
 // export class UserPF {

@@ -10,6 +10,7 @@ import { RegisterService } from 'src/app/services/register.service';
 })
 export class InfoComponent implements OnInit {
   user!: UserPF;
+  username: string = '';
   nome!: string;
   email!: string;
   telefone!: string;
@@ -18,11 +19,12 @@ export class InfoComponent implements OnInit {
   constructor(private info: LoginService, private reg: RegisterService) { }
 
   ngOnInit(): void {
+    this.username = window.localStorage.getItem('login')!
     this.getUser()
   }
 
   getUser(): void {
-    this.info.getConsumer()?.subscribe({
+    this.info.getUser(this.username)?.subscribe({
       next: (data:any) => {
         this.user = data;
         this.nome = data.nome.toUpperCase();

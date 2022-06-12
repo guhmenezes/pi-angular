@@ -1,28 +1,28 @@
 <section class="border border-secondary rounded py-1 px-1 mt-4">
   <div
-    class="container d-flex justify-content-center border border-secondary py-5 px-5 row mx-auto"
+    class="container d-flex justify-content-center border border-secondary py-5 px-5 row mx-0"
   >
     <header class="my-4">
       <p>Olá, {{ firstName | titlecase }} {{ lastName | titlecase }}</p>
     </header>
-    <div class="justify-content-center align-items-center">
-      <button class="opt mx-2" routerLink="/promocoes">
+    <div class="opts justify-content-center align-items-center mb-5">
+      <button *ngIf="cpf" class="opt mx-2" routerLink="/promocoes">
         <div
           class="icon w-100 d-flex justify-content-center align-items-center"
         >
           <i class="fa-solid fa-square"></i><i class="fa-solid fa-percent"></i>
         </div>
-        <p>Minhas Promoções</p>
+        <p>Promoções</p>
       </button>
-      <button class="opt mx-2" routerLink="/cartoes">
+      <button *ngIf="cpf" class="opt mx-2" routerLink="/cartoes">
         <i class="fa-solid fa-credit-card"></i>
         <p>Meus Cartões</p>
       </button>
-      <button class="opt mx-2" routerLink="/info">
+      <button *ngIf="cpf" class="opt mx-2" routerLink="/info">
         <i class="fa-solid fa-user"></i>
         <p>Atualizar Dados</p>
       </button>
-      <button class="opt mx-2" routerLink="/create-campaign">
+      <button *ngIf="cnpj" class="opt mx-2" routerLink="/create-campaign">
         <div
           class="icon d-inline-flex justify-content-center align-items-center"
         >
@@ -31,7 +31,7 @@
         </div>
         <div><p>Criar Promoção</p></div>
       </button>
-      <button class="opt mx-2" routerLink="/generate-card">
+      <button *ngIf="cnpj" class="opt mx-2" routerLink="/generate-card">
         <div
           class="icon d-inline-flex justify-content-center align-items-center"
         >
@@ -40,7 +40,7 @@
         </div>
         <div><p>Gerar Cartão</p></div>
       </button>
-      <button class="opt mx-2" routerLink="/stamp">
+      <button *ngIf="cnpj" class="opt mx-2" routerLink="/stamp">
         <i class="fa-solid fa-stamp"></i>
         <p>Carimbar Cartão</p>
       </button>

@@ -1,3 +1,4 @@
+import { HtmlParser } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,14 +8,40 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AccessibilityComponent implements OnInit {
 
+  fontSize = window.getComputedStyle(document.querySelector('html')!).getPropertyValue('font-size')
+  zoom = 12
+  dark = false;
+  
   constructor() { }
 
   ngOnInit(): void {
+    console.log(this.fontSize)
+    this.fontSize = window.localStorage.getItem('fontSize')!
+    console.log(this.fontSize)
+    this.zoom = +this.fontSize.split('p')[0]
+    document.querySelector('html')?.style.setProperty('--font-size', this.fontSize)
+    this.dark = window.localStorage.getItem('dark') == 'true'!
+    if (this.dark)
+    document.body.classList.add('dark-theme') 
   }
-
+  
+  toggleTheme() { 
+    document.body.classList.toggle('dark-theme')
+    if (document.body.classList.contains('dark-theme'))
+    window.localStorage.setItem('dark', 'true')
+    else window.localStorage.setItem('dark', 'false')
+  }
+  
   zoomIn(){
-    let fontSize = document.getElementsByTagName('body')[0].style.fontSize;
-    console.log(fontSize)
+    if(this.zoom >= 20) this.zoom = 12
+    else 
+    this.zoom += 4
+    {
+    this.fontSize = `${this.zoom}px`
+    console.log(this.fontSize)
+    document.querySelector('html')?.style.setProperty('--font-size', this.fontSize)
+    window.localStorage.setItem('fontSize', this.fontSize)
   }
+}
 
 }

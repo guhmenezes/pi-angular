@@ -9,20 +9,23 @@
 </section> -->
 
 <section class="py-1 px-1 mt-4">
-    <div class="container d-flex justify-content-center row mx-auto">
+    <div class="container d-flex justify-content-center row mx-0">
       <header class="my-4">
+        <app-back></app-back>
         <h1 class="h3 mb-3 fw-normal text-center">Meus Cartões</h1>
       </header>
-      <div class="cards">
-          <div id="card" class="" [ngClass]="flip" (click)="flipCard()" *ngFor="let card of cards">
-            <div id="front" class="face">
-              <div>
+      <ngbd-carousel-navigation></ngbd-carousel-navigation>
+      <!-- <div class="cards row d-flex" *ngFor="let card of cards">
+        
+          <div id="card" [ngClass]="flip" class="row" (click)="flipCard(card.cartaoId)" >
+            <div id="front" class="face mx-1 mb-5">
+              <div class="pulse">
                 <h3 class="cname">Nome da Empresa</h3>
-                <p class="cdesc">{{card.descricao}}</p>
+                <p class="cdesc">{{card.descricao | uppercase}}</p>
                 <p class="cdate">{{card.dataValidade | date:'dd/MM/YY'}} </p>
               </div>
             </div>
-            <div id="back" class="face">
+            <div id="back" class="face d-flex justify-content-center align-items-center">
               <input
                 type="text"
                 class="idcard"
@@ -30,40 +33,79 @@
                 style="display: none"
                 readonly
               />
-              <ul>
-                <li class="stampfield">
-                  <div class="stamped" ></div>
-                </li>
-                <li class="stampfield">
-                  <div class="stamped" style="display: none"></div>
-                </li>
-                <li class="stampfield">
-                  <div class="stamped" style="display: none"></div>
-                </li>
-                <li class="stampfield">
-                  <div class="stamped" style="display: none"></div>
-                </li>
-                <li class="stampfield">
-                  <div class="stamped" style="display: none"></div>
-                </li>
-                <li class="stampfield">
-                  <div class="stamped" style="display: none"></div>
-                </li>
-                <li class="stampfield">
-                  <div class="stamped" style="display: none"></div>
-                </li>
-                <li class="stampfield">
-                  <div class="stamped" style="display: none"></div>
-                </li>
-                <li class="stampfield">
-                  <div class="stamped" style="display: none"></div>
-                </li>
-                <li class="stampfield">
-                  <div class="stamped" style="display: none"></div>
-                </li>
-              </ul>
+              <div class="col">
+
+                <ul class="d-grid row g-0">
+                  <li class="stampfield">
+                    <i class="fa-solid fa-check" *ngIf="card.espacoCarimbado > 0"></i>
+                  </li>
+                  <li class="stampfield">
+                    <i class="fa-solid fa-check" *ngIf="card.espacoCarimbado > 1"></i>
+                  </li>
+                  <li class="stampfield">
+                    <i class="fa-solid fa-check" *ngIf="card.espacoCarimbado > 2"></i>
+                  </li>
+                  <li class="stampfield">
+                    <i class="fa-solid fa-check" *ngIf="card.espacoCarimbado > 3"></i>
+                  </li>
+                  <li class="stampfield">
+                    <i class="fa-solid fa-check" *ngIf="card.espacoCarimbado > 4"></i>
+                  </li>
+                </ul>
+                <ul class="d-grid row g-0 " *ngIf="card.espacoTotal > 5">
+                  <li class="stampfield">
+                    <i class="fa-solid fa-check" *ngIf="card.espacoCarimbado > 5"></i>
+                  </li>
+                  <li class="stampfield">
+                    <i class="fa-solid fa-check" *ngIf="card.espacoCarimbado > 6"></i>
+                  </li>
+                  <li class="stampfield">
+                    <i class="fa-solid fa-check" *ngIf="card.espacoCarimbado > 7"></i>
+                  </li>
+                  <li class="stampfield">
+                    <i class="fa-solid fa-check" *ngIf="card.espacoCarimbado > 8"></i>
+                  </li>
+                  <li class="stampfield">
+                    <i class="fa-solid fa-check" *ngIf="card.espacoCarimbado > 9"></i>
+                  </li>
+                </ul>
+                <ul class="d-grid row g-0 " *ngIf="card.espacoTotal > 10">
+                  <li class="stampfield">
+                    <i class="fa-solid fa-check" *ngIf="card.espacoCarimbado > 10"></i>
+                  </li>
+                  <li class="stampfield">
+                    <i class="fa-solid fa-check" *ngIf="card.espacoCarimbado > 11"></i>
+                  </li>
+                  <li class="stampfield">
+                    <i class="fa-solid fa-check" *ngIf="card.espacoCarimbado > 12"></i>
+                  </li>
+                  <li class="stampfield">
+                    <i class="fa-solid fa-check" *ngIf="card.espacoCarimbado > 13"></i>
+                  </li>
+                  <li class="stampfield">
+                    <i class="fa-solid fa-check" *ngIf="card.espacoCarimbado > 14"></i>
+                  </li>
+                </ul>
+                <ul class="d-grid row g-0" *ngIf="card.espacoTotal > 15">
+                  <li class="stampfield">
+                    <i class="fa-solid fa-check" *ngIf="card.espacoCarimbado > 15"></i>
+                  </li>
+                  <li class="stampfield">
+                    <i class="fa-solid fa-check" *ngIf="card.espacoCarimbado > 16"></i>
+                  </li>
+                  <li class="stampfield">
+                    <i class="fa-solid fa-check" *ngIf="card.espacoCarimbado > 17"></i>
+                  </li>
+                  <li class="stampfield">
+                    <i class="fa-solid fa-check" *ngIf="card.espacoCarimbado > 18"></i>
+                  </li>
+                  <li class="stampfield">
+                    <i class="fa-solid fa-check" *ngIf="card.espacoCarimbado > 19"></i>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
-      </div>
+      </div> -->
     </div>
 </section>

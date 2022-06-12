@@ -41,14 +41,21 @@ export class RegisterComponent implements OnInit {
         email: ['', [Validators.required, Validators.email]],
         telefone: ['', Validators.required],
       }),
+      // "razaoSocial" : "empresa sauro ltda",                    |   "cnpj" : "00000000000191",
+      // "nomeFantasia" : "sauro services",                       |   "password" : "123456",
+      // "cnpj" : "00000000000191",                               |   "corporateName" : "empresa sauro ltda",
+      // "email" : "teste@teste.com.br",                          |   "tradeName" : "sauro SERVICES",
+      // "telefone" : "1934521410",                               |   "startDate" : "16/08/1999",
+      // "senha" : "123456",                                      |   "email" : "teste@teste.com.br",
+      // "dataCriacao" : "1999-08-16"  
       registerPJ: this.fb.group({
         cnpj: '',
-        password: '',
-        corporateName: ['', Validators.required],
-        tradeName: ['', Validators.required],
-        startDate:['', Validators.required],
+        senha: '',
+        razaoSocial: ['', Validators.required],
+        nomeFantasia: ['', Validators.required],
+        dataCriacao:['', Validators.required],
         email: ['', [Validators.required, Validators.email]],
-        phoneNumber: ['', Validators.required],
+        telefone: ['', Validators.required],
       }),
       accept: [false, [Validators.requiredTrue]],
     });
@@ -76,7 +83,7 @@ export class RegisterComponent implements OnInit {
         console.log('é cnpj')
         this.cnpj = value;
         this.registerForm.get('registerPJ')?.patchValue({
-          cnpj: value
+          cnpj: value.replaceAll('.','').replaceAll('/','').replaceAll('-','')
         })
         // this.isCnpj = true
         break
@@ -111,9 +118,15 @@ export class RegisterComponent implements OnInit {
     let confirmPassword = this.registerForm.get('confirmPassword')?.value
     if (createPassword.length >= 4 && createPassword === confirmPassword){
       console.log('bingo');
-      this.registerForm.get('registerPF')?.patchValue({
-        senha: confirmPassword  
-      })
+      if (this.cpf) {        
+        this.registerForm.get('registerPF')?.patchValue({
+          senha: confirmPassword  
+        })
+      } else if (this.cnpj) {
+        this.registerForm.get('registerPJ')?.patchValue({
+          senha: confirmPassword  
+        })
+      }
       this.passwordValid = true;
     }
   }
@@ -137,6 +150,15 @@ export class RegisterComponent implements OnInit {
       nome: name,
       data_nascimento: birthDate.reverse().join('-')
     });
+    let corporateName = this.registerForm.get('registerPJ')?.get('razaoSocial')?.value.toLowerCase();
+    let tradeName = this.registerForm.get('registerPJ')?.get('nomeFantasia')?.value.toLowerCase();
+    let startDate = this.registerForm.get('registerPJ')?.get('dataCriacao')?.value.split('/');
+    console.log(startDate)
+    this.registerForm.get('registerPJ')?.patchValue({
+      razaoSocial: corporateName,
+      nomeFantasia: tradeName,
+      dataCriacao: startDate.reverse().join('-')
+    });
   }
 
   createUser(){
@@ -146,22 +168,21 @@ export class RegisterComponent implements OnInit {
     let bodyPJ = this.registerForm.get('registerPJ');
     if(bodyPF?.valid){
       this.register.createConsumer(bodyPF?.value).subscribe(
-        response => {
-          if (response.status === 201){
+        () => {
             console.log('usou o createconsumer');
             console.log(bodyPF?.value)
             console.log(bodyPF?.valid)
-            console.log('Response =', response)
-            console.log('Status =', response.status)
+            // console.log('Response =', response)
+            // console.log('Status =', response.status)
             alert('Usuário cadastrado com sucesso');
-            // this.registerForm.reset();
-            // this.router.navigate(['/'])
+            this.registerForm.reset();
+            this.router.navigate(['/'])
           }
-        },
-        error => {
-          console.log('deu ruim')
-          console.log('Erro', error.status) 
-          }
+        // },
+        // error => {
+        //   console.log('deu ruim')
+        //   console.log('Erro', error.status) 
+        //   }
       )
     } else if(bodyPJ?.valid){
       this.register.createCorporate(bodyPJ?.value).subscribe(
@@ -178,14 +199,14 @@ export class RegisterComponent implements OnInit {
     }
   }
   
-  set filter(value: string){
-    this.input = value;
-    // this.isCpf = (this.input.length <= 11) ? true : false 
-    // this.isCnpj = (this.input.length > 11) ? true : false 
-    // this.filteredCourses = this._courses.filter((course: Course) => course.name.toLocaleLowerCase().indexOf(this._filterBy.toLocaleLowerCase()) > -1)
-  }
+  // set filter(value: string){
+  //   this.input = value;
+  //   // this.isCpf = (this.input.length <= 11) ? true : false 
+  //   // this.isCnpj = (this.input.length > 11) ? true : false 
+  //   // this.filteredCourses = this._courses.filter((course: Course) => course.name.toLocaleLowerCase().indexOf(this._filterBy.toLocaleLowerCase()) > -1)
+  // }
 
-  get filter(){
-    return this.input;
-  }
+  // get filter(){
+  //   return this.input;
+  // }
 }

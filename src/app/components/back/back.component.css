@@ -1,0 +1,21 @@
+i{
+    font-size: 4.1rem;
+    border-radius: 2rem;
+    border: 1px solid var(--text-color);
+    background-color: var(--text-color);
+    color: var(--bg-color);
+    /* background: transparent; */
+    /* margin-left: 0.5rem;
+    position: fixed; */
+    /* margin-bottom: -50px; */
+}
+
+button, .btn-secondary:focus, .btn-secondary:hover{
+    background-color: transparent;
+    border-style: 0 none !important;
+    border-color: transparent !important;
+    box-shadow: 0 0 !important;
+    outline: 0 !important;
+    padding: 0;
+    /* color: white; */
+}

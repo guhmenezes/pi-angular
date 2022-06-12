@@ -23,13 +23,22 @@
         margin-bottom: -1px;
         border-bottom-right-radius: 0;
         border-bottom-left-radius: 0;
+        background-color: var(--input-color) !important;
+        color: var(---text-color);
       }
       
       form input[type="password"] {
         margin-bottom: 10px;
         border-top-left-radius: 0;
         border-top-right-radius: 0;
+        background-color: var(--input-color) !important;
+        color: var(---text-color);
       }
+
+      label p {
+        margin: 0;    
+      }
+
 /* 
       @media (min-width: 768px) {
         .bd-placeholder-img-lg {
