@@ -63,6 +63,10 @@ export class LoginService {
     return this.userAuth;
   }
 
+  isntAuth(){
+    this.userAuth = false
+  }
+
   getAllConsumers(): Observable<UserPF[]>{
     return this.httpClient.get<UserPF[]>(this.getUsersUrl)
   }

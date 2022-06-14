@@ -12,6 +12,8 @@ import { CreateCampaignComponent } from './components/pages/user/create-campaign
 import { CreateCardComponent } from './components/pages/user/create-card/create-card.component';
 import { StampComponent } from './components/pages/user/stamp/stamp.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { AccessibilityComponent } from './components/accessibility/accessibility.component';
+import { BackComponent } from './components/back/back.component';
 
 import { AppRoutingModule } from './app-routing.module';
 import { NgModule } from '@angular/core';
@@ -19,12 +21,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxMaskModule } from 'ngx-mask';
-import { AccessibilityComponent } from './components/accessibility/accessibility.component';
 import { SwiperModule } from 'swiper/angular';
-import { BackComponent } from './components/back/back.component';
-
 import {NgbPaginationModule, NgbAlertModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { NgbdCarouselNavigation } from './components/pages/user/cards/carousel-navigation.component';
+// import { AlertModalComponent } from './components/alert-modal/alert-modal.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +44,8 @@ import { NgbdCarouselNavigation } from './components/pages/user/cards/carousel-n
     FooterComponent,
     AccessibilityComponent,
     BackComponent,
-    NgbdCarouselNavigation
+    NgbdCarouselNavigation,
+    // AlertModalComponent
   ],
   imports: [
     BrowserModule,

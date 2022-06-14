@@ -1,5 +1,3 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './components/pages/login/login.component';
 import { RegisterComponent } from './components/pages/register/register.component';
 import { CampaignComponent } from './components/pages/user/campaign/campaign.component';
@@ -9,7 +7,11 @@ import { CreateCardComponent } from './components/pages/user/create-card/create-
 import { InfoComponent } from './components/pages/user/info/info.component';
 import { StampComponent } from './components/pages/user/stamp/stamp.component';
 import { UserComponent } from './components/pages/user/user.component';
+
 import { AuthGuard } from './services/auth.guard';
+
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {

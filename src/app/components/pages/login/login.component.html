@@ -27,9 +27,9 @@
         <input type="checkbox" id="remember-me" [(ngModel)]="user.remember" name="remember"  class="check mx-1 py-5">
         <p>Lembrar-me</p>
       </label>
-      <span class="forgot">Esqueci minha senha</span>
+      <app-forgot-password></app-forgot-password>
     </div>
-    <button class="w-100 btn btn-lg btn-primary" type="button" (click)="login()" [routerLink]="['/login']">Entrar</button>
+    <button class="w-100 btn btn-lg btn-primary" type="submit" (click)="login()" [routerLink]="['/login']">Entrar</button>
     <!-- <div class="d-flex justify-content-end align-items-center bg-dark">
       <span>Ainda não tem conta?</span> -->
       <button class="w-100 btn btn-lg btn-secondary mt-2" type="button" [routerLink]="['/cadastro']">Cadastre-se</button>

@@ -7,6 +7,10 @@ p.mb-1 {
     width: 92%;
 }
 
+a {
+    background-color: var(--bg-color);
+}
+
 #active a span:hover, #closed:hover{
     /* border-right: 2px double black; */
     text-decoration: underline;

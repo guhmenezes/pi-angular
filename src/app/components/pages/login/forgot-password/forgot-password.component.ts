@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { Component, OnInit, Input } from '@angular/core';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-forgot-password',
@@ -8,19 +8,46 @@ import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 })
 export class ForgotPasswordComponent implements OnInit {
 
-  title = 'Esqueceu a Senha ?'
-  
-  constructor(public bsModalRef: NgbModalRef) { }
+  title: string = 'Recuperar Senha';
+  msg: string = 'Informe CPF ou CNPJ cadastrado';
+  cancel: string = 'Cancelar';
+  ok: string = 'Recuperar Acesso';
+  username = '';
+  submit = false;
+
+  constructor(private modalRef: NgbModal) { }
+
 
   ngOnInit(): void {
+    this.submit = false;
+    // this.title = 'Recuperar Senha';
+    // this.msg = 'Informe CPF ou CNPJ cadastrado';
+    // this.ok = 'Recuperar Acesso';
+    // this.username = '';
   }
 
-  onConfirm() {
+  ngOnDestroy() {
+    ForgotPasswordComponent
+}
 
-   }
-
-  onClose() { 
-    this.bsModalRef.hidden
+  onClose(){ 
+    // this.modalRef.close();
+    window.location.reload()
   }
+
+
+  open(content:any) {
+    this.modalRef.open(content, {ariaLabelledBy: 'modal-basic-title'}).result
+  }
+
+  onConfirm(){ 
+    console.log(this.username)
+    if (this.username.length === 11 || this.username.length === 14){
+      this.submit = true
+      this.title = ''
+      this.msg = 'Seus dados de acesso foram enviados em seu e-mail cadastrado.'
+    }
+  }
+
 
 }
