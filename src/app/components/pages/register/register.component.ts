@@ -51,7 +51,7 @@ export class RegisterComponent implements OnInit {
         senha: '',
         nome:  ['', [Validators.minLength(10), Validators.maxLength(38), Validators.required, Validators.pattern(/[A-z]* [A-z]*/)]],
         dataNascimento:  ['', [Validators.required]],
-        email: ['', [Validators.required, Validators.pattern(/^[a-z0-9.]+@[a-z0-9]+\.[a-z]+?$/i)]],
+        email: ['', [Validators.required, Validators.email]],
         telefone: ['', Validators.required],
         data_nascimento: ''
       }),
@@ -68,7 +68,7 @@ export class RegisterComponent implements OnInit {
         razaoSocial: ['', [Validators.required, Validators.minLength(3)]],
         nomeFantasia: ['',[Validators.required, Validators.minLength(3)]],
         data_criacao:['', Validators.required],
-        email: ['', [Validators.required, Validators.pattern(/^[a-z0-9.]+@[a-z0-9]+\.[a-z]+?$/i)]],
+        email: ['', [Validators.required, Validators.email]],
         telefone: ['', Validators.required],
         dataCriacao: ''
       }),
@@ -83,7 +83,7 @@ export class RegisterComponent implements OnInit {
   birthValid(input:string){
     let date = input.split('/')
     // console.log(date)
-    console.log(date)
+    // console.log(date)
     let thirtyDays = [4,6,9,10]
     let leap = +date[2] % 4 === 0 ? true : false
     if(thirtyDays.indexOf(+date[1]) > -1 && +date[0] > 30){
@@ -269,9 +269,10 @@ export class RegisterComponent implements OnInit {
     !this.birthValid(this.registerForm.get('registerPF')?.get('dataNascimento')?.value))){
       console.log('moiou')
       this.showModal('Erro ao realizar cadastro','OK','Verifique suas informações',)
-    } else if(this.cnpj && (this.registerForm.get('registerPJ')?.invalid) ||
-    !this.dateValid(this.registerForm.get('registerPJ')?.get('data_criacao')?.value)){
+    } else if(this.cnpj  && (this.registerForm.get('registerPJ')?.invalid ||
+    !this.dateValid(this.registerForm.get('registerPJ')?.get('data_criacao')?.value))){
       console.log('moiou')
+      console.log(this.cnpj)
       this.showModal('Erro ao realizar cadastro','OK','Verifique suas informações',)
     }else if(!this.registerForm.get('accept')?.valid) {
       this.showModal('Você precisa aceitar os termos de uso.')

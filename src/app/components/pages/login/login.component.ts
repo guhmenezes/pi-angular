@@ -31,6 +31,12 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     // if (this.remember) {
       this.statusServer()
+      window.localStorage.removeItem('activeCampaign')
+      window.localStorage.removeItem('userLogged')
+      window.localStorage.removeItem('userId')
+      window.localStorage.removeItem('valid')
+      window.localStorage.removeItem('qtyStamp')
+      window.localStorage.removeItem('description')
       if (window.localStorage.getItem('uar')){
         this.user.username = window.localStorage.getItem('uar')!
         window.localStorage.removeItem('uar')
@@ -51,11 +57,12 @@ export class LoginComponent implements OnInit {
   // console.log(this.rememberMe?.ariaChecked)
 
   rememberMe(login: string, password: string){
-    window.localStorage.setItem('login', login)
     if (this.remember) {
+      window.localStorage.setItem('login', login)
       window.localStorage.setItem('pass', password)
     } else {
-      window.localStorage.setItem('pass', '')
+      window.localStorage.removeItem('login')
+      window.localStorage.removeItem('pass')
     } 
   }
 
@@ -114,6 +121,7 @@ export class LoginComponent implements OnInit {
           else this.userRegistered.username = response.cpf!
           this.userRegistered.password = response.senha
           this.loginService.login(this.user, this.userRegistered)
+          window.localStorage.setItem('userLogged',this.userRegistered.username)
           // this.setUsername(this.user.username)
       },
       error: err => console.log('Error', err)

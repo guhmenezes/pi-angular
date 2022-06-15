@@ -1,4 +1,5 @@
 export class Promo {
+    promocaoId?: string;
     empresaId!: string;
     nomeFantasia!: string;
     dataValidade!: string;

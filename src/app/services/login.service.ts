@@ -89,6 +89,11 @@ isUserAlreadyRegistered(username: string){
     return this.httpClient.get<UserPJ[]>(this.getUsersUrl)
   }
 
+  getCorporate(): Observable<UserPJ>{
+    // return this.httpClient.get<UserPF>(`${this.getUserInfo}`)
+    return this.httpClient.get<UserPJ>('http://localhost:8080/v1/usuarios/thiscnpj')
+  }
+
   getAllCards(): Observable<Card[]>{
   return this.httpClient.get<Card[]>(this.getCardsUrl)
   }
@@ -97,9 +102,9 @@ isUserAlreadyRegistered(username: string){
     return this.httpClient.get<Promo[]>(this.getPromoUrl)
     }
 
-  getUser(username:string): Observable<UserPF|UserPJ>{
-    if (username.length == 14) return this.httpClient.get<UserPJ>(`${this.getUserInfo}/thiscnpj`)
-    return this.httpClient.get<UserPF>(`${this.getUserInfo}/thiscpf`)
+  getUser(username:string): Observable<any>{
+    if (username.length == 14) return this.httpClient.get<any>(`${this.getUserInfo}/thiscnpj`)
+    return this.httpClient.get<any>(`${this.getUserInfo}/thiscpf`)
     // correto return this.httpClient.get<UserPF>(`${this.getUserInfo}/${username}`)
   }
 

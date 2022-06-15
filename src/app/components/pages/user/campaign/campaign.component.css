@@ -7,6 +7,10 @@ p.mb-1 {
     width: 92%;
 }
 
+.closed{
+    margin-top: -2rem;
+}
+
 a {
     background-color: var(--bg-color);
 }

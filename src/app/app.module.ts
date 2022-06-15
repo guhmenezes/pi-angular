@@ -21,7 +21,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxMaskModule } from 'ngx-mask';
-import { SwiperModule } from 'swiper/angular';
 import {NgbPaginationModule, NgbAlertModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { NgbdCarouselNavigation } from './components/pages/user/cards/carousel-navigation.component';
 import { AlertModalComponent } from './components/alert-modal/alert-modal.component';
@@ -51,7 +50,6 @@ import { AlertModalComponent } from './components/alert-modal/alert-modal.compon
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    SwiperModule,
     NgbPaginationModule, 
     NgbAlertModule,
     NgbModule,

@@ -11,3 +11,7 @@ textarea{
     resize: none;
     height: 6rem;
 }  
+
+section{
+    min-height: 55vh;
+}
