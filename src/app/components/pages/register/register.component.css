@@ -96,3 +96,7 @@ form input[id="passwordConfirm"] {
 h2{
   font-size: var(--font-size);
 }
+
+div.modal-content{
+  height: 500px !important;
+}

@@ -59,6 +59,15 @@ export class LoginService {
   //   return this.httpClient.post<Login>(this.loginUrl, user)
   // }
 
+  
+isUserAlreadyRegistered(username: string){
+  if(username === '00000000000' || username === '00000000000000'){
+    this.getConsumer().subscribe()
+    return true
+  }
+  return false
+}
+
   isAuth(){
     return this.userAuth;
   }

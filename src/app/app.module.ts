@@ -24,7 +24,7 @@ import { NgxMaskModule } from 'ngx-mask';
 import { SwiperModule } from 'swiper/angular';
 import {NgbPaginationModule, NgbAlertModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { NgbdCarouselNavigation } from './components/pages/user/cards/carousel-navigation.component';
-// import { AlertModalComponent } from './components/alert-modal/alert-modal.component';
+import { AlertModalComponent } from './components/alert-modal/alert-modal.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +45,7 @@ import { NgbdCarouselNavigation } from './components/pages/user/cards/carousel-n
     AccessibilityComponent,
     BackComponent,
     NgbdCarouselNavigation,
-    // AlertModalComponent
+    AlertModalComponent
   ],
   imports: [
     BrowserModule,

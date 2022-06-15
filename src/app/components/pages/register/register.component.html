@@ -1,8 +1,9 @@
 <section class="py-1 px-1 mt-4">
   <div class="container d-flex justify-content-center py-3 px-4">
-
     
-    <form class="text-center" autocomplete="off" [formGroup]="registerForm" (ngSubmit)="createUser()">
+    
+    <!-- <app-alert-modal #content [msg]='msg' *ngIf="invalidCpf"></app-alert-modal> -->
+    <form class="text-center" autocomplete="off" [formGroup]="registerForm">
       
       
       <div *ngIf="!cpf && !cnpj">
@@ -61,6 +62,14 @@
           id="name"
           name="name"
           formControlName="nome"
+          maxlength="38"
+          [ngClass]="{'is-invalid': 
+          registerForm.get('registerPF')?.get('nome')?.invalid &&
+          registerForm.get('registerPF')?.get('nome')?.touched, 
+          'is-valid':
+          registerForm.get('registerPF')?.get('nome')?.valid &&
+          registerForm.get('registerPF')?.get('nome')?.touched
+        }"
           />
           <label >Nome Completo:</label>
         </div>
@@ -71,9 +80,19 @@
           placeholder=" "
           id="date"
           name="date"
-          formControlName="data_nascimento"
+          formControlName="dataNascimento"
           mask="00/00/0000"
+          (click)="birthValid(registerForm.get('registerPF')?.get('dataNascimento')?.value)"
           [dropSpecialCharacters]="false"
+          [ngClass]="{'is-invalid': 
+          registerForm.get('registerPF')?.get('dataNascimento')?.touched &&
+          !birthValid(registerForm.get('registerPF')?.get('dataNascimento')?.value)
+          , 
+          'is-valid':
+          registerForm.get('registerPF')?.get('dataNascimento')?.valid &&
+          registerForm.get('registerPF')?.get('dataNascimento')?.touched &&
+          birthValid(registerForm.get('registerPF')?.get('dataNascimento')?.value)
+        }"
           />
           <label for="date">Data de Nascimento:</label>
         </div>
@@ -86,6 +105,14 @@
           name="email"
           autocomplete="off"
           formControlName="email"
+          maxlength="30"
+          [ngClass]="{'is-invalid': 
+          registerForm.get('registerPF')?.get('email')?.invalid &&
+          registerForm.get('registerPF')?.get('email')?.touched, 
+          'is-valid':
+          registerForm.get('registerPF')?.get('email')?.valid &&
+          registerForm.get('registerPF')?.get('email')?.touched
+        }"
           />
           <label >E-mail:</label>
         </div>
@@ -99,6 +126,13 @@
           name="phoneNumber"
           formControlName="telefone"
           mask="(00) 0 0000-0000 || (00) 0000-0000"
+          [ngClass]="{'is-invalid': 
+          registerForm.get('registerPF')?.get('telefone')?.invalid &&
+          registerForm.get('registerPF')?.get('telefone')?.touched, 
+          'is-valid':
+          registerForm.get('registerPF')?.get('telefone')?.valid &&
+          registerForm.get('registerPF')?.get('telefone')?.touched
+        }"
           />
           <label> Celular:</label>
         </div>
@@ -115,6 +149,14 @@
             id="corporateName"
             name="corporateName"
             formControlName="razaoSocial"
+            maxlength="38"
+            [ngClass]="{'is-invalid': 
+            registerForm.get('registerPJ')?.get('razaoSocial')?.invalid &&
+            registerForm.get('registerPJ')?.get('razaoSocial')?.touched, 
+            'is-valid':
+            registerForm.get('registerPJ')?.get('razaoSocial')?.valid &&
+            registerForm.get('registerPJ')?.get('razaoSocial')?.touched
+          }"
             />
             <label >Razão Social:</label>
           </div>
@@ -126,6 +168,14 @@
             id="tradeName"
             name="tradeName"
             formControlName="nomeFantasia"
+            maxlength="38"
+            [ngClass]="{'is-invalid': 
+            registerForm.get('registerPJ')?.get('nomeFantasia')?.invalid &&
+            registerForm.get('registerPJ')?.get('nomeFantasia')?.touched, 
+            'is-valid':
+            registerForm.get('registerPJ')?.get('nomeFantasia')?.valid &&
+            registerForm.get('registerPJ')?.get('nomeFantasia')?.touched
+          }"
             />
             <label >Nome Fantasia:</label>
           </div>
@@ -136,9 +186,19 @@
             placeholder=" "
             id="startDate"
             name="startDate"
-            formControlName="dataCriacao"
+            formControlName="data_criacao"
             mask="00/00/0000"
+            (click)="dateValid(registerForm.get('registerPJ')?.get('data_criacao')?.value)"
             [dropSpecialCharacters]="false"
+            [ngClass]="{'is-invalid': 
+            registerForm.get('registerPJ')?.get('data_criacao')?.touched &&
+            !dateValid(registerForm.get('registerPJ')?.get('data_criacao')?.value)
+            ,
+            'is-valid':
+            registerForm.get('registerPJ')?.get('data_criacao')?.valid &&
+            registerForm.get('registerPJ')?.get('data_criacao')?.touched &&
+            dateValid(registerForm.get('registerPJ')?.get('data_criacao')?.value)
+          }"
             />
             <label for="date">Data de Ínicio das Atividades:</label>
           </div>
@@ -151,6 +211,14 @@
             name="email"
             autocomplete="off"
             formControlName="email"
+            maxlength="30"
+            [ngClass]="{'is-invalid': 
+            registerForm.get('registerPJ')?.get('email')?.invalid &&
+            registerForm.get('registerPJ')?.get('email')?.touched, 
+            'is-valid':
+            registerForm.get('registerPJ')?.get('email')?.valid &&
+            registerForm.get('registerPJ')?.get('email')?.touched
+          }"
             />
             <label >E-mail:</label>
           </div>
@@ -164,6 +232,13 @@
             name="phoneNumber"
             formControlName="telefone"
             mask="(00) 0 0000-0000 || (00) 0000-0000"
+            [ngClass]="{'is-invalid': 
+            registerForm.get('registerPJ')?.get('telefone')?.invalid &&
+            registerForm.get('registerPJ')?.get('telefone')?.touched, 
+            'is-valid':
+            registerForm.get('registerPJ')?.get('telefone')?.valid &&
+            registerForm.get('registerPJ')?.get('telefone')?.touched
+          }"
             />
             <label> Telefone para Contato:</label>
           </div>          
@@ -171,12 +246,8 @@
             <div *ngIf="(cpf || cnpj) && passwordValid">
               <!-- *ngIf="(cpf || cnpj) && passwordValid" -->
             <input type="checkbox" class="checkbox" formControlName="accept"/>Li e aceito os
-            <a target="_blank" routerLink="/"><u>termos de uso.</u></a><br />
-            <button class="btn btn-primary my-3" type="submit" 
-            [disabled]="
-              !registerForm.get('registerPF')?.valid &&
-              !registerForm.get('registerPJ')?.valid ||
-              !registerForm.get('accept')?.valid"
+            <a (click)="viewTerms()"><u>termos de uso.</u></a><br />
+            <button class="btn btn-primary my-3" type="submit" (click)="createUser()"
               >
             Cadastrar
             </button>

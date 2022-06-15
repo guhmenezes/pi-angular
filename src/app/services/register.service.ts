@@ -5,6 +5,8 @@ import { Observable } from 'rxjs';
 import { UserPJ } from '../models/userPJ';
 import { Promo } from '../models/promo';
 import { Card } from '../models/card';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AlertModalComponent } from '../components/alert-modal/alert-modal.component';
 
 @Injectable({
   providedIn: 'root'
@@ -32,7 +34,34 @@ export class RegisterService {
   // };
 
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(
+    private httpClient: HttpClient,
+    private modalService: NgbModal
+    ) { }
+
+  isCpfValid(cpf:string){
+    let firstVerify= 0;
+    let secondVerify = 0;
+    let firstDigit: boolean;
+    let secondDigit: boolean;
+
+    for (let i = 0; i < cpf.length -2; i++ )
+    firstVerify += +(cpf[i])*(i+1);
+
+    if (firstVerify % 11 == 10) firstVerify = 0;
+    firstDigit = firstVerify % 11 == +(cpf[9]);
+
+    for (let i = 0; i < cpf.length -1; i++ )
+    secondVerify += +(cpf[i])* i;
+
+    if (secondVerify % 11 == 10) secondVerify = 0;
+    secondDigit = secondVerify % 11 == +(cpf[10]);
+
+    if (firstDigit && secondDigit)
+      return true
+    else
+      return false
+}
 
   createConsumer(user: UserPF): Observable<any>{
     return this.httpClient.post<Response>(this.createUserUrl, user)

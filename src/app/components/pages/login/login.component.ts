@@ -1,9 +1,11 @@
 import { HttpHeaderResponse, HttpHeaders } from '@angular/common/http';
 import { Component, EventEmitter, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Login } from 'src/app/models/login';
 import { UserPF } from 'src/app/models/userPF';
 import { LoginService } from 'src/app/services/login.service';
+import { RegisterService } from 'src/app/services/register.service';
 
 @Component({
   selector: 'app-login',
@@ -16,13 +18,24 @@ export class LoginComponent implements OnInit {
   userRegistered: Login = new Login();
   remember = false;
   username = new EventEmitter();
+  tryRegister: UserPF = new UserPF();
+  serverOn = false;
 
-  constructor(private loginService: LoginService) {
+  constructor(
+    private loginService: LoginService, 
+    private registerWorks: RegisterService,
+    private router: Router
+    ) {
    }
 
   ngOnInit(): void {
     // if (this.remember) {
-      if (window.localStorage.getItem('login') && window.localStorage.getItem('pass')){
+      this.statusServer()
+      if (window.localStorage.getItem('uar')){
+        this.user.username = window.localStorage.getItem('uar')!
+        window.localStorage.removeItem('uar')
+      }
+      else if (window.localStorage.getItem('login') && window.localStorage.getItem('pass')){
       this.user.username = window.localStorage.getItem('login')!
       this.user.password = window.localStorage.getItem('pass')!
       this.user.remember = true
@@ -44,6 +57,39 @@ export class LoginComponent implements OnInit {
     } else {
       window.localStorage.setItem('pass', '')
     } 
+  }
+
+  statusServer(){
+    this.tryRegister = {  
+      nome: '',
+      cpf: '',
+      email: '',
+      telefone: '',
+      senha: '',
+      data_nascimento: ''
+    }
+    console.log(this.tryRegister)
+    this.registerWorks.createConsumer(this.tryRegister).subscribe({
+      next: () => console.log('work'),
+      error: err => {
+        if(err.status !== 0) {
+          console.log('work')
+          this.serverOn = true
+      }
+        else {
+          console.log('fora do ar')
+          this.serverOn = false
+      }
+      }
+      
+    })
+  }
+
+  cadastro(){
+    if(this.serverOn) this.router.navigate(['/cadastro'])
+    else {
+      // this.statusServer();
+    }
   }
 
   login(){
