@@ -1,9 +1,19 @@
 .container-xxl {
   /* background-color: #777 !important; */
   min-height: 100vh;
+  min-width: 340px;
 }
 
 .container{
   /* background-color: #bbb !important; */
   min-height: 100vh;
+  min-width: 340px;
+}
+
+@media (max-width:400px){
+  .container, .container-xxl{
+    padding: 0 !important;
+    margin: 0 auto !important;
+    width: 365px;
+  }
 }

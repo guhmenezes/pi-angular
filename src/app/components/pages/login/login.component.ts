@@ -2,10 +2,12 @@ import { HttpHeaderResponse, HttpHeaders } from '@angular/common/http';
 import { Component, EventEmitter, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Login } from 'src/app/models/login';
 import { UserPF } from 'src/app/models/userPF';
 import { LoginService } from 'src/app/services/login.service';
 import { RegisterService } from 'src/app/services/register.service';
+import { ModalContent } from '../../alert-modal/alert-modal.component';
 
 @Component({
   selector: 'app-login',
@@ -19,18 +21,19 @@ export class LoginComponent implements OnInit {
   remember = false;
   username = new EventEmitter();
   tryRegister: UserPF = new UserPF();
-  serverOn = false;
+  serverOn = true;
 
   constructor(
     private loginService: LoginService, 
     private registerWorks: RegisterService,
-    private router: Router
+    private router: Router,
+    private modalService: NgbModal
     ) {
    }
 
   ngOnInit(): void {
     // if (this.remember) {
-      this.statusServer()
+      // this.statusServer()
       window.localStorage.removeItem('activeCampaign')
       window.localStorage.removeItem('userLogged')
       window.localStorage.removeItem('userId')
@@ -55,6 +58,12 @@ export class LoginComponent implements OnInit {
     // } 
   }
   // console.log(this.rememberMe?.ariaChecked)
+  showModal(msg:string, txtBtn:string = 'OK', title?:string,){
+    const modalRef = this.modalService.open(ModalContent);
+    modalRef.componentInstance.msg = msg;
+    modalRef.componentInstance.title = title
+    modalRef.componentInstance.txtBtn = txtBtn
+  }
 
   rememberMe(login: string, password: string){
     if (this.remember) {
@@ -124,7 +133,7 @@ export class LoginComponent implements OnInit {
           window.localStorage.setItem('userLogged',this.userRegistered.username)
           // this.setUsername(this.user.username)
       },
-      error: err => console.log('Error', err)
+      error: err => this.showModal(`Erro ${err.status}`)
 
     }
     )
@@ -139,3 +148,5 @@ export class LoginComponent implements OnInit {
     LoginService.emitUserLogged.emit({ username: username });
   }
 }
+
+

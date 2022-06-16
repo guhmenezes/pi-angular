@@ -6,3 +6,15 @@
 button{
     border-radius: 10px;
 }
+
+@media (max-width:539px){
+    #access{
+        width: 360px;
+    }
+  }
+
+@media (max-width:400px){
+    #access{
+        width: 340px;
+    }
+ }

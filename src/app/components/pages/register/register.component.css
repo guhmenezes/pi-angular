@@ -97,6 +97,44 @@ h2{
   font-size: var(--font-size);
 }
 
-div.modal-content{
+/* div.modal-content{
   height: 500px !important;
+} */
+
+@media(max-width:450px){
+  .container{
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
+
+@media (max-width:400px){
+  html,body{
+    overflow-x: hidden;
+  }
+  .container{
+    background-color: red;
+    max-width: 340px;
+    width: 100%;
+  }
+
+  section{
+    padding-left: 0!important;
+    padding-right: 0!important;
+  }
+
+  form{
+    width: 340px;
+  }
+
+  .registerPF .form-floating,
+  .registerPJ .form-floating{
+    margin-left: auto !important;
+    margin-right: auto !important;
+    width: 90% !important;
+  }
+  
+  .cpforcnpj{
+    width: 70%;
+  }
 }

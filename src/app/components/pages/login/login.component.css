@@ -82,3 +82,42 @@
         white-space: nowrap;
         -webkit-overflow-scrolling: touch;
       } */
+
+      @media (max-width:539px){
+        .container{
+            background-color: red;
+            max-width: 380px;
+          }
+        
+        .options{
+          background-color: aqua;
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        
+        .options label{
+          padding-bottom: 5px;
+        }
+
+        form{
+          width:270px
+        }
+
+        /* app-forgot-password{
+          justify-content: start;
+        } */
+        
+        }
+        @media (max-width:400px){
+          .container{
+            background-color: red;
+            max-width: 340px;
+            padding-left: 2rem !important;
+            padding-right: 2rem;
+            width: 100%;
+          }
+
+          form{
+            width: 248px;
+          }
+        }

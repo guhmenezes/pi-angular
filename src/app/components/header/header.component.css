@@ -1,0 +1,13 @@
+@media (max-width:400px){
+    header{
+        background-color: red;
+        min-width: 340px;
+        width: 100%;
+      }
+
+    .logo{
+        width: 72px;
+        height: 60px;
+    }
+
+  }

@@ -51,7 +51,7 @@
         </div>
       </div>
   
-      <div *ngIf="cpf && passwordValid" formGroupName="registerPF">
+      <div *ngIf="cpf && passwordValid" class="registerPF" formGroupName="registerPF">
       <!-- *ngIf="cpf && passwordValid" -->
         <h2 class="h3 mb-3 fw-normal">Dados Pessoais</h2>
         <div class="form-floating w-75 mt-3 mx-5">
@@ -138,7 +138,7 @@
         </div>
       </div>
     
-        <div *ngIf="cnpj && passwordValid" formGroupName="registerPJ">
+        <div *ngIf="cnpj && passwordValid" class="registerPJ" formGroupName="registerPJ">
           <!-- *ngIf="cpf && passwordValid" -->
           <h2 class="h3 mb-3 fw-normal">Dados da Empresa</h2>
           <div class="form-floating w-75 mt-3 mx-5">
