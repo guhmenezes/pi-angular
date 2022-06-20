@@ -35,13 +35,14 @@
           <button class="btn-lg btn-primary mt-4" (click)="createPromo()">Criar Promoção</button>
         </div>
       </form>
-      <table class="text-center mt-3">
+      <table *ngIf="havePromo"
+      class="text-center mt-3">
         <tr>
         <th>Vigente até</th>
         <th>Descrição</th>
         <th>Carimbos</th>
         </tr>
-        <tr>
+        <tr class="info">
           <td> {{lastPromo.dataValidade | date:'dd/MM/yyyy'}} </td>
           <td> {{lastPromo.descricao}} </td>
           <td> {{lastPromo.espacoTotal}} </td>

@@ -15,3 +15,21 @@ textarea{
 section{
     min-height: 55vh;
 }
+
+.container{
+    min-width: 512px;
+}
+
+@media (max-width:512px){
+    .container{
+        min-width: 340px;
+    }
+
+    th{
+        min-width: 70px;
+    }
+
+    th,td{
+        border: 2px solid var(--text-color);
+    }
+}

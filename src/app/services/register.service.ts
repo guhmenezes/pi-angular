@@ -7,19 +7,20 @@ import { Promo } from '../models/promo';
 import { Card } from '../models/card';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AlertModalComponent } from '../components/alert-modal/alert-modal.component';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RegisterService {
-  private getUsersUrl = 'http://localhost:3100/api/users';
-  private createUserUrl = 'http://localhost:8080/v1/usuarios';
+  // private getUsersUrl = 'http://localhost:3100/api/users'; TESTE
+  private createUserUrl = `${environment.API}v1/usuarios`;
   private createUserPJUrl = 'http://localhost:8080/v1/empresas';
   private getUserInfo = 'http://localhost:8080/v1/usuarios/thiscpf';
   private updateInfo = 'http://localhost:8080/v1/usuarios/thiscpf/edit'; // construir endpoint atualizar
-  private createPromoUrl = 'http://localhost:8080/v1/promocao';
-  private createCardUrl = 'http://localhost:8080/v1/cartao';
-  private stampCardUrl = 'http://localhost:8080/v1/carimbo';
+  private createPromoUrl = `${environment.API2}v1/promocao`;
+  private createCardUrl = `${environment.API2}v1/cartaofidelidade`;
+  private stampCardUrl = `${environment.API2}v1/carimbo`;
 
 
   // headers = new HttpHeaders({

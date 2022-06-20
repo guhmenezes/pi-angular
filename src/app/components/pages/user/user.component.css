@@ -65,7 +65,6 @@ i{
 
 @media (max-width:992px) and (min-width:892px) {
     .container{
-      background-color: black;
       min-width: 840px;
     }
   
@@ -76,13 +75,11 @@ i{
   }
   @media (max-width:891px) and (min-width:768px) {
     .container{
-      background-color: red;
       max-width: 740px;
     }
 
     section{
         max-width: 760px;
-        background-color: green;
     }
   
     #user{
@@ -105,13 +102,11 @@ i{
 
   @media (max-width:767px) and (min-width:540px){
     .container{
-        background-color: red;
         max-width: 480px;
       }
   
       section{
           max-width: 500px;
-          background-color: green;
       }
     
       #user{
@@ -134,13 +129,11 @@ i{
   
   @media (max-width:539px) and (min-width:400px){
     .container{
-        background-color: red;
         max-width: 380px;
       }
   
       section{
           max-width: 400px;
-          background-color: green;
       }
     
       #user{
@@ -163,7 +156,6 @@ i{
 
   @media (max-width:399px) and (min-width:365px){
     .container{
-        background-color: red;
         max-width: 365px;
         padding: 0 !important;
         width: 100%;
@@ -171,7 +163,6 @@ i{
   
       section{
           max-width: 365px;
-          background-color: green;
       }
     
       #user{
@@ -194,7 +185,6 @@ i{
 
   @media (max-width:364px){
     .container{
-        background-color: red;
         max-width: 340px;
         padding: 0 !important;
         width: 100%;
@@ -202,7 +192,6 @@ i{
   
       section{
           max-width: 340px;
-          background-color: green;
       }
     
       #user{

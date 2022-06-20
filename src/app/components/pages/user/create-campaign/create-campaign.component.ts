@@ -35,7 +35,7 @@ export class CreateCampaignComponent implements OnInit {
   ngOnInit(): void {
     this.userId = window.localStorage.getItem('userId')! //REMOVER COMANDO E PASSAR VIA ROTA
     console.log(this.userId)
-    this.havePromo = window.localStorage.getItem('activeCampaign') ? true : false
+    // this.havePromo = window.localStorage.getItem('activeCampaign') ? true : false
     console.log(this.havePromo)
     // if(!this.lastPromo)
     this.lastPromo = {
@@ -118,9 +118,9 @@ export class CreateCampaignComponent implements OnInit {
     this.treatingData()
     // this.getCorporateId(window.localStorage.getItem('userLogged')!)
     let body = {
-      empresaId: this.userId,
+      idEmpresa: this.userId,
       dataValidade: this.dataValidade,
-      qtdCarimbo: +this.qtdCarimbo,
+      quantidadeCarimbo: +this.qtdCarimbo,
       descricao: this.descricao
     }
     this.reg.createPromo(body).subscribe({

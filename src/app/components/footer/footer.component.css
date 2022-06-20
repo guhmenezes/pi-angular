@@ -1,6 +1,5 @@
 @media (max-width:400px){
     footer, footer span{
-        background-color: red;
         max-width: 340px;
         width: 100%;
         padding: 0;

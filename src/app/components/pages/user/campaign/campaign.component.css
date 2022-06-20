@@ -15,6 +15,13 @@ a {
     background-color: var(--bg-color);
 }
 
+.list-group-item-action:focus, .list-group-item-action:hover {
+    z-index: 1;
+    color: #495057;
+    text-decoration: none;
+    background-color: var(--bg-color);
+}
+
 #active a span:hover, #closed:hover{
     /* border-right: 2px double black; */
     text-decoration: underline;
@@ -29,3 +36,48 @@ nav{
     max-height: 50vh;
     overflow-y: scroll;
 } */
+
+@media(max-width:770px){
+    section{
+        width: 520px;
+    }
+
+    .txt{
+        display: none;
+    }
+}
+
+@media(max-width:512px){
+    section{
+        width: 400px;
+    }
+
+    a div.d-flex{
+        flex-direction: column !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
+    p{
+        width: 70%;
+        margin-top: 2rem;
+        text-align: right;
+
+    }
+
+    h3, p{
+        width: 100% !important;
+    }
+
+    .promo-info{
+        width: 280px;
+    }
+
+    .promo-info p {
+        text-align: left;
+    }
+
+    .date{
+        padding-right: 5px;
+    }
+}

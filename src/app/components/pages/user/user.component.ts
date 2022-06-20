@@ -9,7 +9,7 @@ import { LoginService } from 'src/app/services/login.service';
 export class UserComponent implements OnInit {
   username: string = ''
   cpf: string = ''
-  cnpj: string = ''
+  cnpj: string = 'e'
   firstName: string = '';
   lastName: string = '';
   userId!:string;
@@ -30,8 +30,11 @@ export class UserComponent implements OnInit {
     //     console.log(this.username)
     //   }
     // });
-    this.username = window.localStorage.getItem('userLogged')!
-    this.userLogged()
+    this.username = window.localStorage.getItem('login')!
+    let fullName = this.info.getInfo().nome!.split(" ");
+    this.firstName = fullName[0];
+    this.lastName = fullName[fullName.length-1]
+    // this.userLogged()
     if(this.username.length == 11) this.cpf = this.username
     else if (this.username.length == 14) this.cnpj = this.username
     console.log(this.userId)
@@ -39,29 +42,29 @@ export class UserComponent implements OnInit {
     this.activeCampaign()
   }
 
-  userLogged(){
-    this.info.getUser(this.username).subscribe(
-      data => {
-        let fullName = data.nome.split(" ");
-        this.firstName = fullName[0];
-        this.lastName = fullName[fullName.length-1]
-        console.log(data)
-        if (data.empresaId)
-        this.userId = data.empresaId;
-        else 
-        this.userId = data.usuarioId
-        window.localStorage.setItem('userId',this.userId) //ALTERAR ESTE COMANDO DEPOIS  
-      }
-    )
-  }
+  // userLogged(){
+  //   this.info.getUser(this.username).subscribe(
+  //     data => {
+  //       let fullName = data.nome.split(" ");
+  //       this.firstName = fullName[0];
+  //       this.lastName = fullName[fullName.length-1]
+  //       console.log(data)
+  //       // if (data.empresaId)
+  //       // this.userId = data.empresaId;
+  //       // else 
+  //       // this.userId = data.usuarioId
+  //       // window.localStorage.setItem('userId',this.userId) //ALTERAR ESTE COMANDO DEPOIS  
+  //     }
+  //   )
+  // }
 
   activeCampaign(){
-    this.info.getAllPromo().subscribe({
+    this.info.getPromo(window.localStorage.getItem('userId')!).subscribe({
       next: data => {
-        console.log(data[0].promocaoId)
-        window.localStorage.setItem('activeCampaign', data[0].promocaoId!)
+        console.log(data)
+        window.localStorage.setItem('activeCampaign', data[0].idPromocao!)
         window.localStorage.setItem('valid', data[0].dataValidade!)
-        window.localStorage.setItem('qtyStamp', data[0].espacoTotal.toString()!)
+        window.localStorage.setItem('qtyStamp', data[0].quantidadeCarimbo.toString()!)
         window.localStorage.setItem('description', data[0].descricao!)
       }
     })

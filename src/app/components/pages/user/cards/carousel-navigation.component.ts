@@ -12,8 +12,8 @@ import { LoginService } from 'src/app/services/login.service';
 export class NgbdCarouselNavigation implements OnInit {
   showNavigationArrows = true;
   showNavigationIndicators = true;
-  images = [1055, 194, 368].map((n) => `https://picsum.photos/id/${n}/900/500`);
-  cards: Card[] = [];
+  // images = [1055, 194, 368].map((n) => `https://picsum.photos/id/${n}/900/500`);
+  cards:any[] = [];
   flip = 'flip'
 
   constructor(config: NgbCarouselConfig,
@@ -26,21 +26,27 @@ export class NgbdCarouselNavigation implements OnInit {
   }
 
   retrieveCards(){
-    this.service.getAllCards().subscribe(response => {
-      for(let i = 0; i<=1; i++){
+    this.service.getCards(window.localStorage.getItem('userId')!).subscribe(response => {
+      console.log(response.length)
+      for(let i = 0; i< response.length; i++){
+        // this.service.getInfoCard(response[i].idPromocao)
         this.cards.push(response[i]);
+      }
+      if (response.length <= 1){
+        this.showNavigationArrows = false;
+        this.showNavigationIndicators = false;
       }
       console.log(this.cards)})
     }
 
-    flipCard(id: string){
+    flipCard(){
       for(let i=0; i<this.cards.length; i++) {
-        if(this.cards[i].cartaoId === id) {
+        // if(this.cards[i].id === id) {
             // achou!
             // console.log(cards)
             if (this.flip === 'flip') this.flip = ''
             else this.flip = 'flip' 
-        }
+        // }
     }
   }
 }

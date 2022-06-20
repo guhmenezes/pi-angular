@@ -61,9 +61,9 @@ export class StampComponent implements OnInit {
       }, 3000)
     } else {
     let body = {
-      promocaoId: this.promocaoId,
+      idPromocao: this.promocaoId,
       cpf: this.cpf,
-      qtdCarimbos: this.qtd
+      qtdCarimbos: +this.qtd
     }
     this.reg.stampCard(body).subscribe({
       next: response => {

@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
       }
       else if (window.localStorage.getItem('login') && window.localStorage.getItem('pass')){
       this.user.username = window.localStorage.getItem('login')!
-      this.user.password = window.localStorage.getItem('pass')!
+      this.user.senha = window.localStorage.getItem('pass')!
       this.user.remember = true
     }
       // this.loginService.emitUserLogged.subscribe(
@@ -65,10 +65,10 @@ export class LoginComponent implements OnInit {
     modalRef.componentInstance.txtBtn = txtBtn
   }
 
-  rememberMe(login: string, password: string){
+  rememberMe(login: string, senha: string){
     if (this.remember) {
       window.localStorage.setItem('login', login)
-      window.localStorage.setItem('pass', password)
+      window.localStorage.setItem('pass', senha)
     } else {
       window.localStorage.removeItem('login')
       window.localStorage.removeItem('pass')
@@ -108,11 +108,78 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  loginAPI(){
+    this.loginService.loginAPI(this.user).subscribe({
+      next: resp => {
+        
+            // const token = resp.headers.get('X-Access-Token');
+            console.log(resp)
+            // localStorage.setItem('token', token);
+            // this.user = user;
+      },
+      error: err => console.log(err)
+    })
+  }
+
+
+  loginToken(){
+    if (this.user.remember)
+    this.remember = true;
+    this.rememberMe(this.user.username,this.user.senha);
+    this.loginService.loginToken(this.user).subscribe({
+      next: response => {
+        console.log(response)
+        window.localStorage.setItem('userId', response.id)
+        window.localStorage.setItem('userLogged', response.username)
+        window.localStorage.setItem('nome', response.nome)
+        window.localStorage.setItem('email', response.email)
+        window.localStorage.setItem('telefone', response.telefone)
+        window.localStorage.setItem('token', response.token)
+        this.loginService.userAuthenticated(true)
+      }
+      ,error: err => this.showModal(`Erro ${err.status}`)
+    })
+  }
+  loginCerto(){
+    let username = this.user.username
+    if(username.length === 11){
+      this.loginService.getConsumer(username).subscribe({
+        next: dados => {
+          console.log(dados)
+          window.localStorage.setItem('userId', dados.usuarioId)
+          window.localStorage.setItem('userLogged', dados.cpf)
+          window.localStorage.setItem('nome', dados.nome)
+          window.localStorage.setItem('email', dados.email)
+          // window.localStorage.setItem('telefone', dados.telefone)
+          window.localStorage.setItem('aniversario', dados.dataNascimento)
+          //funcao token
+        }
+        ,
+        error: err => this.showModal(`Erro ${err.status}`)
+      })
+    } else if(username.length === 14){
+      this.loginService.getCorporate(username).subscribe({
+        next: dados => {
+          window.localStorage.setItem('userId', dados.id)
+          window.localStorage.setItem('userLogged', dados.cnpj)
+          window.localStorage.setItem('nome', dados.contatoNome)
+          window.localStorage.setItem('email', dados.email)
+          window.localStorage.setItem('telefone', dados.telefone)
+          //funcao token
+        }
+        ,
+        error: err => this.showModal(`Erro ${err.status}`)
+      })
+    } else {
+      this.showModal('Usuário não encontrado')
+    }
+  }
+
   login(){
     console.log(this.user)
     if (this.user.remember)
     this.remember = true;
-    this.rememberMe(this.user.username,this.user.password);
+    this.rememberMe(this.user.username,this.user.senha);
     // this.loginService.getUser(this.user).subscribe(
     //   response => {
     //     console.log(response)
@@ -128,7 +195,7 @@ export class LoginComponent implements OnInit {
           if(this.user.username.length == 14)
           this.userRegistered.username = response.cnpj!
           else this.userRegistered.username = response.cpf!
-          this.userRegistered.password = response.senha
+          this.userRegistered.senha = response.senha
           this.loginService.login(this.user, this.userRegistered)
           window.localStorage.setItem('userLogged',this.userRegistered.username)
           // this.setUsername(this.user.username)

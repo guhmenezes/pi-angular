@@ -15,6 +15,7 @@ export class CreateCardComponent implements OnInit {
   newConsumer!: string;
   empresaId!: string;
   promocaoId!: string;
+  espacoTotal!: string;
 
   constructor(
     private reg: RegisterService, 
@@ -26,7 +27,9 @@ export class CreateCardComponent implements OnInit {
   ngOnInit(): void {
     this.empresaId = window.localStorage.getItem('userId')!
     console.log(this.empresaId)
-    this.getCampaignId(this.empresaId)
+    this.promocaoId = window.localStorage.getItem('activeCampaign')!
+    this.espacoTotal = window.localStorage.getItem('qtyStamp')!
+    // this.getCampaignId(this.empresaId)
     // console.log(this.promocaoId)
     // this.haveThisCard(this.newConsumer)
   }
@@ -75,11 +78,17 @@ export class CreateCardComponent implements OnInit {
       }, 3000)
     } else {
       // console.log(this.haveThisCard(this.newConsumer))
-    
+      let idUser!:string;
+    this.info.getConsumer(this.newConsumer).subscribe({
+      next: data => idUser = data.usuarioId,
+      error: () => this.showModal('Usuário não encontrado')
+    })
+    if(idUser !== null){
     setTimeout(() => {
        let body = {
-      promocaoId: this.promocaoId,
-      cpf: this.newConsumer
+      idPromocao: this.promocaoId,
+      idUsuario: idUser,
+      espacoTotal: +this.espacoTotal
     }
     this.reg.createCard(body).subscribe({
       next: response => {
@@ -94,6 +103,7 @@ export class CreateCardComponent implements OnInit {
   })
 },1000)
 }
+    }
   }
 
 }

@@ -19,3 +19,9 @@ button, .btn-secondary:focus, .btn-secondary:hover{
     padding: 0;
     /* color: white; */
 }
+
+@media (max-width:512px){
+    i{
+        font-size: 2rem;
+    }
+}

@@ -85,12 +85,10 @@
 
       @media (max-width:539px){
         .container{
-            background-color: red;
             max-width: 380px;
           }
         
         .options{
-          background-color: aqua;
           flex-direction: column;
           align-items: flex-start;
         }
@@ -110,7 +108,6 @@
         }
         @media (max-width:400px){
           .container{
-            background-color: red;
             max-width: 340px;
             padding-left: 2rem !important;
             padding-right: 2rem;

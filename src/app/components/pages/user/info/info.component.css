@@ -1,11 +1,53 @@
 form{
-  width: 550px;
+  width: 500px;
 }
 
 .form-control{
   width: 70%;
 }
 
+label{
+  min-width: 165px;
+}
+
 form{
   min-height: 38vh;
+}
+
+@media (max-width:600px) and (min-width:513px){
+  .container{
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
+
+@media (max-width:512px){
+  form{
+    width: 340px;
+  }
+
+  input{
+    width: 100% !important;
+    margin-top: 0 !important;
+    margin-bottom: 1rem !important; 
+  }
+  
+  label{
+    display: block;
+    width: 100%;
+    margin-bottom: .25rem;
+    padding-left: 10px;
+  }
+
+  form div{
+    flex-direction: column;
+  }
+
+  button{
+    width: 50%;
+  }
+  
+  .dbtn{
+    align-items: center;
+  }
 }

@@ -9,13 +9,13 @@
       [(ngModel)]="user.username"
       name="login"
       id="cpf-cnpj"
-      mask="CPF_CNPJ"
-      [dropSpecialCharacters]="true">
+      
+      >
       <label for="floatingInput">CPF ou CNPJ</label>
     </div>
     <div class="form-floating">
       <input type="password" class="form-control px-4" id="floatingPassword" placeholder=" "
-      [(ngModel)]="user.password"
+      [(ngModel)]="user.senha"
       name="password"
       id="password"
       maxlength="12">
@@ -29,7 +29,7 @@
       </label>
       <app-forgot-password></app-forgot-password>
     </div>
-    <button class="w-100 btn btn-lg btn-primary" type="button" (click)="login()">Entrar</button>
+    <button class="w-100 btn btn-lg btn-primary" type="submit" (click)="loginToken()">Entrar</button>
     <!-- <div class="d-flex justify-content-end align-items-center bg-dark">
       <span>Ainda não tem conta?</span> -->
       <button class="w-100 btn btn-lg btn-secondary mt-2" type="button" (click)="cadastro()" >Cadastre-se</button>

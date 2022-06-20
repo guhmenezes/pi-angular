@@ -19,22 +19,26 @@ export class InfoComponent implements OnInit {
   constructor(private info: LoginService, private reg: RegisterService) { }
 
   ngOnInit(): void {
-    this.username = window.localStorage.getItem('login')!
-    this.getUser()
+    // this.username = window.localStorage.getItem('login')!
+    // this.getUser()
+    let data = this.info.getInfo()
+    this.nome = data.nome!.toUpperCase()
+    this.email = data.email!
+    this.telefone = data.telefone!
   }
 
-  getUser(): void {
-    this.info.getUser(this.username)?.subscribe({
-      next: (data:any) => {
-        this.user = data;
-        this.nome = data.nome.toUpperCase();
-        this.email = data.email;
-        this.telefone = data.telefone
-        console.log(data);
-        console.log(this.user)
-      }
-    })
-  }
+  // getUser(): void {
+  //   this.info.getUser(this.username)?.subscribe({
+  //     next: (data:any) => {
+  //       this.user = data;
+  //       this.nome = data.nome.toUpperCase();
+  //       this.email = data.email;
+  //       this.telefone = data.telefone
+  //       console.log(data);
+  //       console.log(this.user)
+  //     }
+  //   })
+  // }
 
   updateData():void{
     this.user.email = this.email;

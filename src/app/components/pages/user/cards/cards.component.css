@@ -4,12 +4,16 @@
     position: relative;
 }
 
+.container{
+  min-width: 550px;
+}
+
 /* .carousel-control-prev{
   color: black ;
 } */
 
 section{
-  width: 600px;
+  width: 550px;
 }
 
 i{
@@ -217,3 +221,31 @@ ngb-carousel:focus{
     border-style: none;
     overflow-y: auto;
   } */
+
+  @media (max-width:512px){
+    .container{
+      min-width: 450px;
+    }
+    
+    /* .carousel-control-prev{
+      color: black ;
+    } */
+    
+    section{
+      width: 450px;
+    }
+  }
+
+  @media (max-width:400px){
+    .container{
+      min-width: 400px;
+    }
+    
+    /* .carousel-control-prev{
+      color: black ;
+    } */
+    
+    section{
+      width: 400px;
+    }
+  }

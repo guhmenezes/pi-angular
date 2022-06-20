@@ -1,5 +1,4 @@
 export class UserPJ {
-  empresaId?: string;
   cnpj!: string;
   senha!: string;
   corporateName!: string;

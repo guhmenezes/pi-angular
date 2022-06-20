@@ -1,26 +1,42 @@
 import { EventEmitter, Injectable, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient, HttpHeaderResponse } from '@angular/common/http'
-import { Observable, Subject, tap } from 'rxjs';
+import { HttpClient, HttpHeaderResponse, HttpHeaders, HttpResponse } from '@angular/common/http'
+import { Observable, Subject, map } from 'rxjs';
 
 import { UserPF } from '../models/userPF';
 import { UserPJ } from '../models/userPJ';
 import { Login } from '../models/login';
 import { Card } from '../models/card';
 import { Promo } from '../models/promo';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
   private getUsersUrl = 'http://localhost:3100/api/users'
-  private loginUrl = 'http://localhost:8080/login'
+  private loginUrl = 'http://192.168.0.15:8080/login'
   private userAuth: boolean = false;
-  private getUserInfo = 'http://localhost:8080/v1/usuarios'
+  private getConsumerInfo = `${environment.API2}v1/usuario`
+  private getConsumerCards = `${environment.API2}v1/ /cartoes`
+  private getCorporateInfo = `${environment.API2}v1/empresa`
+  private getCorporatePromo = `${environment.API2}v1/ /promocoes`
+  private loginTokenUrl = `${environment.API}v1/login2`
   private getCardsUrl = 'http://localhost:8080/v1/usuarios/thiscpf/cartoes'
   private getPromoUrl = 'http://localhost:8080/v1/promocao/promocaoid'
   static emitUserLogged = new EventEmitter()
   private subject = new Subject<string>();
+
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json;charset=UTF-8',
+      'Accept-Language': '1',
+      // 'Access-Control-Allow-Origin': '*',
+      // 'Access-Control-Allow-Origin': '*',
+      // 'Access-Control-Allow-Methods': 'GET,POST,OPTIONS,DELETE,PUT'
+    }),
+    // observe: 'response'
+  };
 
   // showMenuEmitter = new EventEmitter<boolean>();
 
@@ -44,7 +60,7 @@ export class LoginService {
     // }
     console.log(user,userRegistered)
     // this.emitUserLogged.emit(userRegistered.username)
-    if (user.username === userRegistered.username && user.password === userRegistered.password){
+    if (user.username === userRegistered.username && user.senha === userRegistered.senha){
       this.userAuth = true;
     //   // this.showMenuEmitter.emit(true);
       this.router.navigate(['/login'])
@@ -59,10 +75,47 @@ export class LoginService {
   //   return this.httpClient.post<Login>(this.loginUrl, user)
   // }
 
+  userAuthenticated(condition: boolean){
+    if (condition){
+      this.userAuth = true;
+        this.router.navigate(['/login'])
+    } else {
+      this.userAuth = false;
+      this.router.navigate(['/'])
+    }
+  }
+
+  getToken(){
+    return window.localStorage.getItem('token')
+  }
+
+  setToken(token:string){
+    window.localStorage.setItem('token',token)
+  }
+
+  loginToken(user: Login){
+    return this.httpClient.post<any>(this.loginTokenUrl, user)
+  }
+
+  loginAPI(user:Login){
+    return this.httpClient.post<any>(this.loginUrl, user)
+    // return user;
+      // login successful if there's a jwt token in the response
+      // console.log("USER: " + user);
+
+        // if (user) {
+        //     // store user details and jwt token in local storage to keep user logged in between page refreshes
+        //     localStorage.setItem('currentUser', JSON.stringify(user));
+        //     this.currentUserSubject.next(user);
+        // }
+
+    
+  }
+
   
 isUserAlreadyRegistered(username: string){
   if(username === '00000000000' || username === '00000000000000'){
-    this.getConsumer().subscribe()
+    // this.getConsumer().subscribe()
     return true
   }
   return false
@@ -80,31 +133,52 @@ isUserAlreadyRegistered(username: string){
     return this.httpClient.get<UserPF[]>(this.getUsersUrl)
   }
 
-  getConsumer(): Observable<UserPF>{
-    // return this.httpClient.get<UserPF>(`${this.getUserInfo}`)
-    return this.httpClient.get<UserPF>('http://localhost:8080/v1/usuarios/thiscpf')
+  getConsumer(username: string): Observable<any>{
+    return this.httpClient.get<any>(`${this.getConsumerInfo}/${username}`, this.httpOptions)
+    // return this.httpClient.get<UserPF>('http://localhost:8080/v1/usuarios/thiscpf')
+  }
+
+  getInfo(){
+    return {
+      id: window.localStorage.getItem('userId'),
+      nome: window.localStorage.getItem('nome'),
+      email: window.localStorage.getItem('email'),
+      telefone: window.localStorage.getItem('telefone')
+    }
   }
 
   getAllCorporates(): Observable<UserPJ[]>{
     return this.httpClient.get<UserPJ[]>(this.getUsersUrl)
   }
 
-  getCorporate(): Observable<UserPJ>{
-    // return this.httpClient.get<UserPF>(`${this.getUserInfo}`)
-    return this.httpClient.get<UserPJ>('http://localhost:8080/v1/usuarios/thiscnpj')
+  getCorporate(username:string): Observable<any>{
+    return this.httpClient.get<any>(`${this.getCorporateInfo}/${username}`)
+    // return this.httpClient.get<UserPJ>('http://localhost:8080/v1/usuarios/thiscnpj')
   }
 
   getAllCards(): Observable<Card[]>{
   return this.httpClient.get<Card[]>(this.getCardsUrl)
   }
 
+  getCards(idConsumer:string){
+    return this.httpClient.get<any>(this.getConsumerCards.replace(' ', idConsumer))
+  }
+
+  // getInfoCard(idPromocao:string){
+  //   return this.httpClient.get<Card>(this.)
+  // }
+
   getAllPromo(): Observable<Promo[]>{
     return this.httpClient.get<Promo[]>(this.getPromoUrl)
     }
 
+  getPromo(idCorporate:string){
+    return this.httpClient.get<any>(this.getCorporatePromo.replace(' ', idCorporate))
+  }
+
   getUser(username:string): Observable<any>{
-    if (username.length == 14) return this.httpClient.get<any>(`${this.getUserInfo}/thiscnpj`)
-    return this.httpClient.get<any>(`${this.getUserInfo}/thiscpf`)
+    if (username.length == 11) return this.httpClient.get<any>(`${this.getConsumerInfo}/${username}`)
+    return this.httpClient.get<any>(`${this.getCorporateInfo}/${username}`)
     // correto return this.httpClient.get<UserPF>(`${this.getUserInfo}/${username}`)
   }
 

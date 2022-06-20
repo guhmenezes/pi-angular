@@ -2,12 +2,12 @@
     <ng-template ngbSlide *ngFor="let card of cards" >
 
         <div>
-        <div id="card" [ngClass]="flip" class="cards row" (click)="flipCard(card.cartaoId)">
+        <div id="card" [ngClass]="flip" class="cards row" (click)="flipCard()">
           <div id="front" class="face mx-1 mb-5 mt-1">
             <div class="pulse">
-              <h3 class="cname">Nome da Empresa</h3>
-              <p class="cdesc">{{card.descricao | uppercase}}</p>
-              <p class="cdate">{{card.dataValidade | date:'dd/MM/YY'}} </p>
+              <h3 class="cname">{{card.idPromocao}}</h3>
+              <!-- <p class="cdesc">{{card.descricao | uppercase}}</p> -->
+              <!-- <p class="cdate">{{card.dataValidade | date:'dd/MM/YY'}} </p> -->
             </div>
           </div>
           <div id="back" class="face mx-1 mb-5 mt-1 d-flex justify-content-center align-items-center pulse">
