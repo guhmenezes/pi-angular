@@ -64,6 +64,10 @@ export class RegisterService {
       return false
 }
 
+isCnpjValid(cnpj:string){
+  return true
+}
+
   createConsumer(user: UserPF): Observable<any>{
     return this.httpClient.post<Response>(this.createUserUrl, user)
   }

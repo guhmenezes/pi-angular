@@ -1,15 +1,12 @@
 <section class="py-1 px-1 mt-4">
   <div class="container d-flex justify-content-center py-3 px-4">
     
-    
-    <!-- <app-alert-modal #content [msg]='msg' *ngIf="invalidCpf"></app-alert-modal> -->
-    <form class="text-center" autocomplete="off" [formGroup]="registerForm">
-      
-      
+    <form class="text-center" autocomplete="off" [formGroup]="registerForm">     
+
+      <!-- CADASTRO PARTE 1  -->
       <div *ngIf="!cpf && !cnpj">
         <h1 class="h3 mb-3 fw-normal">Cadastro</h1>
         <h2 class="h6 my-4 fw-normal text-center" >Informe seu CPF ou CNPJ:</h2>
-        <!-- *ngIf="!isCpf" -->
       <div class="form-group cpforcnpj col-7 mx-auto">
         <input type="text" class="form-control" name="cpforcnpj" formControlName="cpforcnpj" 
         mask="CPF_CNPJ" [dropSpecialCharacters]="false">        
@@ -17,11 +14,10 @@
         </button>
       </div>
       </div>
-        
+
+      <!-- CADASTRO PARTE 2 -->
       <div *ngIf="(cpf || cnpj) && !passwordValid" class="create-password mx-auto">
-        <!-- *ngIf="cpf && !passwordValid" -->
         <h2 class="h3 mb-3 fw-normal text-center">Crie sua Senha</h2>
-      
         <div class="d-flex justify-content-center align-items-center row">
           <div class="h6 my-2 form-group text-center mx-auto">
             <label *ngIf="cpf else cnpj">CPF:</label>
@@ -51,8 +47,10 @@
         </div>
       </div>
   
+      <!-- CADASTRO PARTE 3 -->
+
+      <!-- SE CPF -->
       <div *ngIf="cpf && passwordValid" class="registerPF" formGroupName="registerPF">
-      <!-- *ngIf="cpf && passwordValid" -->
         <h2 class="h3 mb-3 fw-normal">Dados Pessoais</h2>
         <div class="form-floating w-75 mt-3 mx-5">
           <input
@@ -138,8 +136,8 @@
         </div>
       </div>
     
-        <div *ngIf="cnpj && passwordValid" class="registerPJ" formGroupName="registerPJ">
-          <!-- *ngIf="cpf && passwordValid" -->
+      <!-- SE CNPJ -->
+      <div *ngIf="cnpj && passwordValid" class="registerPJ" formGroupName="registerPJ">
           <h2 class="h3 mb-3 fw-normal">Dados da Empresa</h2>
           <div class="form-floating w-75 mt-3 mx-5">
             <input
@@ -242,17 +240,18 @@
             />
             <label> Telefone para Contato:</label>
           </div>          
-        </div>
-            <div *ngIf="(cpf || cnpj) && passwordValid">
-              <!-- *ngIf="(cpf || cnpj) && passwordValid" -->
+      </div>
+
+      <!-- SUBMIT -->
+      <div *ngIf="(cpf || cnpj) && passwordValid">
             <input type="checkbox" class="checkbox" formControlName="accept"/>Li e aceito os
             <a (click)="viewTerms()"><u>termos de uso.</u></a><br />
             <button class="btn btn-primary my-3" type="submit" (click)="createUser()"
               >
             Cadastrar
             </button>
-          </div>
+      </div>
           
-        </form>
+    </form>
   </div>
 </section>

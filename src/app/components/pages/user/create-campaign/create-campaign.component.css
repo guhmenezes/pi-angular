@@ -1,5 +1,5 @@
 form{
-    width: 580px;
+    width: 500px;
 }
 
 label{
@@ -24,6 +24,36 @@ section{
     .container{
         min-width: 340px;
     }
+
+    form{
+        width: 320px;
+      }
+    
+      input{
+        width: 100% !important;
+        margin-top: 0 !important;
+        margin-bottom: 1rem !important; 
+      }
+      
+      label{
+        display: block;
+        width: 100%;
+        margin-bottom: .25rem;
+        padding-left: 10px;
+        text-align: left;
+      }
+
+      form div{
+        flex-direction: column;
+      }
+
+      button{
+        width: 60%;
+      }
+      
+      .dbtn{
+        align-items: center;
+      }
 
     th{
         min-width: 70px;

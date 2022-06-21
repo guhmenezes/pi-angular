@@ -1,83 +1,36 @@
 <main class="border border-secondary rounded py-1 px-1 mt-4">
   <div class="container d-flex justify-content-center border border-secondary py-5 px-5">
-  <form class="text-center">
-    <!-- <img class="mb-4" src="/docs/5.2/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57"> -->
-    <h1 class="h3 mb-3 fw-normal">Acesse a plataforma</h1>
+    <form class="text-center">
+      <h1 class="h3 mb-3 fw-normal">Acesse a plataforma</h1>
     
-    <div class="form-floating">
-      <input type="text" class="form-control px-4" placeholder=" "
-      [(ngModel)]="user.username"
-      name="login"
-      id="cpf-cnpj"
-      
-      >
-      <label for="floatingInput">CPF ou CNPJ</label>
-    </div>
-    <div class="form-floating">
-      <input type="password" class="form-control px-4" id="floatingPassword" placeholder=" "
-      [(ngModel)]="user.senha"
-      name="password"
-      id="password"
-      maxlength="12">
-      <label for="floatingPassword">Senha</label>
-    </div>
+      <div class="form-floating">
+        <input type="text" class="form-control px-4" placeholder=" "
+        [(ngModel)]="user.username"
+        name="login"
+        id="cpf-cnpj"
+        mask="CPF_CNPJ"
+        [dropSpecialCharacters]="true"
+        >
+        <label for="floatingInput">CPF ou CNPJ</label>
+      </div>
+      <div class="form-floating">
+        <input type="password" class="form-control px-4" id="floatingPassword" placeholder=" "
+        [(ngModel)]="user.senha"
+        name="password"
+        id="password"
+        maxlength="12">
+        <label for="floatingPassword">Senha</label>
+      </div>
     
-    <div class="options mb-3 mt-1 d-flex justify-content-between mx-1">
-      <label class="d-inline-flex my-0 align-items-center">
+      <div class="options mb-3 mt-1 d-flex justify-content-between mx-1">
+        <label class="d-inline-flex my-0 align-items-center">
         <input type="checkbox" id="remember-me" [(ngModel)]="user.remember" name="remember"  class="check mx-1 py-5">
         <p>Lembrar-me</p>
-      </label>
-      <app-forgot-password></app-forgot-password>
-    </div>
-    <button class="w-100 btn btn-lg btn-primary" type="submit" (click)="loginToken()">Entrar</button>
-    <!-- <div class="d-flex justify-content-end align-items-center bg-dark">
-      <span>Ainda não tem conta?</span> -->
+        </label>
+        <app-forgot-password></app-forgot-password>
+      </div>
+      <button class="w-100 btn btn-lg btn-primary" type="submit" (click)="loginToken()">Entrar</button>
       <button class="w-100 btn btn-lg btn-secondary mt-2" type="button" (click)="cadastro()" >Cadastre-se</button>
-    <!-- </div> -->
-  </form>
+    </form>
   </div>
 </main>
-
-
-
-
-<!-- <div class="border border-light my-5 mx-auto">
-  <div class=" border border-light m-1">
-    <h2 class="h4 text-center mt-5 mb-3 mx-5">Acesse a plataforma</h2>
-      <div class="row my-4 mx-auto col-9">
-        <div class="form-floating">
-          <input
-            type="text"
-            class="form-control px-4 bg-dark text-light"
-            [(ngModel)]="user.username"
-            id="cpf-cnpj"
-            placeholder=" "
-            maxlength="18"
-          />
-          <label class="mx-3" for="floatingInput">CPF ou CNPJ</label>
-        </div>
-      </div>
-      <div class="row my-4 mb-3 mx-auto col-9">
-        <div class="form-floating ">
-          <input
-            type="password"
-            class="form-control px-4 bg-dark text-light"
-            [(ngModel)]="user.password"
-            id="password"
-            placeholder=" "
-          />
-          <label class="mx-3" for="floatingInput">Senha</label>
-        </div>
-      </div>
-      <div class="row my-4 mx-auto col-8">
-        <div class="form-group mt-2">
-          <button type="button" class="btn btn-outline-light float-end w-100 my-2"
-          (click)="login()" >Entrar</button>
-          <button type="button" class="btn btn-outline-light float-start w-100"
-          [routerLink]="['/cadastro']">Cadastrar</button>
-        </div>
-      </div>
-  </div>
-</div> -->
-
-

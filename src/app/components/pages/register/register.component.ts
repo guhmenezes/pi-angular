@@ -156,17 +156,20 @@ export class RegisterComponent implements OnInit {
         break
       case 14:
         console.log('é cnpj')
-        if(alreadyRegistered){
+        let cnpjValid = this.register.isCnpjValid(value)
+        if(cnpjValid && !alreadyRegistered){
+          this.cnpj = value;
+          this.registerForm.get('registerPJ')?.patchValue({
+            cnpj: value.replaceAll('.','').replaceAll('/','').replaceAll('-','')
+          })
+        } else if(alreadyRegistered){
           this.showModal('Usuário já cadastrado.', 'Faça seu login')
           setTimeout(() => {
             localStorage.setItem('uar',value)
             window.location.href = ''
           },3000)
         } else {
-        this.cnpj = value;
-        this.registerForm.get('registerPJ')?.patchValue({
-          cnpj: value.replaceAll('.','').replaceAll('/','').replaceAll('-','')
-        })
+          this.showModal('CNPJ Inválido !')
       }
         // this.isCnpj = true
         break

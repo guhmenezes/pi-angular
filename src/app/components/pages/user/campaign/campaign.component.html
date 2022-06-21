@@ -25,37 +25,11 @@
                 <p><span class="date">Vigente até</span><strong>{{promo.dataValidade | date:"dd/MM/yyyy"}}</strong></p>
             </div>
             </a>
-
-            <!-- <a href="#" class="list-group-item list-group-item-action">
-                <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">List group item heading</h5>
-                    <small class="text-muted">3 days ago</small>
-                </div>
-                <p class="mb-1">Some placeholder content in a paragraph.</p>
-              <small class="text-muted">And some muted small print.</small>
-            </a>
-            <a href="#" class="list-group-item list-group-item-action">
-              <div class="d-flex w-100 justify-content-between">
-                  <h5 class="mb-1">List group item heading</h5>
-                <small class="text-muted">3 days ago</small>
-            </div>
-            <p class="mb-1">Some placeholder content in a paragraph.</p>
-              <small class="text-muted">And some muted small print.</small>
-            </a> -->
         </div>
         <div *ngIf="!activeList && active">
             <p class="text-center my-5 h6 fw-normal">Você não possui promoção ativa no momento</p>
         </div>
         <div class="list-group mb-2 bg-danger" *ngFor="let promo of promoList">
-            <!-- <a  href="#" class="list-group-item list-group-item-action form-group px-4 py-3" aria-current="true">
-                <div class="d-flex w-100 align-items-center px-3 py-3">
-                    <div class="d-flex row">
-                <h3 class="h5 mb-3">Promoção criada por: </h3>
-                <p class="mb-1">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptas id dolores consequatur quisquam ratione tempore fugit reiciendis molestiae, officiis amet, eius esse accusamus. Eveniet, officiis! Possimus voluptatibus hic neque expedita?</p>
-                </div>
-                <p>Vigente até<br><strong>00/00/0000</strong></p>
-            </div>
-            </a> -->
             <a *ngIf="compare(promo.dataValidade, date, false) && closed" class="list-group-item list-group-item-action px-4 py-3" aria-current="true">
                 <div class="d-flex w-100 align-items-center px-3 py-3">
                     <div class="d-flex row promo-info">

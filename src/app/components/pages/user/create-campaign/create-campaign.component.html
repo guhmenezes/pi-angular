@@ -5,6 +5,7 @@
       <h1 *ngIf="!havePromo" class="h3 mb-3 fw-normal text-center">Criar Promoção</h1>
       <h1 *ngIf="havePromo" class="h3 mb-3 fw-normal text-center">Promoção ativa</h1>
     </header>
+
       <form *ngIf="!havePromo" >
         <div class="form-group d-flex align-items-center">
           <label for="validUntil" class="col-5">Promoção válida até:</label>
@@ -31,16 +32,17 @@
           >
           </textarea>
         </div>
-        <div class="d-flex justify-content-center">
+        <div class="d-flex justify-content-center dbtn">
           <button class="btn-lg btn-primary mt-4" (click)="createPromo()">Criar Promoção</button>
         </div>
       </form>
+
       <table *ngIf="havePromo"
       class="text-center mt-3">
         <tr>
-        <th>Vigente até</th>
-        <th>Descrição</th>
-        <th>Carimbos</th>
+          <th>Vigente até</th>
+          <th>Descrição</th>
+          <th>Carimbos</th>
         </tr>
         <tr class="info">
           <td> {{lastPromo.dataValidade | date:'dd/MM/yyyy'}} </td>
@@ -48,5 +50,6 @@
           <td> {{lastPromo.espacoTotal}} </td>
         </tr>
       </table>
+      
     </div>
 </section>

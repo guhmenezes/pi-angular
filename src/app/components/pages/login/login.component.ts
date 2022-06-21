@@ -123,9 +123,17 @@ export class LoginComponent implements OnInit {
 
 
   loginToken(){
-    if (this.user.remember)
-    this.remember = true;
-    this.rememberMe(this.user.username,this.user.senha);
+    if(this.user.username == undefined  && this.user.senha == undefined) 
+    this.showModal('Informe seu CPF/CNPJ e senha para acessar')
+    else if(this.user.username.length != 11 && this.user.username.length != 14)
+    this.showModal('Usuário inválido')
+    // else if(this.user.username == undefined && this.user.senha != undefined)
+    // this.showModal('Informe seu CPF/CNPJ')
+    else if(this.user.senha == undefined)
+    this.showModal('Informe sua senha')
+    else if(this.user.senha.length < 4 || this.user.senha.length > 12)
+    this.showModal('Usuário e/ou senha inválidos')
+    else{
     this.loginService.loginToken(this.user).subscribe({
       next: response => {
         console.log(response)
@@ -136,9 +144,13 @@ export class LoginComponent implements OnInit {
         window.localStorage.setItem('telefone', response.telefone)
         window.localStorage.setItem('token', response.token)
         this.loginService.userAuthenticated(true)
+        if (this.user.remember)
+        this.remember = true;
+        this.rememberMe(this.user.username,this.user.senha);
       }
-      ,error: err => this.showModal(`Erro ${err.status}`)
+      ,error: err => this.showModal('Usuário não encontrado','Realizar Cadastro')
     })
+  }
   }
   loginCerto(){
     let username = this.user.username

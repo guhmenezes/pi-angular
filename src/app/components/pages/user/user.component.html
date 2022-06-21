@@ -5,7 +5,11 @@
     <header class="my-4">
       <p>Olá, {{ firstName | titlecase }} {{ lastName | titlecase }}</p>
     </header>
+
+    <!-- DASHBOARD -->
     <div class="opts justify-content-center align-items-center mb-5">
+
+      <!-- DASHBOARD PF -->
       <button *ngIf="cpf" class="opt mx-2" routerLink="/promocoes">
         <div
           class="icon d-inline-flex justify-content-center align-items-center"
@@ -22,6 +26,8 @@
         <i class="fa-solid fa-user"></i>
         <p>Atualizar Dados</p>
       </button>
+
+      <!-- DASHBOARD PJ -->
       <button *ngIf="cnpj" class="opt mx-2" routerLink="/create-campaign">
         <div
           class="icon d-inline-flex justify-content-center align-items-center"
@@ -44,10 +50,14 @@
         <i class="fa-solid fa-stamp"></i>
         <p>Carimbar Cartão</p>
       </button>
+
+      <!-- ALL -->
       <button class="opt mx-2" routerLink="" (click)="logout()">
         <i class="fa-solid fa-arrow-right-to-bracket"></i>
         <p>Sair</p>
       </button>
+
     </div>
+    
   </div>
 </section>

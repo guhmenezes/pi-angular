@@ -1,25 +1,19 @@
 <ngb-carousel [showNavigationArrows]="showNavigationArrows" [showNavigationIndicators]="showNavigationIndicators">
     <ng-template ngbSlide *ngFor="let card of cards" >
 
-        <div>
+      <div>
         <div id="card" [ngClass]="flip" class="cards row" (click)="flipCard()">
+
           <div id="front" class="face mx-1 mb-5 mt-1">
             <div class="pulse">
               <h3 class="cname">{{card.idPromocao}}</h3>
-              <!-- <p class="cdesc">{{card.descricao | uppercase}}</p> -->
-              <!-- <p class="cdate">{{card.dataValidade | date:'dd/MM/YY'}} </p> -->
+              <p class="cdesc">{{card.descricao | uppercase}}</p>
+              <p class="cdate">{{card.dataValidade | date:'dd/MM/YY'}} </p>
             </div>
           </div>
-          <div id="back" class="face mx-1 mb-5 mt-1 d-flex justify-content-center align-items-center pulse">
-            <input
-              type="text"
-              class="idcard"
-              name="idcard"
-              style="display: none"
-              readonly
-            />
-            <div class="col mx-auto">
 
+          <div id="back" class="face mx-1 mb-5 mt-1 d-flex justify-content-center align-items-center pulse">
+            <div class="col mx-auto">
               <ul class="d-grid row g-0">
                 <li class="stampfield">
                   <i class="fa-solid fa-check" *ngIf="card.espacoCarimbado > 0"></i>
@@ -92,7 +86,6 @@
           </div> 
         </div>
       </div>
-      <div>
-      </div>
+      
     </ng-template>
   </ngb-carousel>

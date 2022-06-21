@@ -6,7 +6,6 @@ import { InfoComponent } from './components/pages/user/info/info.component';
 import { UserComponent } from './components/pages/user/user.component';
 import { CardsComponent } from './components/pages/user/cards/cards.component';
 import { CampaignComponent } from './components/pages/user/campaign/campaign.component';
-import { IndexComponent } from './components/pages/index/index.component';
 import { ForgotPasswordComponent } from './components/pages/login/forgot-password/forgot-password.component';
 import { CreateCampaignComponent } from './components/pages/user/create-campaign/create-campaign.component';
 import { CreateCardComponent } from './components/pages/user/create-card/create-card.component';
@@ -25,6 +24,7 @@ import {NgbPaginationModule, NgbAlertModule, NgbModule} from '@ng-bootstrap/ng-b
 import { NgbdCarouselNavigation } from './components/pages/user/cards/carousel-navigation.component';
 import { AlertModalComponent } from './components/alert-modal/alert-modal.component';
 import { AuthInterceptor } from './components/pages/login/auth.interceptor';
+import { Error404Component } from './components/error404/error404.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +36,6 @@ import { AuthInterceptor } from './components/pages/login/auth.interceptor';
     UserComponent,
     CardsComponent,
     CampaignComponent,
-    IndexComponent,
     ForgotPasswordComponent,
     CreateCampaignComponent,
     CreateCardComponent,
@@ -45,7 +44,8 @@ import { AuthInterceptor } from './components/pages/login/auth.interceptor';
     AccessibilityComponent,
     BackComponent,
     NgbdCarouselNavigation,
-    AlertModalComponent
+    AlertModalComponent,
+    Error404Component
   ],
   imports: [
     BrowserModule,

@@ -10,8 +10,8 @@ import { LoginService } from 'src/app/services/login.service';
   providers: [NgbCarouselConfig]  // add NgbCarouselConfig to the component providers
 })
 export class NgbdCarouselNavigation implements OnInit {
-  showNavigationArrows = true;
-  showNavigationIndicators = true;
+  showNavigationArrows = false;
+  showNavigationIndicators = false;
   // images = [1055, 194, 368].map((n) => `https://picsum.photos/id/${n}/900/500`);
   cards:any[] = [];
   flip = 'flip'
@@ -40,14 +40,14 @@ export class NgbdCarouselNavigation implements OnInit {
     }
 
     flipCard(){
-      for(let i=0; i<this.cards.length; i++) {
+      // for(let i=0; i<this.cards.length; i++) {
         // if(this.cards[i].id === id) {
             // achou!
             // console.log(cards)
             if (this.flip === 'flip') this.flip = ''
             else this.flip = 'flip' 
         // }
-    }
+    // }
   }
 }
 

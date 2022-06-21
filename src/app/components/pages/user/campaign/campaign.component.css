@@ -3,6 +3,10 @@ section{
     min-height: 58vh;
 }
 
+.date{
+    display: block;
+}
+
 p.mb-1 {
     width: 92%;
 }
@@ -79,5 +83,6 @@ nav{
 
     .date{
         padding-right: 5px;
+        display: inline;
     }
 }

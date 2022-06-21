@@ -16,7 +16,7 @@ import { environment } from 'src/environments/environment';
 export class LoginService {
   private getUsersUrl = 'http://localhost:3100/api/users'
   private loginUrl = 'http://192.168.0.15:8080/login'
-  private userAuth: boolean = false;
+  private userAuth: boolean = true;
   private getConsumerInfo = `${environment.API2}v1/usuario`
   private getConsumerCards = `${environment.API2}v1/ /cartoes`
   private getCorporateInfo = `${environment.API2}v1/empresa`

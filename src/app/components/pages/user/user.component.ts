@@ -9,7 +9,7 @@ import { LoginService } from 'src/app/services/login.service';
 export class UserComponent implements OnInit {
   username: string = ''
   cpf: string = ''
-  cnpj: string = 'e'
+  cnpj: string = ''
   firstName: string = '';
   lastName: string = '';
   userId!:string;
@@ -30,16 +30,16 @@ export class UserComponent implements OnInit {
     //     console.log(this.username)
     //   }
     // });
-    this.username = window.localStorage.getItem('login')!
-    let fullName = this.info.getInfo().nome!.split(" ");
-    this.firstName = fullName[0];
-    this.lastName = fullName[fullName.length-1]
-    // this.userLogged()
-    if(this.username.length == 11) this.cpf = this.username
-    else if (this.username.length == 14) this.cnpj = this.username
-    console.log(this.userId)
-    if(this.cnpj)
-    this.activeCampaign()
+    // this.username = window.localStorage.getItem('login')!
+    // let fullName = this.info.getInfo().nome!.split(" ");
+    // this.firstName = fullName[0];
+    // this.lastName = fullName[fullName.length-1]
+    // // this.userLogged()
+    // if(this.username.length == 11) this.cpf = this.username
+    // else if (this.username.length == 14) this.cnpj = this.username
+    // console.log(this.userId)
+    // if(this.cnpj)
+    // this.activeCampaign()
   }
 
   // userLogged(){

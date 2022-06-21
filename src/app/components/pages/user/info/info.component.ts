@@ -25,6 +25,9 @@ export class InfoComponent implements OnInit {
     this.nome = data.nome!.toUpperCase()
     this.email = data.email!
     this.telefone = data.telefone!
+    // this.nome = 'TESTE DA SILVA SAURO'
+    // this.email = 'teste@teste.com.br'
+    // this.telefone = '19987654321'
   }
 
   // getUser(): void {
