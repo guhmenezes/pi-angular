@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {NgbCarouselConfig} from '@ng-bootstrap/ng-bootstrap';
-import { Card } from 'src/app/models/card';
-import { LoginService } from 'src/app/services/login.service';
+import { Card } from 'src/app/core/models/card';
+import { LoginService } from 'src/app/core/services/login.service';
 
 @Component({
   selector: 'ngbd-carousel-navigation',

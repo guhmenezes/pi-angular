@@ -1,18 +1,19 @@
-import { LoginComponent } from './components/pages/login/login.component';
-import { RegisterComponent } from './components/pages/register/register.component';
-import { CampaignComponent } from './components/pages/user/campaign/campaign.component';
-import { CardsComponent } from './components/pages/user/cards/cards.component';
-import { CreateCampaignComponent } from './components/pages/user/create-campaign/create-campaign.component';
-import { CreateCardComponent } from './components/pages/user/create-card/create-card.component';
-import { InfoComponent } from './components/pages/user/info/info.component';
-import { StampComponent } from './components/pages/user/stamp/stamp.component';
-import { UserComponent } from './components/pages/user/user.component';
 
-import { AuthGuard } from './services/auth.guard';
+
+import { AuthGuard } from './core/services/auth.guard';
 
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { Error404Component } from './components/error404/error404.component';
+import { LoginComponent } from './core/components/login/login.component';
+import { RegisterComponent } from './core/components/register/register.component';
+import { UserComponent } from './user/components/user/user.component';
+import { CampaignComponent } from './user/components/campaign/campaign.component';
+import { CardsComponent } from './user/components/cards/cards.component';
+import { InfoComponent } from './user/components/info/info.component';
+import { CreateCampaignComponent } from './user/components/create-campaign/create-campaign.component';
+import { CreateCardComponent } from './user/components/create-card/create-card.component';
+import { StampComponent } from './user/components/stamp/stamp.component';
+import { Error404Component } from './core/components/error404/error404.component';
 
 const routes: Routes = [
   {
@@ -29,7 +30,7 @@ const routes: Routes = [
     component: RegisterComponent
   },
   {
-    path: 'login',
+    path: 'dashboard',
     component: UserComponent,
     // canActivate: [AuthGuard]
   },
@@ -49,24 +50,24 @@ const routes: Routes = [
     // canActivate: [AuthGuard]
   },
   {
-    path: 'create-campaign',
+    path: 'criar-promocao',
     component: CreateCampaignComponent,
     // canActivate: [AuthGuard]
   },
   {
-    path: 'generate-card',
+    path: 'gerar-cartao',
     component: CreateCardComponent,
     // canActivate: [AuthGuard]
   },
   {
-    path: 'stamp',
+    path: 'carimbar',
     component: StampComponent,
     // canActivate: [AuthGuard]
   },
   {
     path: '**',
     component: Error404Component
-  }
+    }
 ];
 
 @NgModule({

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ModalContent } from 'src/app/components/alert-modal/alert-modal.component';
-import { Promo } from 'src/app/models/promo';
-import { LoginService } from 'src/app/services/login.service';
-import { RegisterService } from 'src/app/services/register.service';
+import { ModalContent } from 'src/app/shared/components/alert-modal/alert-modal.component';
+import { Promo } from 'src/app/core/models/promo';
+import { LoginService } from 'src/app/core/services/login.service';
+import { RegisterService } from 'src/app/core/services/register.service';
 
 @Component({
   selector: 'app-create-campaign',

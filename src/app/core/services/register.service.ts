@@ -6,7 +6,7 @@ import { UserPJ } from '../models/userPJ';
 import { Promo } from '../models/promo';
 import { Card } from '../models/card';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { AlertModalComponent } from '../components/alert-modal/alert-modal.component';
+// import { AlertModalComponent } from '../components/alert-modal/alert-modal.component';
 import { environment } from 'src/environments/environment';
 
 @Injectable({

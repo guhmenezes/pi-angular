@@ -3,11 +3,12 @@ import { Component, EventEmitter, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Login } from 'src/app/models/login';
-import { UserPF } from 'src/app/models/userPF';
-import { LoginService } from 'src/app/services/login.service';
-import { RegisterService } from 'src/app/services/register.service';
-import { ModalContent } from '../../alert-modal/alert-modal.component';
+import { Login } from 'src/app/core/models/login';
+import { UserPF } from 'src/app/core/models/userPF';
+import { LoginService } from 'src/app/core/services/login.service';
+import { RegisterService } from 'src/app/core/services/register.service';
+import { ModalContent } from 'src/app/shared/components/alert-modal/alert-modal.component';
+// import { ModalContent } from '../../alert-modal/alert-modal.component';
 
 @Component({
   selector: 'app-login',

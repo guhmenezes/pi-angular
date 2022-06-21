@@ -5,11 +5,12 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgbModalWindow } from '@ng-bootstrap/ng-bootstrap/modal/modal-window';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { UserPF } from 'src/app/models/userPF';
-import { UserPJ } from 'src/app/models/userPJ';
-import { LoginService } from 'src/app/services/login.service';
-import { RegisterService } from 'src/app/services/register.service';
-import { AlertModalComponent, ModalContent } from '../../alert-modal/alert-modal.component';
+import { UserPF } from 'src/app/core/models/userPF';
+import { UserPJ } from 'src/app/core/models/userPJ';
+import { LoginService } from 'src/app/core/services/login.service';
+import { RegisterService } from 'src/app/core/services/register.service';
+import { ModalContent } from 'src/app/shared/components/alert-modal/alert-modal.component';
+// import { AlertModalComponent, ModalContent } from '../../alert-modal/alert-modal.component';
 
 @Component({
   selector: 'app-register',

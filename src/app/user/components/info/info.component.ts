@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { UserPF } from 'src/app/models/userPF';
-import { LoginService } from 'src/app/services/login.service';
-import { RegisterService } from 'src/app/services/register.service';
+import { UserPF } from 'src/app/core/models/userPF';
+import { LoginService } from 'src/app/core/services/login.service';
+import { RegisterService } from 'src/app/core/services/register.service';
 
 @Component({
   selector: 'app-info',

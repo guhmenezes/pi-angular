@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Promo } from 'src/app/models/promo';
-import { LoginService } from 'src/app/services/login.service';
+import { Promo } from 'src/app/core/models/promo';
+import { LoginService } from 'src/app/core/services/login.service';
 
 @Component({
   selector: 'app-campaign',

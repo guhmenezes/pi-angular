@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Card } from 'src/app/models/card';
-import { LoginService } from 'src/app/services/login.service';
+import { Card } from 'src/app/core/models/card';
+import { LoginService } from 'src/app/core/services/login.service';
 import Swiper from 'swiper';
 
 @Component({
