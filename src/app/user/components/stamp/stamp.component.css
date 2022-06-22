@@ -1,6 +1,16 @@
 form{
     width: 320px;
     min-height: 38vh;
+    margin-top: 1rem;
+}
+
+img{
+    width: 160px;
+    height: 160px;
+}
+
+.qr-code{
+    margin-left: 1rem;
 }
 
 @media (max-width:512px){

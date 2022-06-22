@@ -1,31 +1,3 @@
-// import { Component, Input } from '@angular/core';
-// import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-
-// @Component({
-//   selector: 'app-alert-modal',
-//   templateUrl: './alert-modal.component.html',
-//   // add NgbModalConfig and NgbModal to the component providers
-//   providers: [NgbModalConfig, NgbModal]
-// })
-// export class AlertModalComponent {
-    
-//   cont = {
-//     title: 'skjk',
-//     msg: 'sdj'
-//   }
-
-//   constructor(config: NgbModalConfig, private modalService: NgbModal) {
-//     // customize default values of modals used by this component tree
-//     config.backdrop = 'static';
-//     config.keyboard = true;
-//   }
-
-//   open(content:any) {
-//     this.modalService.open(content);
-  
-//   }
-// }
-
 import {Component, Input} from '@angular/core';
 import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
@@ -52,7 +24,7 @@ export class ModalContent {
   constructor(public activeModal: NgbActiveModal) {}
 }
 
-@Component({selector: 'app-alert-modal', templateUrl: './alert-modal.component.html'})
+@Component({templateUrl: './alert-modal.component.html'})
 export class AlertModalComponent {
   constructor(private modalService: NgbModal) {}
 

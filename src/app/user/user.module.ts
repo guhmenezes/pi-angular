@@ -8,7 +8,7 @@ import { InfoComponent } from './components/info/info.component';
 import { StampComponent } from './components/stamp/stamp.component';
 import { UserComponent } from './components/user/user.component';
 import { NgbdCarouselNavigation } from './components/cards/carousel-navigation.component';
-import { FormsModule } from '@angular/forms';
+// import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 
 

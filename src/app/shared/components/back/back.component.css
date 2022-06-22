@@ -17,7 +17,6 @@ button, .btn-secondary:focus, .btn-secondary:hover{
     box-shadow: 0 0 !important;
     outline: 0 !important;
     padding: 0;
-    /* color: white; */
 }
 
 @media (max-width:512px){

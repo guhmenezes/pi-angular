@@ -146,14 +146,14 @@
             placeholder=" "
             id="corporateName"
             name="corporateName"
-            formControlName="razaoSocial"
+            formControlName="nome"
             maxlength="38"
             [ngClass]="{'is-invalid': 
-            registerForm.get('registerPJ')?.get('razaoSocial')?.invalid &&
-            registerForm.get('registerPJ')?.get('razaoSocial')?.touched, 
+            registerForm.get('registerPJ')?.get('nome')?.invalid &&
+            registerForm.get('registerPJ')?.get('nome')?.touched, 
             'is-valid':
-            registerForm.get('registerPJ')?.get('razaoSocial')?.valid &&
-            registerForm.get('registerPJ')?.get('razaoSocial')?.touched
+            registerForm.get('registerPJ')?.get('nome')?.valid &&
+            registerForm.get('registerPJ')?.get('nome')?.touched
           }"
             />
             <label >Razão Social:</label>
@@ -165,14 +165,14 @@
             placeholder=" "
             id="tradeName"
             name="tradeName"
-            formControlName="nomeFantasia"
+            formControlName="contatoNome"
             maxlength="38"
             [ngClass]="{'is-invalid': 
-            registerForm.get('registerPJ')?.get('nomeFantasia')?.invalid &&
-            registerForm.get('registerPJ')?.get('nomeFantasia')?.touched, 
+            registerForm.get('registerPJ')?.get('contatoNome')?.invalid &&
+            registerForm.get('registerPJ')?.get('contatoNome')?.touched, 
             'is-valid':
-            registerForm.get('registerPJ')?.get('nomeFantasia')?.valid &&
-            registerForm.get('registerPJ')?.get('nomeFantasia')?.touched
+            registerForm.get('registerPJ')?.get('contatoNome')?.valid &&
+            registerForm.get('registerPJ')?.get('contatoNome')?.touched
           }"
             />
             <label >Nome Fantasia:</label>

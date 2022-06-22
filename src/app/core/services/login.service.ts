@@ -14,18 +14,19 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class LoginService {
-  private getUsersUrl = 'http://localhost:3100/api/users'
-  private loginUrl = 'http://192.168.0.15:8080/login'
-  private userAuth: boolean = true;
-  private getConsumerInfo = `${environment.API2}v1/usuario`
-  private getConsumerCards = `${environment.API2}v1/ /cartoes`
-  private getCorporateInfo = `${environment.API2}v1/empresa`
-  private getCorporatePromo = `${environment.API2}v1/ /promocoes`
-  private loginTokenUrl = `${environment.API}v1/login2`
+  private API_URL = environment.API 
+  // private getUsersUrl = 'http://localhost:3100/api/users'
+  // private loginUrl = 'http://192.168.0.15:8080/login'
+  private getConsumerInfo = `${this.API_URL}v1/usuario`
+  private getConsumerCards = `${this.API_URL}v1/ /cartoes`
+  private getCorporateInfo = `${this.API_URL}v1/empresa`
+  private getCorporatePromo = `${this.API_URL}v1/ /promocoes`
+  private loginTokenUrl = `${this.API_URL}login`
   private getCardsUrl = 'http://localhost:8080/v1/usuarios/thiscpf/cartoes'
   private getPromoUrl = 'http://localhost:8080/v1/promocao/promocaoid'
-  static emitUserLogged = new EventEmitter()
-  private subject = new Subject<string>();
+  private userAuth: boolean = true;
+  // static emitUserLogged = new EventEmitter()
+  // private subject = new Subject<string>();
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -44,7 +45,7 @@ export class LoginService {
   
   login(user: Login, userRegistered: Login){
     // var username, password = '';
-    console.log(user.username.length)
+    console.log(user.usuario.length)
     // if(user.username.length === 11){
       // this.getUser(user.username).subscribe({
       //   next: response => {
@@ -60,7 +61,7 @@ export class LoginService {
     // }
     console.log(user,userRegistered)
     // this.emitUserLogged.emit(userRegistered.username)
-    if (user.username === userRegistered.username && user.senha === userRegistered.senha){
+    if (user.usuario === userRegistered.usuario && user.senha === userRegistered.senha){
       this.userAuth = true;
     //   // this.showMenuEmitter.emit(true);
       this.router.navigate(['/login'])
@@ -78,7 +79,7 @@ export class LoginService {
   userAuthenticated(condition: boolean){
     if (condition){
       this.userAuth = true;
-        this.router.navigate(['/login'])
+        this.router.navigate(['/dashboard'])
     } else {
       this.userAuth = false;
       this.router.navigate(['/'])
@@ -98,7 +99,7 @@ export class LoginService {
   }
 
   loginAPI(user:Login){
-    return this.httpClient.post<any>(this.loginUrl, user)
+    // return this.httpClient.post<any>(this.loginUrl, user)
     // return user;
       // login successful if there's a jwt token in the response
       // console.log("USER: " + user);
@@ -129,14 +130,14 @@ isUserAlreadyRegistered(username: string){
     this.userAuth = false
   }
 
-  getAllConsumers(): Observable<UserPF[]>{
-    return this.httpClient.get<UserPF[]>(this.getUsersUrl)
-  }
+  // getAllConsumers(): {
+    // return this.httpClient.get<UserPF[]>(this.getUsersUrl)
+  // }
 
-  getConsumer(username: string): Observable<any>{
-    return this.httpClient.get<any>(`${this.getConsumerInfo}/${username}`, this.httpOptions)
-    // return this.httpClient.get<UserPF>('http://localhost:8080/v1/usuarios/thiscpf')
-  }
+  // getConsumer(username: string): Observable<any>{
+  //   return this.httpClient.get<any>(`${this.getConsumerInfo}/${username}`, this.httpOptions)
+  //   // return this.httpClient.get<UserPF>('http://localhost:8080/v1/usuarios/thiscpf')
+  // }
 
   getInfo(){
     return {
@@ -147,9 +148,9 @@ isUserAlreadyRegistered(username: string){
     }
   }
 
-  getAllCorporates(): Observable<UserPJ[]>{
-    return this.httpClient.get<UserPJ[]>(this.getUsersUrl)
-  }
+  // getAllCorporates(): Observable<UserPJ[]>{
+  //   return this.httpClient.get<UserPJ[]>(this.getUsersUrl)
+  // }
 
   getCorporate(username:string): Observable<any>{
     return this.httpClient.get<any>(`${this.getCorporateInfo}/${username}`)
@@ -182,13 +183,13 @@ isUserAlreadyRegistered(username: string){
     // correto return this.httpClient.get<UserPF>(`${this.getUserInfo}/${username}`)
   }
 
-  setUsername(username: string) {
-    LoginService.emitUserLogged.emit({username: username})
-}
+//   setUsername(username: string) {
+//     LoginService.emitUserLogged.emit({username: username})
+// }
 
-  getUsername(): Observable<string> {
-    return this.subject.asObservable();
-}
+//   getUsername(): Observable<string> {
+//     return this.subject.asObservable();
+// }
 
 }
 

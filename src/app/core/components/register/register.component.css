@@ -1,30 +1,13 @@
-/* .form-group{
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-}
-
-.form-control{
-  width: 80%;
-  float: right;
-
-} */
-
 form{
   width: 400px;
   min-height: 49vh;
-  /* padding: 15px; */
-  /* background-color: black; */
 }
-
-/* form input{
-  padding: 0 15px;
-} */
 
 .create-password{
   width: 300px;
   position: relative;
 }
+
 .cpforcnpj {
   position: relative;
 }
@@ -32,7 +15,6 @@ form{
 .cpforcnpj input{
   border-radius: 20px !important;
   padding-left: 1.75rem;
-  /* border-bottom-right-radius: 20px !important; */
 }
 
 .btn-value{
@@ -97,10 +79,6 @@ h2{
   font-size: var(--font-size);
 }
 
-/* div.modal-content{
-  height: 500px !important;
-} */
-
 @media(max-width:450px){
   .container{
     padding-left: 0 !important;
@@ -112,6 +90,7 @@ h2{
   html,body{
     overflow-x: hidden;
   }
+  
   .container{
     max-width: 340px;
     width: 100%;

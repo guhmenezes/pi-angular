@@ -6,9 +6,9 @@
 
           <div id="front" class="face mx-1 mb-5 mt-1">
             <div class="pulse">
-              <h3 class="cname">{{card.idPromocao}}</h3>
+              <h3 class="cname">{{card.empresa | uppercase}}</h3>
               <p class="cdesc">{{card.descricao | uppercase}}</p>
-              <p class="cdate">{{card.dataValidade | date:'dd/MM/YY'}} </p>
+              <p class="cdate">{{card.validade | date:'dd/MM/YY'}} </p>
             </div>
           </div>
 

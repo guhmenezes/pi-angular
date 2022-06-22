@@ -68,21 +68,21 @@ export class CreateCardComponent implements OnInit {
       this.showModal('Insira o CPF do novo cliente')
     } else if(this.newConsumer.length !== 11 || !this.reg.isCpfValid(this.newConsumer)){
       this.showModal('CPF inválido. Tente novamente')
-    } else if (!window.localStorage.getItem('userLogged')){
-      this.showModal('Faça o login novamente', 'OK', 'Sessão expirada!')
-      setTimeout(() => {
-        this.info.isntAuth()
-        window.localStorage.removeItem('userId')
-        this.router.navigate(['/'])
-        // console.log(this.userId)
-      }, 3000)
+    // } else if (!window.localStorage.getItem('token')){
+      // this.showModal('Faça o login novamente', 'OK', 'Sessão expirada!')
+      // setTimeout(() => {
+      //   this.info.isntAuth()
+      //   window.localStorage.removeItem('userId')
+      //   this.router.navigate(['/'])
+      //   // console.log(this.userId)
+      // }, 3000)
     } else {
       // console.log(this.haveThisCard(this.newConsumer))
       let idUser!:string;
-    this.info.getConsumer(this.newConsumer).subscribe({
-      next: data => idUser = data.usuarioId,
-      error: () => this.showModal('Usuário não encontrado')
-    })
+    // this.info.getConsumer(this.newConsumer).subscribe({
+    //   next: data => idUser = data.usuarioId,
+    //   error: () => this.showModal('Usuário não encontrado')
+    // })
     if(idUser !== null){
     setTimeout(() => {
        let body = {

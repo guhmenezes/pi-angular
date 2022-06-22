@@ -1,6 +1,6 @@
-import { HttpHeaderResponse, HttpHeaders } from '@angular/common/http';
+// import { HttpHeaderResponse, HttpHeaders } from '@angular/common/http';
 import { Component, EventEmitter, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+// import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Login } from 'src/app/core/models/login';
@@ -11,7 +11,6 @@ import { ModalContent } from 'src/app/shared/components/alert-modal/alert-modal.
 // import { ModalContent } from '../../alert-modal/alert-modal.component';
 
 @Component({
-  selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
@@ -42,18 +41,18 @@ export class LoginComponent implements OnInit {
       window.localStorage.removeItem('qtyStamp')
       window.localStorage.removeItem('description')
       if (window.localStorage.getItem('uar')){
-        this.user.username = window.localStorage.getItem('uar')!
+        this.user.usuario = window.localStorage.getItem('uar')!
         window.localStorage.removeItem('uar')
       }
       else if (window.localStorage.getItem('login') && window.localStorage.getItem('pass')){
-      this.user.username = window.localStorage.getItem('login')!
+      this.user.usuario = window.localStorage.getItem('login')!
       this.user.senha = window.localStorage.getItem('pass')!
       this.user.remember = true
     }
       // this.loginService.emitUserLogged.subscribe(
         // data => { 
-          // this.username = data
-          // console.log(this.username)
+          // this.usuario = data
+          // console.log(this.usuario)
         // }
       // )
     // } 
@@ -77,29 +76,29 @@ export class LoginComponent implements OnInit {
   }
 
   statusServer(){
-    this.tryRegister = {  
-      nome: '',
-      cpf: '',
-      email: '',
-      telefone: '',
-      senha: '',
-      data_nascimento: ''
-    }
+    // this.tryRegister = {  
+    //   nome: '',
+    //   cpf: '',
+    //   email: '',
+    //   telefone: '',
+    //   senha: '',
+    //   data_nascimento: ''
+    // }
     console.log(this.tryRegister)
-    this.registerWorks.createConsumer(this.tryRegister).subscribe({
-      next: () => console.log('work'),
-      error: err => {
-        if(err.status !== 0) {
-          console.log('work')
-          this.serverOn = true
-      }
-        else {
-          console.log('fora do ar')
-          this.serverOn = false
-      }
-      }
+    // this.registerWorks.createConsumer(this.tryRegister).subscribe({
+    //   next: () => console.log('work'),
+    //   error: err => {
+    //     if(err.status !== 0) {
+    //       console.log('work')
+    //       this.serverOn = true
+    //   }
+    //     else {
+    //       console.log('fora do ar')
+    //       this.serverOn = false
+    //   }
+    //   }
       
-    })
+    // })
   }
 
   cadastro(){
@@ -109,26 +108,26 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  loginAPI(){
-    this.loginService.loginAPI(this.user).subscribe({
-      next: resp => {
+  // loginAPI(){
+  //   this.loginService.loginAPI(this.user).subscribe({
+  //     next: resp => {
         
-            // const token = resp.headers.get('X-Access-Token');
-            console.log(resp)
-            // localStorage.setItem('token', token);
-            // this.user = user;
-      },
-      error: err => console.log(err)
-    })
-  }
+  //           // const token = resp.headers.get('X-Access-Token');
+  //           console.log(resp)
+  //           // localStorage.setItem('token', token);
+  //           // this.user = user;
+  //     },
+  //     error: err => console.log(err)
+  //   })
+  // }
 
 
   loginToken(){
-    if(this.user.username == undefined  && this.user.senha == undefined) 
+    if(this.user.usuario == undefined  && this.user.senha == undefined) 
     this.showModal('Informe seu CPF/CNPJ e senha para acessar')
-    else if(this.user.username.length != 11 && this.user.username.length != 14)
+    else if(this.user.usuario.length != 11 && this.user.usuario.length != 14)
     this.showModal('Usuário inválido')
-    // else if(this.user.username == undefined && this.user.senha != undefined)
+    // else if(this.user.usuario == undefined && this.user.senha != undefined)
     // this.showModal('Informe seu CPF/CNPJ')
     else if(this.user.senha == undefined)
     this.showModal('Informe sua senha')
@@ -138,61 +137,63 @@ export class LoginComponent implements OnInit {
     this.loginService.loginToken(this.user).subscribe({
       next: response => {
         console.log(response)
-        window.localStorage.setItem('userId', response.id)
-        window.localStorage.setItem('userLogged', response.username)
-        window.localStorage.setItem('nome', response.nome)
-        window.localStorage.setItem('email', response.email)
-        window.localStorage.setItem('telefone', response.telefone)
-        window.localStorage.setItem('token', response.token)
+        // window.localStorage.setItem('userId', response.id)
+        // window.localStorage.setItem('userLogged', response.usuario)
+        // window.localStorage.setItem('nome', response.nome)
+        // window.localStorage.setItem('email', response.email)
+        // window.localStorage.setItem('telefone', response.telefone)
+        // window.localStorage.setItem('token', response.token)
+        window.localStorage.setItem('token',
+ 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMTExMTExMTExMTExMSIsImV4cCI6MTY1NTg2MzQ1OH0.klAwp41yLkA6QWzkAuod46Z-i-pAzX0PHxfX2m6pSepXPAtl4S7JuZW-syyOhDUAtbVR_5EhEAEYS41YAauA2A')
         this.loginService.userAuthenticated(true)
         if (this.user.remember)
         this.remember = true;
-        this.rememberMe(this.user.username,this.user.senha);
+        this.rememberMe(this.user.usuario,this.user.senha);
       }
       ,error: err => this.showModal('Usuário não encontrado','Realizar Cadastro')
     })
   }
   }
-  loginCerto(){
-    let username = this.user.username
-    if(username.length === 11){
-      this.loginService.getConsumer(username).subscribe({
-        next: dados => {
-          console.log(dados)
-          window.localStorage.setItem('userId', dados.usuarioId)
-          window.localStorage.setItem('userLogged', dados.cpf)
-          window.localStorage.setItem('nome', dados.nome)
-          window.localStorage.setItem('email', dados.email)
-          // window.localStorage.setItem('telefone', dados.telefone)
-          window.localStorage.setItem('aniversario', dados.dataNascimento)
-          //funcao token
-        }
-        ,
-        error: err => this.showModal(`Erro ${err.status}`)
-      })
-    } else if(username.length === 14){
-      this.loginService.getCorporate(username).subscribe({
-        next: dados => {
-          window.localStorage.setItem('userId', dados.id)
-          window.localStorage.setItem('userLogged', dados.cnpj)
-          window.localStorage.setItem('nome', dados.contatoNome)
-          window.localStorage.setItem('email', dados.email)
-          window.localStorage.setItem('telefone', dados.telefone)
-          //funcao token
-        }
-        ,
-        error: err => this.showModal(`Erro ${err.status}`)
-      })
-    } else {
-      this.showModal('Usuário não encontrado')
-    }
-  }
+  // loginCerto(){
+  //   let usuario = this.user.usuario
+  //   if(usuario.length === 11){
+  //     this.loginService.getConsumer(usuario).subscribe({
+  //       next: dados => {
+  //         console.log(dados)
+  //         window.localStorage.setItem('userId', dados.usuarioId)
+  //         window.localStorage.setItem('userLogged', dados.cpf)
+  //         window.localStorage.setItem('nome', dados.nome)
+  //         window.localStorage.setItem('email', dados.email)
+  //         // window.localStorage.setItem('telefone', dados.telefone)
+  //         window.localStorage.setItem('aniversario', dados.dataNascimento)
+  //         //funcao token
+  //       }
+  //       ,
+  //       error: err => this.showModal(`Erro ${err.status}`)
+  //     })
+  //   } else if(usuario.length === 14){
+  //     this.loginService.getCorporate(usuario).subscribe({
+  //       next: dados => {
+  //         window.localStorage.setItem('userId', dados.id)
+  //         window.localStorage.setItem('userLogged', dados.cnpj)
+  //         window.localStorage.setItem('nome', dados.contatoNome)
+  //         window.localStorage.setItem('email', dados.email)
+  //         window.localStorage.setItem('telefone', dados.telefone)
+  //         //funcao token
+  //       }
+  //       ,
+  //       error: err => this.showModal(`Erro ${err.status}`)
+  //     })
+  //   } else {
+  //     this.showModal('Usuário não encontrado')
+  //   }
+  // }
 
-  login(){
-    console.log(this.user)
-    if (this.user.remember)
-    this.remember = true;
-    this.rememberMe(this.user.username,this.user.senha);
+  // login(){
+  //   console.log(this.user)
+  //   if (this.user.remember)
+  //   this.remember = true;
+  //   this.rememberMe(this.user.usuario,this.user.senha);
     // this.loginService.getUser(this.user).subscribe(
     //   response => {
     //     console.log(response)
@@ -202,31 +203,31 @@ export class LoginComponent implements OnInit {
     //     // console.log(header)
     //   }
     // )
-    try{
-      this.loginService.getUser(this.user.username).subscribe({
-        next: response => {
-          if(this.user.username.length == 14)
-          this.userRegistered.username = response.cnpj!
-          else this.userRegistered.username = response.cpf!
-          this.userRegistered.senha = response.senha
-          this.loginService.login(this.user, this.userRegistered)
-          window.localStorage.setItem('userLogged',this.userRegistered.username)
-          // this.setUsername(this.user.username)
-      },
-      error: err => this.showModal(`Erro ${err.status}`)
+  //   try{
+  //     this.loginService.getUser(this.user.usuario).subscribe({
+  //       next: response => {
+  //         if(this.user.usuario.length == 14)
+  //         this.userRegistered.usuario = response.cnpj!
+  //         else this.userRegistered.usuario = response.cpf!
+  //         this.userRegistered.senha = response.senha
+  //         this.loginService.login(this.user, this.userRegistered)
+  //         window.localStorage.setItem('userLogged',this.userRegistered.usuario)
+  //         // this.setusuario(this.user.usuario)
+  //     },
+  //     error: err => this.showModal(`Erro ${err.status}`)
 
-    }
-    )
-    console.log(this.user)
-  } catch (e) {
-    alert('Not Found')
-  }
-  }
+  //   }
+  //   )
+  //   console.log(this.user)
+  // } catch (e) {
+  //   alert('Not Found')
+  // }
+  // }
 
-  setUsername(username: string): void{ //aqui eu envio o valor para uma função do serviço.
-    this.loginService.setUsername(username);
-    LoginService.emitUserLogged.emit({ username: username });
-  }
+  // setusuario(usuario: string): void{ //aqui eu envio o valor para uma função do serviço.
+  //   this.loginService.setusuario(usuario);
+  //   LoginService.emitUserLogged.emit({ usuario: usuario });
+  // }
 }
 
 

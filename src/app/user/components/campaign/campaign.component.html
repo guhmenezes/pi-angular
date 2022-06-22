@@ -4,44 +4,43 @@
             <app-back></app-back>
         <h1 class="h3 mb-3 fw-normal text-center">Minhas Promoções</h1>
     </header> 
-    <div > 
+    <div *ngIf="notParticipant">
+        <p class="text-center my-5 h6 fw-normal">Ops! Você ainda não se cadastrou em nenhuma promoção.</p>
+    </div>
+    <div *ngIf="!notParticipant"> 
         <nav class="my-5 mr-md-3">
             <a class="p-2 h5 my-2 " id="active" (click)="showActive()">Em andamento</a>
             <a class="p-2 h5 my-2 fw-normal" id="closed" (click)="showClosed()">Encerrados</a>
         </nav>
     </div>     
-
-    <!-- <div *ngIf="!closedList && !activeList">
-        <p class="text-center my-5 h6 fw-normal">Ops! Você ainda não possui promoção</p>
-    </div> -->
         <div class="list-group mb-2 bg-primary" *ngFor="let promo of promoList">
-            <a *ngIf="compare(promo.dataValidade, date, true) && active" [routerLink]="['/cartoes']" 
+            <a *ngIf="compare(promo.validade, date, true) && active && !notParticipant" [routerLink]="['/cartoes']" 
             class="list-group-item list-group-item-action px-4 py-3" aria-current="true">
                 <div class="d-flex w-100 align-items-center px-3 py-3">
                     <div class="d-flex row promo-info">
-                <h3 class="h5 mb-3"><span class="txt">Promoção criada por:</span> {{promo.nomeFantasia | titlecase}}</h3>
+                <h3 class="h5 mb-3"><span class="txt">Promoção criada por:</span> {{promo.empresa | titlecase}}</h3>
                 <p class="mb-1">{{promo.descricao}}</p>
                 </div>
-                <p><span class="date">Vigente até</span><strong>{{promo.dataValidade | date:"dd/MM/yyyy"}}</strong></p>
+                <p><span class="date">Vigente até</span><strong>{{promo.validade | date:"dd/MM/yyyy"}}</strong></p>
             </div>
             </a>
         </div>
-        <div *ngIf="!activeList && active">
-            <p class="text-center my-5 h6 fw-normal">Você não possui promoção ativa no momento</p>
+        <div *ngIf="!activeList && active && !notParticipant">
+            <p class="text-center my-5 h6 fw-normal">Você não possui promoção ativa no momento.</p>
         </div>
         <div class="list-group mb-2 bg-danger" *ngFor="let promo of promoList">
-            <a *ngIf="compare(promo.dataValidade, date, false) && closed" class="list-group-item list-group-item-action px-4 py-3" aria-current="true">
+            <a *ngIf="compare(promo.validade, date, false) && closed && !notParticipant" class="list-group-item list-group-item-action px-4 py-3" aria-current="true">
                 <div class="d-flex w-100 align-items-center px-3 py-3">
                     <div class="d-flex row promo-info">
-                <h3 class="h5 mb-3"><span class="txt">Promoção criada por:</span> {{promo.nomeFantasia | titlecase}}</h3>
+                <h3 class="h5 mb-3"><span class="txt">Promoção criada por:</span> {{promo.empresa | titlecase}}</h3>
                 <p class="mb-1">{{promo.descricao}}</p>
                 </div>
-                <p><span class="date">Expirou em</span><strong>{{promo.dataValidade | date:"dd/MM/yyyy"}}</strong></p>
+                <p><span class="date">Expirou em</span><strong>{{promo.validade | date:"dd/MM/yyyy"}}</strong></p>
             </div>
             </a>
         </div>
         <div *ngIf="!closedList && closed">
-            <p class="text-center my-5 h6 fw-normal">Todas as suas promoções estão ativas</p>
+            <p class="text-center my-5 h6 fw-normal">Todas as suas promoções estão ativas.</p>
         </div>
 </div>
 </section>

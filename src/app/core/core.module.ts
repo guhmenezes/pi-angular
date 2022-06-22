@@ -6,9 +6,8 @@ import { HeaderComponent } from './components/header/header.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ForgotPasswordComponent } from './components/login/forgot-password/forgot-password.component';
-import { NgxMaskModule } from 'ngx-mask';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -24,6 +23,7 @@ import { SharedModule } from '../shared/shared.module';
   imports: [
     CommonModule,
     SharedModule,
+    HttpClientModule
     // NgxMaskModule.forChild(),
     // FormsModule,
     // ReactiveFormsModule

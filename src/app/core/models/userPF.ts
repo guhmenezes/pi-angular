@@ -1,11 +1,18 @@
 export class UserPF{
-  nome!: string;
-  cpf!: string;
-  email!: string;
-  telefone!: string;
-  senha!: string;
-  data_nascimento!: string;
-  cnpj?: string
+  nome!:string;
+  cpfcnpj!:string;
+  cpf?: string;
+  email!:string;
+  telefone!:string;
+  senha!:string; 
+  data_nascimento!:string;  
+  // nome!: string;
+  // cpf!: string;
+  // email!: string;
+  // telefone!: string;
+  // senha!: string;
+  // data_nascimento!: string;
+  // cnpj?: string
 }
 
 // export class UserPF {

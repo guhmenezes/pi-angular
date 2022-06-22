@@ -1,12 +1,19 @@
 export class UserPJ {
-  cnpj!: string;
+  nome!: string; 
+  cpfcnpj!: string; 
+  email!: string; 
+  telefone!: string; 
   senha!: string;
-  corporateName!: string;
-  nome!: string;
-  startDate!: string;
-  email!: string;
-  phoneNumber!: string;
-  cpf?: string;
+  dataCriacao!: string; 
+  contatoNome!: string; 
+  // cnpj!: string;
+  // senha!: string;
+  // corporateName!: string;
+  // nome!: string;
+  // startDate!: string;
+  // email!: string;
+  // phoneNumber!: string;
+  // cpf?: string;
 }
 
 // body = {

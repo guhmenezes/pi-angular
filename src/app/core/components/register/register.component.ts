@@ -1,19 +1,15 @@
-import { Component, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, NgModel, Validators } from '@angular/forms';
+import { Component, OnInit} from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { NgbModalWindow } from '@ng-bootstrap/ng-bootstrap/modal/modal-window';
-import { Observable } from 'rxjs';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { map } from 'rxjs/operators';
 import { UserPF } from 'src/app/core/models/userPF';
 import { UserPJ } from 'src/app/core/models/userPJ';
 import { LoginService } from 'src/app/core/services/login.service';
 import { RegisterService } from 'src/app/core/services/register.service';
 import { ModalContent } from 'src/app/shared/components/alert-modal/alert-modal.component';
-// import { AlertModalComponent, ModalContent } from '../../alert-modal/alert-modal.component';
 
 @Component({
-  selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
@@ -24,18 +20,7 @@ export class RegisterComponent implements OnInit {
   cpf?: string;
   cnpj?: string;
   validDate = false;
-  // birthDate!: string[];
-  // public customPatterns = { '0': { pattern: new RegExp(')} };
-  // invalidCpf = true
-  // msg = ''
-  // title = 'CPF INVÁLIDO'
-  // password!: string;
-  // passwordConfirm!: string;
   passwordValid: boolean = false; 
-  // isCpf: boolean = false;
-  // isCnpj: boolean = false;
-
-  // @ViewChild('registerForm',{static: true}) registerForm: NgModel
 
   constructor(private register: RegisterService, 
               private info: LoginService,
@@ -48,43 +33,34 @@ export class RegisterComponent implements OnInit {
       createPassword: '',
       confirmPassword: '',
       registerPF: this.fb.group({
-        cpf: '',
-        senha: '',
         nome:  ['', [Validators.minLength(10), Validators.maxLength(38), Validators.required, Validators.pattern(/[A-z]* [A-z]*/)]],
-        dataNascimento:  ['', [Validators.required]],
+        cpfcnpj: '',
         email: ['', [Validators.required, Validators.email]],
         telefone: ['', Validators.required],
-        data_nascimento: ''
-      }),
-      // "razaoSocial" : "empresa sauro ltda",                    |   "cnpj" : "00000000000191",
-      // "nomeFantasia" : "sauro services",                       |   "password" : "123456",
-      // "cnpj" : "00000000000191",                               |   "corporateName" : "empresa sauro ltda",
-      // "email" : "teste@teste.com.br",                          |   "tradeName" : "sauro SERVICES",
-      // "telefone" : "1934521410",                               |   "startDate" : "16/08/1999",
-      // "senha" : "123456",                                      |   "email" : "teste@teste.com.br",
-      // "dataCriacao" : "1999-08-16"  
-      registerPJ: this.fb.group({
-        cnpj: '',
         senha: '',
-        razaoSocial: ['', [Validators.required, Validators.minLength(3)]],
-        nomeFantasia: ['',[Validators.required, Validators.minLength(3)]],
-        data_criacao:['', Validators.required],
+        data_nascimento: '',
+        dataNascimento:  ['', [Validators.required]],
+      }),
+      registerPJ: this.fb.group({
+        nome: ['', [Validators.required, Validators.minLength(3)]],
+        cpfcnpj: '',
         email: ['', [Validators.required, Validators.email]],
         telefone: ['', Validators.required],
-        dataCriacao: ''
+        senha: '',
+        dataCriacao: '',
+        contatoNome: ['',[Validators.required, Validators.minLength(2)]],
+        data_criacao:['', Validators.required],
       }),
       accept: [false, [Validators.requiredTrue]],
     });
   }
 
   ngOnInit(): void {
-    console.log(this.validDate)
+    // console.log(this.validDate)
   }
 
   birthValid(input:string){
     let date = input.split('/')
-    // console.log(date)
-    // console.log(date)
     let thirtyDays = [4,6,9,10]
     let leap = +date[2] % 4 === 0 ? true : false
     if(thirtyDays.indexOf(+date[1]) > -1 && +date[0] > 30){
@@ -108,10 +84,7 @@ export class RegisterComponent implements OnInit {
     let currentYear = currentDate.getFullYear()
     let currentMonth = currentDate.getMonth() +1 
     let currentDay = currentDate.getDate()
-    // console.log(currentDay,currentMonth,currentYear)
       if (+date[2] < currentYear && +date[2] > 1998){
-       // +date[2] >= currentYear && +date[1] < currentMonth - 3)
-       // && +date[2] > 1998){
          console.log('oiii')
        return true
    } if (+date[2] == currentYear && +date[1] < currentMonth - 3){ 
@@ -122,61 +95,82 @@ export class RegisterComponent implements OnInit {
        return true
     }
   return false
-}
+  }
   
-
   getCpfOrCnpj(){
     this.cpf = undefined;
     this.cnpj = undefined;
     let value = this.registerForm.get('cpforcnpj')?.value.replaceAll('.','').replaceAll('/','').replaceAll('-','')
     let alreadyRegistered = this.info.isUserAlreadyRegistered(value)
     console.log(value.length)
-    switch (value.length) {
-      case 0:
-        this.showModal('Insira seu CPF ou CNPJ')
-        break
-      case 11:
-        let cpfValid = this.register.isCpfValid(value)
-        if(cpfValid && !alreadyRegistered){
-        this.cpf = value.replaceAll('.','').replaceAll('-','');
-        console.log('é cpf')
-        this.registerForm.get('registerPF')?.patchValue({
-          cpf: this.cpf
-        })
-      } else if(alreadyRegistered){
-        this.showModal('Usuário já cadastrado.', 'Faça seu login')
-        setTimeout(() => {
-          localStorage.setItem('uar',value)
-          window.location.href = ''
-        },3000)
-        
-      } else {
-        this.showModal('CPF Inválido !')
-      }
-        // this.isCpf = true
-        break
-      case 14:
-        console.log('é cnpj')
-        let cnpjValid = this.register.isCnpjValid(value)
-        if(cnpjValid && !alreadyRegistered){
-          this.cnpj = value;
-          this.registerForm.get('registerPJ')?.patchValue({
-            cnpj: value.replaceAll('.','').replaceAll('/','').replaceAll('-','')
-          })
-        } else if(alreadyRegistered){
+    if (value.length == 0) this.showModal('Insira seu CPF ou CNPJ')
+    else if (alreadyRegistered){
           this.showModal('Usuário já cadastrado.', 'Faça seu login')
           setTimeout(() => {
             localStorage.setItem('uar',value)
             window.location.href = ''
           },3000)
-        } else {
-          this.showModal('CNPJ Inválido !')
-      }
-        // this.isCnpj = true
-        break
-      default:
-        this.showModal('CPF ou CNPJ inválido')
+    } else if (value.length != 11 && value.length != 14) this.showModal('CPF ou CNPJ inválido')
+    else {
+      console.log(value)
+      if (value.length == 11 && this.register.isCpfValid(value)){
+        this.cpf = value
+        this.registerForm.get('registerPF')?.patchValue({
+        cpfcnpj: this.cpf
+        })
+      } else if (value.length == 14 && this.register.isCnpjValid(value)) {
+        this.cnpj = value
+        this.registerForm.get('registerPJ')?.patchValue({
+        cpfcnpj: this.cnpj
+        })
+      } else  this.showModal('CPF ou CNPJ inválido2')
     }
+    
+
+    // switch (value.length) {
+    //   case 0:
+    //     this.showModal('Insira seu CPF ou CNPJ')
+    //     break
+    //   case 11:
+    //     let cpfValid = this.register.isCpfValid(value)
+    //     if(cpfValid && !alreadyRegistered){
+    //     this.cpf = value.replaceAll('.','').replaceAll('-','');
+    //     console.log('é cpf')
+    //     this.registerForm.get('registerPF')?.patchValue({
+    //       cpf: this.cpf
+    //     })
+    //   } else if(alreadyRegistered){
+    //     this.showModal('Usuário já cadastrado.', 'Faça seu login')
+    //     setTimeout(() => {
+    //       localStorage.setItem('uar',value)
+    //       window.location.href = ''
+    //     },3000)
+        
+    //   } else {
+    //     this.showModal('CPF Inválido !')
+    //   }
+    //     break
+    //   case 14:
+    //     console.log('é cnpj')
+    //     let cnpjValid = this.register.isCnpjValid(value)
+    //     if(cnpjValid && !alreadyRegistered){
+    //       this.cnpj = value;
+    //       this.registerForm.get('registerPJ')?.patchValue({
+    //         cnpj: value.replaceAll('.','').replaceAll('/','').replaceAll('-','')
+    //       })
+    //     } else if(alreadyRegistered){
+    //       this.showModal('Usuário já cadastrado.', 'Faça seu login')
+    //       setTimeout(() => {
+    //         localStorage.setItem('uar',value)
+    //         window.location.href = ''
+    //       },3000)
+    //     } else {
+    //       this.showModal('CNPJ Inválido !')
+    //   }
+    //     break
+    //   default:
+    //     this.showModal('CPF ou CNPJ inválido')
+    // }
   }
 
   showModal(msg:string, txtBtn:string = 'OK', title?:string,){
@@ -203,7 +197,6 @@ export class RegisterComponent implements OnInit {
     this.cpf = undefined;
     this.cnpj = undefined;
     this.registerForm.reset();
-
   }
 
   validPassword(){
@@ -238,16 +231,6 @@ export class RegisterComponent implements OnInit {
       accept: true
     })
   }
-  // verifyValidTouched(input: string){
-  //   return !this.registerForm.get(input)?.valid && this.registerForm.get(input)?.touched 
-  // }
-
-  // errorField(input: string){
-  //   return {      
-  //     'has-error': this.verifyValidTouched(input),
-  //     'has-feedback': this.verifyValidTouched(input)
-  //   }
-  // }
 
   treatingInfo(){
     let name = this.registerForm.get('registerPF')?.get('nome')?.value.toLowerCase();
@@ -257,13 +240,13 @@ export class RegisterComponent implements OnInit {
       nome: name,
       data_nascimento: birthDate.reverse().join('-')
     });
-    let corporateName = this.registerForm.get('registerPJ')?.get('razaoSocial')?.value.toLowerCase();
-    let tradeName = this.registerForm.get('registerPJ')?.get('nomeFantasia')?.value.toLowerCase();
+    let corporateName = this.registerForm.get('registerPJ')?.get('nome')?.value.toLowerCase();
+    let tradeName = this.registerForm.get('registerPJ')?.get('contatoNome')?.value.toLowerCase();
     let startDate = this.registerForm.get('registerPJ')?.get('data_criacao')?.value.split('/');
     console.log(startDate)
     this.registerForm.get('registerPJ')?.patchValue({
-      razaoSocial: corporateName,
-      nomeFantasia: tradeName,
+      nome: corporateName,
+      contatoNome: tradeName,
       dataCriacao: startDate.reverse().join('-')
     });
   }
@@ -282,17 +265,22 @@ export class RegisterComponent implements OnInit {
       this.showModal('Você precisa aceitar os termos de uso.')
     } else {
     this.treatingInfo()
-    let bodyPF = this.registerForm.get('registerPF');
-    console.log(bodyPF)
-    let bodyPJ = this.registerForm.get('registerPJ');
-    if(bodyPF?.valid){
-      this.register.createConsumer(bodyPF?.value).subscribe({
+    // let bodyPF = this.registerForm.get('registerPF');
+    // console.log(bodyPF)
+    // let bodyPJ = this.registerForm.get('registerPJ');
+    let body = this.registerForm.get('registerPF')?.valid ?
+    this.registerForm.get('registerPF') :
+    this.registerForm.get('registerPJ')
+
+    if(body?.valid){
+      console.log(body.value)
+    }
+    // if(bodyPF?.valid){
+      this.register.createUser(body?.value).subscribe({
         next: () => {
             console.log('usou o createconsumer');
-            console.log(bodyPF?.value)
-            console.log(bodyPF?.valid)
-            // console.log('Response =', response)
-            // console.log('Status =', response.status)
+            console.log(body?.value)
+            console.log(body?.valid)
             alert('Usuário cadastrado com sucesso');
             this.registerForm.reset();
             this.router.navigate(['/'])
@@ -302,44 +290,23 @@ export class RegisterComponent implements OnInit {
             this.showModal(`Erro ao realizar cadastro ${err.status}`)
         }
         }
-        // },
-        // error => {
-        //   console.log('deu ruim')
-        //   console.log('Erro', error.status) 
-        //   }
       )
-    } else if(bodyPJ?.valid){
-      this.register.createCorporate(bodyPJ?.value).subscribe({
-        next: () => {
-            console.log('usou o createcorporate');
-            console.log(bodyPJ?.value)
-            console.log(bodyPJ?.valid)
-            alert('Empresa cadastrada com sucesso');
-            this.registerForm.reset();
-            this.router.navigate(['/'])
-        },
-        error: err => {
-          console.log('nao enviado', err)
-          this.showModal(`Erro ao realizar cadastro ${err.status}`)
-      }
-    })
-    }
+    // } else if(bodyPJ?.valid){
+    //   this.register.createCorporate(bodyPJ?.value).subscribe({
+    //     next: () => {
+    //         console.log('usou o createcorporate');
+    //         console.log(bodyPJ?.value)
+    //         console.log(bodyPJ?.valid)
+    //         alert('Empresa cadastrada com sucesso');
+    //         this.registerForm.reset();
+    //         this.router.navigate(['/'])
+    //     },
+    //     error: err => {
+    //       console.log('nao enviado', err)
+    //       this.showModal(`Erro ao realizar cadastro ${err.status}`)
+    //   }
+    // })
+    // }
   }
   }
-  
-  // set filter(value: string){
-  //   this.input = value;
-  //   // this.isCpf = (this.input.length <= 11) ? true : false 
-  //   // this.isCnpj = (this.input.length > 11) ? true : false 
-  //   // this.filteredCourses = this._courses.filter((course: Course) => course.name.toLocaleLowerCase().indexOf(this._filterBy.toLocaleLowerCase()) > -1)
-  // }
-
-  // get filter(){
-  //   return this.input;
-  // }
-
-  // [disabled]="
-  // !registerForm.get('registerPF')?.valid &&
-  // !registerForm.get('registerPJ')?.valid ||
-  // !registerForm.get('accept')?.valid"
 }

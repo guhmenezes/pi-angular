@@ -16,6 +16,7 @@ export class StampComponent implements OnInit {
   cpf!: string;
   qtd!: any;
   promocaoId!: string;
+  stampcard!: string;
 
   constructor(
     private reg: RegisterService,
@@ -51,14 +52,14 @@ export class StampComponent implements OnInit {
       this.showModal('CPF inválido. Tente novamente')
     } else if(!form.value.qtd){
       this.showModal('Informe a quantidade de carimbos que o cartão receberá')
-    } else if (!this.promocaoId){
-      this.showModal('Faça o login novamente', 'OK', 'Sessão expirada!')
-      setTimeout(() => {
-        this.log.isntAuth()
-        window.localStorage.removeItem('userId')
-        this.router.navigate(['/'])
-        console.log(this.promocaoId)
-      }, 3000)
+    // } else if (!this.promocaoId){
+    //   this.showModal('Faça o login novamente', 'OK', 'Sessão expirada!')
+    //   setTimeout(() => {
+    //     this.log.isntAuth()
+    //     window.localStorage.removeItem('userId')
+    //     this.router.navigate(['/'])
+    //     console.log(this.promocaoId)
+    //   }, 3000)
     } else {
     let body = {
       idPromocao: this.promocaoId,
@@ -69,6 +70,7 @@ export class StampComponent implements OnInit {
       next: response => {
         console.log(response)
         this.showModal('Carimbado com Sucesso')
+        this.stampcard = 'jhjhjwh'
         form.reset()
         // this.cpf = ''
         // this.qtd = ''
@@ -77,6 +79,7 @@ export class StampComponent implements OnInit {
       },
       error: err => {
         console.log(body)
+        this.stampcard = 'hjah'
         this.showModal(`Erro ao carimbar ${err.status}`, 'Verificar dados', 'Cartão não carimbado')
       }
     })

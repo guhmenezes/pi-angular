@@ -46,7 +46,7 @@ export class InfoComponent implements OnInit {
   updateData():void{
     this.user.email = this.email;
     this.user.telefone = this.telefone;
-    this.reg.editConsumer(this.user.cpf, this.user)
+    // this.reg.editConsumer(this.user.cpf, this.user)
     console.log(this.user)
   }
 }

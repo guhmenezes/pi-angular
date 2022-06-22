@@ -14,13 +14,15 @@ import { environment } from 'src/environments/environment';
 })
 export class RegisterService {
   // private getUsersUrl = 'http://localhost:3100/api/users'; TESTE
-  private createUserUrl = `${environment.API}v1/usuarios`;
-  private createUserPJUrl = 'http://localhost:8080/v1/empresas';
+  private API_URL = environment.API 
+
+  private createUserUrl = `${this.API_URL}v1/signup`;
+  // private createUserPJUrl = 'http://localhost:8080/v1/empresas';
   private getUserInfo = 'http://localhost:8080/v1/usuarios/thiscpf';
-  private updateInfo = 'http://localhost:8080/v1/usuarios/thiscpf/edit'; // construir endpoint atualizar
-  private createPromoUrl = `${environment.API2}v1/promocao`;
-  private createCardUrl = `${environment.API2}v1/cartaofidelidade`;
-  private stampCardUrl = `${environment.API2}v1/carimbo`;
+  // private updateInfo = 'http://localhost:8080/v1/usuarios/thiscpf/edit'; // construir endpoint atualizar
+  private createPromoUrl = `${this.API_URL}v1/promocao`;
+  private createCardUrl = `${this.API_URL}v1/cartaofidelidade`;
+  private stampCardUrl = `${this.API_URL}v1/carimbo`;
 
 
   // headers = new HttpHeaders({
@@ -68,22 +70,22 @@ isCnpjValid(cnpj:string){
   return true
 }
 
-  createConsumer(user: UserPF): Observable<any>{
-    return this.httpClient.post<Response>(this.createUserUrl, user)
+  createUser(user: any): Observable<any>{
+    return this.httpClient.post(this.createUserUrl, user)
   }
 
-  createCorporate(user: UserPJ): Observable<UserPJ>{
-    return this.httpClient.post<UserPJ>(this.createUserPJUrl, user)
-  }
+  // createCorporate(user: UserPJ): Observable<UserPJ>{
+  //   return this.httpClient.post<UserPJ>(this., user)
+  // }
 
   getConsumer(userAuth: boolean):Observable<UserPF> | any{
     if(userAuth === true) return this.httpClient.get<UserPF>(this.getUserInfo)
     return null
   }
 
-  editConsumer(cpf:string, newData: UserPF){
-    return this.httpClient.put(this.updateInfo, newData)
-  }
+  // editConsumer(cpf:string, newData: UserPF){
+  //   return this.httpClient.put(this.updateInfo, newData)
+  // }
 
   createPromo(newPromo: any): Observable<Promo> {
     return this.httpClient.post<any>(this.createPromoUrl, newPromo)

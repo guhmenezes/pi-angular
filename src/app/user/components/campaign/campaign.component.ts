@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Card } from 'src/app/core/models/card';
 import { Promo } from 'src/app/core/models/promo';
 import { LoginService } from 'src/app/core/services/login.service';
 
@@ -9,18 +10,18 @@ import { LoginService } from 'src/app/core/services/login.service';
 })
 export class CampaignComponent implements OnInit {
 
-  promoList: Promo[] = [];
+  promoList: Card[] = [];
   activeList: boolean = false;
   closedList: boolean = false;
   date: number | Date = new Date(Date.now());
   validade: number | Date =new Date();
   active: boolean = true;
   closed: boolean = false;
+  notParticipant = true;
 
   constructor(private service: LoginService) { }
 
   ngOnInit(): void {
-    
     this.retrievePromo()
   }
 
@@ -41,15 +42,27 @@ export class CampaignComponent implements OnInit {
   }
 
   retrievePromo(){
-    this.service.getAllPromo().subscribe(response => {
-      for(let i = 0; i<=2; i++){
-      this.promoList.push(response[i]);
-      this.validade = Date.parse(response[i].dataValidade)
-      console.log(this.validade)
-      }
-      console.log(this.promoList)
-      console.log(this.date)
+    // this.service.getAllPromo().subscribe(response => {
+    //   for(let i = 0; i<=2; i++){
+    //   this.promoList.push(response[i]);
+    //   this.validade = Date.parse(response[i].dataValidade)
+    //   console.log(this.validade)
+    //   }
+    //   console.log(this.promoList)
+    //   console.log(this.date)
   
+    // })
+    this.service.getCards('63672391-e7a1-4a4d-ba66-a77639603ff9').subscribe({
+      next: response => {
+        this.notParticipant = false
+        for(let i = 0; i< response.length; i++){
+          this.promoList.push(response[i]);
+          this.validade = Date.parse(response[i].validade)
+          console.log(this.validade)
+          }
+          console.log(this.promoList)
+          console.log(this.date)
+        }
     })
   }
 

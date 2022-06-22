@@ -20,18 +20,9 @@ export class ForgotPasswordComponent implements OnInit {
 
   ngOnInit(): void {
     this.submit = false;
-    // this.title = 'Recuperar Senha';
-    // this.msg = 'Informe CPF ou CNPJ cadastrado';
-    // this.ok = 'Recuperar Acesso';
-    // this.username = '';
   }
 
-  ngOnDestroy() {
-    ForgotPasswordComponent
-}
-
   onClose(){ 
-    // this.modalRef.close();
     window.location.reload()
   }
 
@@ -48,6 +39,5 @@ export class ForgotPasswordComponent implements OnInit {
       this.msg = 'Seus dados de acesso foram enviados em seu e-mail cadastrado.'
     }
   }
-
-
+  
 }

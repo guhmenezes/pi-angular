@@ -10,8 +10,8 @@ import { LoginService } from 'src/app/core/services/login.service';
   providers: [NgbCarouselConfig]  // add NgbCarouselConfig to the component providers
 })
 export class NgbdCarouselNavigation implements OnInit {
-  showNavigationArrows = false;
-  showNavigationIndicators = false;
+  showNavigationArrows = true;
+  showNavigationIndicators = true;
   // images = [1055, 194, 368].map((n) => `https://picsum.photos/id/${n}/900/500`);
   cards:any[] = [];
   flip = 'flip'
@@ -26,7 +26,7 @@ export class NgbdCarouselNavigation implements OnInit {
   }
 
   retrieveCards(){
-    this.service.getCards(window.localStorage.getItem('userId')!).subscribe(response => {
+    this.service.getCards('63672391-e7a1-4a4d-ba66-a77639603ff9').subscribe(response => {
       console.log(response.length)
       for(let i = 0; i< response.length; i++){
         // this.service.getInfoCard(response[i].idPromocao)

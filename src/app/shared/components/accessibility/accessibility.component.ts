@@ -1,4 +1,3 @@
-import { HtmlParser } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -15,9 +14,7 @@ export class AccessibilityComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.fontSize)
     this.fontSize = window.localStorage.getItem('fontSize')!
-    console.log(this.fontSize)
     this.zoom = +this.fontSize.split('p')[0]
     document.querySelector('html')?.style.setProperty('--font-size', this.fontSize)
     this.dark = window.localStorage.getItem('dark') == 'true'!
@@ -38,7 +35,6 @@ export class AccessibilityComponent implements OnInit {
     this.zoom += 4
     {
     this.fontSize = `${this.zoom}px`
-    console.log(this.fontSize)
     document.querySelector('html')?.style.setProperty('--font-size', this.fontSize)
     window.localStorage.setItem('fontSize', this.fontSize)
   }
