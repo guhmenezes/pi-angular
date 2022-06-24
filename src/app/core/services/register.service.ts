@@ -8,6 +8,7 @@ import { Card } from '../models/card';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 // import { AlertModalComponent } from '../components/alert-modal/alert-modal.component';
 import { environment } from 'src/environments/environment';
+import { StampCode } from '../models/stampCode';
 
 @Injectable({
   providedIn: 'root'
@@ -95,8 +96,8 @@ isCnpjValid(cnpj:string){
     return this.httpClient.post<Card>(this.createCardUrl, body)
   }
 
-  stampCard(body:any): Observable<Response>{
-    return this.httpClient.post<Response>(this.stampCardUrl, body)
+  stampCard(body:any): Observable<StampCode>{
+    return this.httpClient.post<StampCode>(this.stampCardUrl, body)
   }
 
   // getAllConsumers(): Observable<UserPF[]>{

@@ -1,6 +1,4 @@
-// import { HttpHeaderResponse, HttpHeaders } from '@angular/common/http';
 import { Component, EventEmitter, OnInit } from '@angular/core';
-// import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Login } from 'src/app/core/models/login';
@@ -8,7 +6,7 @@ import { UserPF } from 'src/app/core/models/userPF';
 import { LoginService } from 'src/app/core/services/login.service';
 import { RegisterService } from 'src/app/core/services/register.service';
 import { ModalContent } from 'src/app/shared/components/alert-modal/alert-modal.component';
-// import { ModalContent } from '../../alert-modal/alert-modal.component';
+import { UserService } from 'src/app/user/services/user.service';
 
 @Component({
   templateUrl: './login.component.html',
@@ -17,15 +15,14 @@ import { ModalContent } from 'src/app/shared/components/alert-modal/alert-modal.
 export class LoginComponent implements OnInit {
 
   user: Login = new Login();
-  userRegistered: Login = new Login();
+  // userRegistered: Login = new Login();
   remember = false;
-  username = new EventEmitter();
-  tryRegister: UserPF = new UserPF();
-  serverOn = true;
+  // tryRegister: UserPF = new UserPF();
+  serverOn = false;
 
   constructor(
     private loginService: LoginService, 
-    private registerWorks: RegisterService,
+    private userService: UserService,
     private router: Router,
     private modalService: NgbModal
     ) {
@@ -34,16 +31,18 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     // if (this.remember) {
       // this.statusServer()
-      if(window.localStorage.getItem('token') && this.loginService.isAuth()){
+      if(this.loginService.getToken() && 
+      this.loginService.isAuth() && 
+      this.userService.getInfo().username){
         this.router.navigate(['/dashboard'])
       }
-      window.localStorage.removeItem('activeCampaign')
-      window.localStorage.removeItem('userLogged')
-      window.localStorage.removeItem('userId')
-      window.localStorage.removeItem('valid')
-      window.localStorage.removeItem('qtyStamp')
-      window.localStorage.removeItem('description')
-      if (window.localStorage.getItem('uar')){
+      // window.localStorage.removeItem('activeCampaign')
+      // window.localStorage.removeItem('userLogged')
+      // window.localStorage.removeItem('userId')
+      // window.localStorage.removeItem('valid')
+      // window.localStorage.removeItem('qtyStamp')
+      // window.localStorage.removeItem('description')
+      else if (window.localStorage.getItem('uar')){
         this.user.usuario = window.localStorage.getItem('uar')!
         window.localStorage.removeItem('uar')
       }
@@ -79,6 +78,18 @@ export class LoginComponent implements OnInit {
   }
 
   statusServer(){
+    let tryCommunication = new Login()
+    this.loginService.login(tryCommunication).subscribe({
+      next: () => this.showModal('Erro desconhecido'),
+      error: err => {
+        if (err.status == 0){
+          this.showModal(`Erro de comunicação com o servidor! ${err.message}`, 'Tente novamente')
+          this.serverOn = false
+        } else {
+          this.serverOn = true
+        }
+      }
+    })
     // this.tryRegister = {  
     //   nome: '',
     //   cpf: '',
@@ -105,10 +116,10 @@ export class LoginComponent implements OnInit {
   }
 
   cadastro(){
+    this.statusServer()
+    setTimeout(()=> {
     if(this.serverOn) this.router.navigate(['/cadastro'])
-    else {
-      // this.statusServer();
-    }
+    }, 100)
   }
 
   // loginAPI(){
@@ -147,13 +158,17 @@ export class LoginComponent implements OnInit {
         // window.localStorage.setItem('telefone', response.telefone)
         // window.localStorage.setItem('token', response.token)
         window.localStorage.setItem('username', this.user.usuario)
-        window.localStorage.setItem('token', response.token)
+        this.loginService.setToken(response.token)
         this.loginService.userAuthenticated(true)
         if (this.remember)
         this.remember = true;
         this.rememberMe(this.user.usuario,this.user.senha);
       }
-      ,error: err => this.showModal('Usuário não encontrado','Realizar Cadastro',`${err.status}`)
+      ,error: err => {
+        if(err.status == 403)
+        this.showModal('Usuário e/ou senha inválidos')
+        else this.showModal(`Erro de comunicação com o servidor! ${err.message}`)
+      }
     })
   }
   }

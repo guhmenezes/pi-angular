@@ -115,10 +115,10 @@ export class LoginService {
 
   
 isUserAlreadyRegistered(username: string){
-  if(username === '00000000000' || username === '00000000000000'){
-    // this.getConsumer().subscribe()
-    return true
-  }
+  // if(username === '00000000000' || username === '00000000000000'){
+  //   // this.getConsumer().subscribe()
+  //   return true
+  // }
   return false
 }
 

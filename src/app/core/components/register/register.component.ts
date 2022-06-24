@@ -278,16 +278,17 @@ export class RegisterComponent implements OnInit {
     // if(bodyPF?.valid){
       this.register.createUser(body?.value).subscribe({
         next: () => {
-            console.log('usou o createconsumer');
+            // console.log('usou o createconsumer');
             console.log(body?.value)
             console.log(body?.valid)
-            alert('Usuário cadastrado com sucesso');
+            this.showModal('Usuário cadastrado com sucesso');
             this.registerForm.reset();
             this.router.navigate(['/'])
           },
           error: err => {
             console.log('nao enviado', err)
-            this.showModal(`Erro ao realizar cadastro ${err.status}`)
+            // this.showModal(`Erro ao realizar cadastro ${err.status}`)
+            this.showModal(`Erro de comunicação com o servidor! ${err.message}`, 'Tente novamente')
         }
         }
       )

@@ -4,7 +4,7 @@ form{
     margin-top: 1rem;
 }
 
-img{
+img, .qr-code-btn{
     width: 160px;
     height: 160px;
 }

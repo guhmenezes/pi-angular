@@ -15,7 +15,7 @@ export class UserComponent implements OnInit {
   part: string = ''
   lastName: string = '';
   userId!:string;
-  havePromo!:string;
+  // dataLoad: boolean = false;
   lastPromo: string[] = [];
 
   constructor(private login: LoginService, private user: UserService) { }
@@ -38,25 +38,29 @@ export class UserComponent implements OnInit {
     // this.firstName = fullName[0];
     // this.lastName = fullName[fullName.length-1]
     // // this.userLogged()
+    // this.havePromo = this.user.havePromo()
+    this.userId = window.localStorage.getItem('id')!
     this.username = window.localStorage.getItem('username')!
     if(this.username.length == 11) this.cpf = this.username
     else if (this.username.length == 14) this.cnpj = this.username
+    this.getUser()
+    // if(!this.user.havePromo()){
+    //   this.getUser()
+    // if(!this.havePromo)
+    // }
+    //   console.log('vazio')
+    //   this.getActivePromo(this.userId)
+    // }
     // console.log(this.userId)
     // if(this.cnpj)
     // this.activeCampaign()
     // this.userLogged() //getinfo
-    this.username = window.localStorage.getItem('username')!
-    this.userId = window.localStorage.getItem('id')!
+    // this.username = window.localStorage.getItem('username')!
     // if(this.user.getInfo().nome) //localstorage
     // console.log(this.user.getInfo())
     // else //request
-    this.getUser()
-    if(!this.user.havePromo()){
-      console.log('vazio')
-      this.getActivePromo(this.userId)
-    }
   }
-
+  
   getUser(){
     this.user.getUser(this.username).subscribe({
       next: data => {
@@ -92,6 +96,7 @@ export class UserComponent implements OnInit {
         // this.firstName = fullName[0];
         // this.lastName = fullName[fullName.length-1]
         console.log(data)
+        // this.dataLoad = true
       },
       error: err => {
         if (err.status == 403){
@@ -127,7 +132,7 @@ export class UserComponent implements OnInit {
         this.lastPromo = response[0]
         console.log(this.lastPromo)
         if (response.length > 0)
-        this.user.setPromo(response[0].idPromocao, response[0].dataValidade, response[0].descricao, response[0].quantidadeCarimbo)
+        this.user.setPromo(response[0].idPromocao)
         else this.user.setPromo('false')
       },
       error: err => {

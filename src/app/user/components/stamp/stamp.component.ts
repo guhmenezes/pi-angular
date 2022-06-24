@@ -5,6 +5,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalContent } from 'src/app/shared/components/alert-modal/alert-modal.component';
 import { LoginService } from 'src/app/core/services/login.service';
 import { RegisterService } from 'src/app/core/services/register.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-stamp',
@@ -16,11 +17,11 @@ export class StampComponent implements OnInit {
   cpf!: string;
   qtd!: any;
   promocaoId!: string; //localstorage
-  stampcard!: string;
+  stampCode!: string;
 
   constructor(
     private reg: RegisterService,
-    private log: LoginService,
+    private user: UserService,
     private modalService: NgbModal,
     private router: Router
     ) { }
@@ -42,6 +43,18 @@ export class StampComponent implements OnInit {
     modalRef.componentInstance.msg = msg;
     modalRef.componentInstance.title = title
     modalRef.componentInstance.txtBtn = txtBtn
+  }
+
+  stamp(){
+    this.user.stamp(this.stampCode).subscribe({
+      next: () => this.showModal('Carimbado com sucesso'),
+      error: err => {
+        if(err.status == 200)
+        this.showModal('Carimbado com sucesso')
+        else 
+        this.showModal(`Erro ao carimbar ${err.status}`, 'Verificar dados', 'Cartão não carimbado')
+      }
+    })
   }
   
   stampCard(form: NgForm):void{
@@ -69,8 +82,8 @@ export class StampComponent implements OnInit {
     this.reg.stampCard(body).subscribe({
       next: response => {
         console.log(response)
-        this.showModal('Carimbado com Sucesso')
-        this.stampcard = 'jhjhjwh'
+        this.showModal('Escaneie o QR-Code ou clique sobre ele')
+        this.stampCode = response.urlCarimbo
         form.reset()
         // this.cpf = ''
         // this.qtd = ''
@@ -79,7 +92,7 @@ export class StampComponent implements OnInit {
       },
       error: err => {
         console.log(body)
-        this.stampcard = 'hjah'
+        this.stampCode = 'hjah'
         this.showModal(`Erro ao carimbar ${err.status}`, 'Verificar dados', 'Cartão não carimbado')
       }
     })
