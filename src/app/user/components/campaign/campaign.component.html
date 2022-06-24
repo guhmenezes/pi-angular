@@ -4,20 +4,20 @@
             <app-back></app-back>
         <h1 class="h3 mb-3 fw-normal text-center">Minhas Promoções</h1>
     </header> 
-    <div *ngIf="notParticipant">
+    <div *ngIf="!havePromo">
         <p class="text-center my-5 h6 fw-normal">Ops! Você ainda não se cadastrou em nenhuma promoção.</p>
     </div>
-    <div *ngIf="!notParticipant"> 
+    <div *ngIf="havePromo"> 
         <nav class="my-5 mr-md-3">
             <a class="p-2 h5 my-2 " id="active" (click)="showActive()">Em andamento</a>
             <a class="p-2 h5 my-2 fw-normal" id="closed" (click)="showClosed()">Encerrados</a>
         </nav>
     </div>     
         <div class="list-group mb-2 bg-primary" *ngFor="let promo of promoList">
-            <a *ngIf="compare(promo.validade, date, true) && active && !notParticipant" [routerLink]="['/cartoes']" 
+            <a *ngIf="compare(promo.validade, date, true) && active && havePromo" [routerLink]="['/cartoes']" 
             class="list-group-item list-group-item-action px-4 py-3" aria-current="true">
                 <div class="d-flex w-100 align-items-center px-3 py-3">
-                    <div class="d-flex row promo-info">
+                    <div class="d-flex row promo-info col-11">
                 <h3 class="h5 mb-3"><span class="txt">Promoção criada por:</span> {{promo.empresa | titlecase}}</h3>
                 <p class="mb-1">{{promo.descricao}}</p>
                 </div>
@@ -25,11 +25,11 @@
             </div>
             </a>
         </div>
-        <div *ngIf="!activeList && active && !notParticipant">
+        <div *ngIf="!activeList && active && havePromo">
             <p class="text-center my-5 h6 fw-normal">Você não possui promoção ativa no momento.</p>
         </div>
         <div class="list-group mb-2 bg-danger" *ngFor="let promo of promoList">
-            <a *ngIf="compare(promo.validade, date, false) && closed && !notParticipant" class="list-group-item list-group-item-action px-4 py-3" aria-current="true">
+            <a *ngIf="compare(promo.validade, date, false) && closed && havePromo" class="list-group-item list-group-item-action px-4 py-3" aria-current="true">
                 <div class="d-flex w-100 align-items-center px-3 py-3">
                     <div class="d-flex row promo-info">
                 <h3 class="h5 mb-3"><span class="txt">Promoção criada por:</span> {{promo.empresa | titlecase}}</h3>

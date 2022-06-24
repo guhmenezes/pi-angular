@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Card } from 'src/app/core/models/card';
 import { Promo } from 'src/app/core/models/promo';
 import { LoginService } from 'src/app/core/services/login.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-campaign',
@@ -11,18 +12,22 @@ import { LoginService } from 'src/app/core/services/login.service';
 export class CampaignComponent implements OnInit {
 
   promoList: Card[] = [];
-  activeList: boolean = false;
+  activeList: boolean = true;
   closedList: boolean = false;
   date: number | Date = new Date(Date.now());
   validade: number | Date =new Date();
   active: boolean = true;
   closed: boolean = false;
-  notParticipant = true;
+  havePromo = false;
+  userId!: string;
 
-  constructor(private service: LoginService) { }
+  constructor(private user: UserService) { }
 
   ngOnInit(): void {
+    this.userId = this.user.getId()
+    this.havePromo = this.user.havePromo()
     this.retrievePromo()
+    
   }
 
   compare(date1: string, date2: number | Date, tipo:boolean){
@@ -52,11 +57,11 @@ export class CampaignComponent implements OnInit {
     //   console.log(this.date)
   
     // })
-    this.service.getCards('63672391-e7a1-4a4d-ba66-a77639603ff9').subscribe({
+    this.user.getCards(this.userId).subscribe({
       next: response => {
-        this.notParticipant = false
+        // this.havePromo = false
         for(let i = 0; i< response.length; i++){
-          this.promoList.push(response[i]);
+          this.promoList.unshift(response[i]);
           this.validade = Date.parse(response[i].validade)
           console.log(this.validade)
           }

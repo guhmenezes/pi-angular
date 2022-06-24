@@ -64,17 +64,34 @@ ngb-carousel:focus{
   }
   
   #front{
-    background: linear-gradient(180deg, rgb(108, 139, 201), rgb(87, 104, 146));
+    background: var(--card-color);
     transform: rotateY(180deg);
     border: var(--text-color) solid 1px;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 1);
+    box-shadow: 0px 2px 5px var(--shadow-card);
     backface-visibility: hidden;
   }
   #back{
-    background: linear-gradient(180deg, rgb(108, 139, 201), rgb(87, 104, 146));
+    background: var(--card-color);
     border: rgba(30,30,30,0.2) solid 1px;
+    box-shadow: 0px 2px 5px var(--shadow-card);
     backface-visibility: hidden;
   }
+
+  #empty{
+    background: var(--card-empty);
+    border: var(--text-color) solid 1px;
+    box-shadow: 0px 2px 5px var(--shadow-card);
+  }
+  
+  h3, .fa-plus{
+    color: #fff;
+    font-size: 14px;
+  }
+
+  .fa-plus{
+    font-size: 5rem
+  }
+
   .flip{
     transform: rotateY(180deg);
   }

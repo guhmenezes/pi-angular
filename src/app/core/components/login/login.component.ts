@@ -34,6 +34,9 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     // if (this.remember) {
       // this.statusServer()
+      if(window.localStorage.getItem('token') && this.loginService.isAuth()){
+        this.router.navigate(['/dashboard'])
+      }
       window.localStorage.removeItem('activeCampaign')
       window.localStorage.removeItem('userLogged')
       window.localStorage.removeItem('userId')
@@ -47,7 +50,7 @@ export class LoginComponent implements OnInit {
       else if (window.localStorage.getItem('login') && window.localStorage.getItem('pass')){
       this.user.usuario = window.localStorage.getItem('login')!
       this.user.senha = window.localStorage.getItem('pass')!
-      this.user.remember = true
+      this.remember = true
     }
       // this.loginService.emitUserLogged.subscribe(
         // data => { 
@@ -84,7 +87,7 @@ export class LoginComponent implements OnInit {
     //   senha: '',
     //   data_nascimento: ''
     // }
-    console.log(this.tryRegister)
+    // console.log(this.tryRegister)
     // this.registerWorks.createConsumer(this.tryRegister).subscribe({
     //   next: () => console.log('work'),
     //   error: err => {
@@ -122,7 +125,7 @@ export class LoginComponent implements OnInit {
   // }
 
 
-  loginToken(){
+  login(){
     if(this.user.usuario == undefined  && this.user.senha == undefined) 
     this.showModal('Informe seu CPF/CNPJ e senha para acessar')
     else if(this.user.usuario.length != 11 && this.user.usuario.length != 14)
@@ -131,10 +134,10 @@ export class LoginComponent implements OnInit {
     // this.showModal('Informe seu CPF/CNPJ')
     else if(this.user.senha == undefined)
     this.showModal('Informe sua senha')
-    else if(this.user.senha.length < 4 || this.user.senha.length > 12)
+    else if(this.user.senha.length < 4 || this.user.senha.length > 14)
     this.showModal('Usuário e/ou senha inválidos')
     else{
-    this.loginService.loginToken(this.user).subscribe({
+    this.loginService.login(this.user).subscribe({
       next: response => {
         console.log(response)
         // window.localStorage.setItem('userId', response.id)
@@ -143,14 +146,14 @@ export class LoginComponent implements OnInit {
         // window.localStorage.setItem('email', response.email)
         // window.localStorage.setItem('telefone', response.telefone)
         // window.localStorage.setItem('token', response.token)
-        window.localStorage.setItem('token',
- 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMTExMTExMTExMTExMSIsImV4cCI6MTY1NTg2MzQ1OH0.klAwp41yLkA6QWzkAuod46Z-i-pAzX0PHxfX2m6pSepXPAtl4S7JuZW-syyOhDUAtbVR_5EhEAEYS41YAauA2A')
+        window.localStorage.setItem('username', this.user.usuario)
+        window.localStorage.setItem('token', response.token)
         this.loginService.userAuthenticated(true)
-        if (this.user.remember)
+        if (this.remember)
         this.remember = true;
         this.rememberMe(this.user.usuario,this.user.senha);
       }
-      ,error: err => this.showModal('Usuário não encontrado','Realizar Cadastro')
+      ,error: err => this.showModal('Usuário não encontrado','Realizar Cadastro',`${err.status}`)
     })
   }
   }

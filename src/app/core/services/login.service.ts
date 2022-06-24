@@ -17,14 +17,14 @@ export class LoginService {
   private API_URL = environment.API 
   // private getUsersUrl = 'http://localhost:3100/api/users'
   // private loginUrl = 'http://192.168.0.15:8080/login'
-  private getConsumerInfo = `${this.API_URL}v1/usuario`
-  private getConsumerCards = `${this.API_URL}v1/ /cartoes`
-  private getCorporateInfo = `${this.API_URL}v1/empresa`
-  private getCorporatePromo = `${this.API_URL}v1/ /promocoes`
+  // private getConsumerInfo = `${this.API_URL}v1/usuario`
+  // private getConsumerCards = `${this.API_URL}v1/ /cartoes`
+  // private getCorporateInfo = `${this.API_URL}v1/empresa`
+  // private getCorporatePromo = `${this.API_URL}v1/ /promocoes`
   private loginTokenUrl = `${this.API_URL}login`
-  private getCardsUrl = 'http://localhost:8080/v1/usuarios/thiscpf/cartoes'
-  private getPromoUrl = 'http://localhost:8080/v1/promocao/promocaoid'
-  private userAuth: boolean = true;
+  // private getCardsUrl = 'http://localhost:8080/v1/usuarios/thiscpf/cartoes'
+  // private getPromoUrl = 'http://localhost:8080/v1/promocao/promocaoid'
+  private userAuth: boolean = false;
   // static emitUserLogged = new EventEmitter()
   // private subject = new Subject<string>();
 
@@ -43,9 +43,9 @@ export class LoginService {
 
   constructor(private httpClient: HttpClient , private router: Router) { }
   
-  login(user: Login, userRegistered: Login){
+  // login(user: Login, userRegistered: Login){
     // var username, password = '';
-    console.log(user.usuario.length)
+    // console.log(user.usuario.length)
     // if(user.username.length === 11){
       // this.getUser(user.username).subscribe({
       //   next: response => {
@@ -59,18 +59,18 @@ export class LoginService {
     //   username = userRegisteredPJ!.cnpj
     //   password = userRegisteredPJ!.password
     // }
-    console.log(user,userRegistered)
+    // console.log(user,userRegistered)
     // this.emitUserLogged.emit(userRegistered.username)
-    if (user.usuario === userRegistered.usuario && user.senha === userRegistered.senha){
-      this.userAuth = true;
+    // if (user.usuario === userRegistered.usuario && user.senha === userRegistered.senha){
+      // this.userAuth = true;
     //   // this.showMenuEmitter.emit(true);
-      this.router.navigate(['/login'])
-    } else {
+      // this.router.navigate(['/login'])
+    // } else {
       // this.userAuth = true;
     //   // this.showMenuEmitter.emit(false);
-      alert('Usuário e/ou senha incorretos.')
-    }
-  }
+      // alert('Usuário e/ou senha incorretos.')
+    // }
+  // }
 
   // getUser(user: Login): Observable<Login>{
   //   return this.httpClient.post<Login>(this.loginUrl, user)
@@ -94,11 +94,11 @@ export class LoginService {
     window.localStorage.setItem('token',token)
   }
 
-  loginToken(user: Login){
+  login(user: Login){
     return this.httpClient.post<any>(this.loginTokenUrl, user)
   }
 
-  loginAPI(user:Login){
+  // loginAPI(user:Login){
     // return this.httpClient.post<any>(this.loginUrl, user)
     // return user;
       // login successful if there's a jwt token in the response
@@ -111,7 +111,7 @@ export class LoginService {
         // }
 
     
-  }
+  // }
 
   
 isUserAlreadyRegistered(username: string){
@@ -152,36 +152,36 @@ isUserAlreadyRegistered(username: string){
   //   return this.httpClient.get<UserPJ[]>(this.getUsersUrl)
   // }
 
-  getCorporate(username:string): Observable<any>{
-    return this.httpClient.get<any>(`${this.getCorporateInfo}/${username}`)
-    // return this.httpClient.get<UserPJ>('http://localhost:8080/v1/usuarios/thiscnpj')
-  }
+  // getCorporate(username:string): Observable<any>{
+  //   return this.httpClient.get<any>(`${this.getCorporateInfo}/${username}`)
+  //   // return this.httpClient.get<UserPJ>('http://localhost:8080/v1/usuarios/thiscnpj')
+  // }
 
-  getAllCards(): Observable<Card[]>{
-  return this.httpClient.get<Card[]>(this.getCardsUrl)
-  }
+  // getAllCards(): Observable<Card[]>{
+  // return this.httpClient.get<Card[]>(this.getCardsUrl)
+  // }
 
-  getCards(idConsumer:string){
-    return this.httpClient.get<any>(this.getConsumerCards.replace(' ', idConsumer))
-  }
+  // getCards(idConsumer:string){
+  //   return this.httpClient.get<any>(this.getConsumerCards.replace(' ', idConsumer))
+  // }
 
   // getInfoCard(idPromocao:string){
   //   return this.httpClient.get<Card>(this.)
   // }
 
-  getAllPromo(): Observable<Promo[]>{
-    return this.httpClient.get<Promo[]>(this.getPromoUrl)
-    }
+  // getAllPromo(): Observable<Promo[]>{
+  //   return this.httpClient.get<Promo[]>(this.getPromoUrl)
+  //   }
 
-  getPromo(idCorporate:string){
-    return this.httpClient.get<any>(this.getCorporatePromo.replace(' ', idCorporate))
-  }
+  // getPromo(idCorporate:string){
+  //   return this.httpClient.get<any>(this.getCorporatePromo.replace(' ', idCorporate))
+  // }
 
-  getUser(username:string): Observable<any>{
-    if (username.length == 11) return this.httpClient.get<any>(`${this.getConsumerInfo}/${username}`)
-    return this.httpClient.get<any>(`${this.getCorporateInfo}/${username}`)
+  // getUser(username:string): Observable<any>{
+  //   if (username.length == 11) return this.httpClient.get<any>(`${this.getConsumerInfo}/${username}`)
+  //   return this.httpClient.get<any>(`${this.getCorporateInfo}/${username}`)
     // correto return this.httpClient.get<UserPF>(`${this.getUserInfo}/${username}`)
-  }
+  // }
 
 //   setUsername(username: string) {
 //     LoginService.emitUserLogged.emit({username: username})
@@ -190,6 +190,32 @@ isUserAlreadyRegistered(username: string){
 //   getUsername(): Observable<string> {
 //     return this.subject.asObservable();
 // }
+
+// setInfo(
+//   id: string, 
+//   nome: string, 
+//   email?: string, 
+//   telefone?: string) 
+//   {
+//     window.localStorage.setItem('id', id)
+//     window.localStorage.setItem('nome', nome)
+//     window.localStorage.setItem('email', email? email : '')
+//     window.localStorage.setItem('telefone', telefone? telefone : '')
+//   }
+
+  clearInfo(){
+    window.localStorage.removeItem('id'),
+    window.localStorage.removeItem('nome'),
+    window.localStorage.removeItem('username'),
+    window.localStorage.removeItem('email'),
+    window.localStorage.removeItem('telefone'),
+    window.localStorage.removeItem('token'),
+    window.localStorage.removeItem('havePromo')
+  }
+
+  logout(){
+    
+  }
 
 }
 

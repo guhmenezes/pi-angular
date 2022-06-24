@@ -14,8 +14,10 @@ export class AccessibilityComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.fontSize = window.localStorage.getItem('fontSize')!
-    this.zoom = +this.fontSize.split('p')[0]
+    if(window.localStorage.getItem('fontSize')){
+      this.fontSize = window.localStorage.getItem('fontSize')!
+      this.zoom = +this.fontSize.split('p')[0]
+    }
     document.querySelector('html')?.style.setProperty('--font-size', this.fontSize)
     this.dark = window.localStorage.getItem('dark') == 'true'!
     if (this.dark)

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Card } from 'src/app/core/models/card';
 import { LoginService } from 'src/app/core/services/login.service';
 import Swiper from 'swiper';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-cards',
@@ -10,13 +11,15 @@ import Swiper from 'swiper';
 })
 export class CardsComponent implements OnInit {
 
+havePromo = false;
 //   cards: Card[] = [];
 //   espacoTotal: number[] = [];
 //   flip = 'flip'
   
-//   constructor(private service: LoginService) { }
+  constructor(private user: UserService) { }
   
   ngOnInit(): void {
+    this.havePromo = this.user.havePromo()
     // this.retrieveCards()
   }
   

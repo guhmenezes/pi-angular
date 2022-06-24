@@ -5,6 +5,7 @@ import { ModalContent } from 'src/app/shared/components/alert-modal/alert-modal.
 import { Promo } from 'src/app/core/models/promo';
 import { LoginService } from 'src/app/core/services/login.service';
 import { RegisterService } from 'src/app/core/services/register.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-create-campaign',
@@ -17,8 +18,8 @@ export class CreateCampaignComponent implements OnInit {
   qtdCarimbo!: string;
   descricao!: string;
   data_validade!: string;
-  userId!: string;
-  havePromo: boolean = false;
+  userId!: string; //localstorage request
+  havePromo!: boolean;
   lastPromo = {
     dataValidade: '',
     espacoTotal: '',
@@ -28,20 +29,26 @@ export class CreateCampaignComponent implements OnInit {
   constructor(
     private reg: RegisterService, 
     private log: LoginService,
+    private user: UserService,
     private modalService: NgbModal,
     private router: Router
     ) { }
 
   ngOnInit(): void {
-    this.userId = window.localStorage.getItem('userId')! //REMOVER COMANDO E PASSAR VIA ROTA
+    this.userId = window.localStorage.getItem('id')! //REMOVER COMANDO E PASSAR VIA ROTA
+    this.havePromo = this.user.havePromo()
     console.log(this.userId)
     // this.havePromo = window.localStorage.getItem('activeCampaign') ? true : false
     console.log(this.havePromo)
     // if(!this.lastPromo)
     this.lastPromo = {
-      dataValidade: window.localStorage.getItem('valid')!,
-      espacoTotal: window.localStorage.getItem('qtyStamp')!,
-      descricao: window.localStorage.getItem('description')!
+      dataValidade: window.localStorage.getItem('dataValidade')!,
+      espacoTotal: window.localStorage.getItem('carimbos')!,
+      descricao: window.localStorage.getItem('descricao')!
+    }
+
+    if(this.havePromo){
+      this.showModal('Você já possui uma promoção ativa', 'Ver detalhes')
     }
   }
 
@@ -96,7 +103,7 @@ export class CreateCampaignComponent implements OnInit {
   else if (!this.data_validade.length)
     this.showModal('Informe a data de vigência da nova promoção') 
   else if (!this.futureDate(this.data_validade) && this.data_validade.length > 0)
-    this.showModal('Informe uma data futura')
+    this.showModal('A duração mínima é de 30 dias','OK', 'Informe uma data futura')
   else if (!this.qtdCarimbo)
     this.showModal('Informe a quantidade de carimbos necessários para a contemplação')
   else if (isNaN(+this.qtdCarimbo))
@@ -127,7 +134,7 @@ export class CreateCampaignComponent implements OnInit {
       next: response => {
         console.log(response)
         this.showModal('Promoção Criada com Sucesso')
-        setTimeout(() => this.router.navigate(['/login']),3000)
+        setTimeout(() => this.router.navigate(['/dashboard']),3000)
       },
       error: err => {
         console.log(body)

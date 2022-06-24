@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { UserPF } from 'src/app/core/models/userPF';
 import { LoginService } from 'src/app/core/services/login.service';
 import { RegisterService } from 'src/app/core/services/register.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-info',
@@ -9,22 +10,27 @@ import { RegisterService } from 'src/app/core/services/register.service';
   styleUrls: ['./info.component.css']
 })
 export class InfoComponent implements OnInit {
-  user!: UserPF;
+  // user!: UserPF;
   username: string = '';
   nome!: string;
   email!: string;
   telefone!: string;
 
 
-  constructor(private info: LoginService, private reg: RegisterService) { }
+  constructor(private user: UserService, private reg: RegisterService) { }
 
   ngOnInit(): void {
     // this.username = window.localStorage.getItem('login')!
     // this.getUser()
-    let data = this.info.getInfo()
+    let data = this.user.getInfo()
+    if(data.id){
     this.nome = data.nome!.toUpperCase()
     this.email = data.email!
     this.telefone = data.telefone!
+    } else {
+      console.log('sessao expirada')
+      console.log('erro ao carregar dados')
+    }
     // this.nome = 'TESTE DA SILVA SAURO'
     // this.email = 'teste@teste.com.br'
     // this.telefone = '19987654321'
@@ -44,9 +50,9 @@ export class InfoComponent implements OnInit {
   // }
 
   updateData():void{
-    this.user.email = this.email;
-    this.user.telefone = this.telefone;
+    // this.user.email = this.email;
+    // this.user.telefone = this.telefone;
     // this.reg.editConsumer(this.user.cpf, this.user)
-    console.log(this.user)
+    // console.log(this.user)
   }
 }

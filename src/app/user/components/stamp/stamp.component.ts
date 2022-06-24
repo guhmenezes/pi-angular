@@ -15,7 +15,7 @@ export class StampComponent implements OnInit {
 
   cpf!: string;
   qtd!: any;
-  promocaoId!: string;
+  promocaoId!: string; //localstorage
   stampcard!: string;
 
   constructor(
@@ -26,7 +26,7 @@ export class StampComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    this.promocaoId = window.localStorage.getItem('activeCampaign')!
+    this.promocaoId = window.localStorage.getItem('havePromo')!
     console.log(this.promocaoId)
   }
 

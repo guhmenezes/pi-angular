@@ -1,5 +1,5 @@
 <ngb-carousel [showNavigationArrows]="showNavigationArrows" [showNavigationIndicators]="showNavigationIndicators">
-    <ng-template ngbSlide *ngFor="let card of cards" >
+    <ng-template *ngFor="let card of cards" ngbSlide >
 
       <div>
         <div id="card" [ngClass]="flip" class="cards row" (click)="flipCard()">

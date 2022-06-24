@@ -5,8 +5,14 @@
         <app-back></app-back>
         <h1 class="h3 mb-3 fw-normal text-center">Meus Cartões</h1>
       </header>
-
-      <ngbd-carousel-navigation></ngbd-carousel-navigation>
-      
+      <div *ngIf="!havePromo" id="card" class="cards row">
+        <div id="empty" class="face mx-1 mb-5 mt-1">
+          <div class="d-flex justify-content-center row">
+            <!-- <i class="fa-solid fa-plus text-center mb-4 text-dark"></i> -->
+            <h3 class="fw-normal">Você ainda não se cadastrou em nenhuma promoção</h3>
+          </div>
+        </div>
+      </div>
+      <ngbd-carousel-navigation *ngIf="havePromo"></ngbd-carousel-navigation>
     </div>
 </section>

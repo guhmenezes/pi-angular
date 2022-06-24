@@ -4,6 +4,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalContent } from 'src/app/shared/components/alert-modal/alert-modal.component';
 import { LoginService } from 'src/app/core/services/login.service';
 import { RegisterService } from 'src/app/core/services/register.service';
+import { UserService } from '../../services/user.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-create-card',
@@ -13,22 +15,25 @@ import { RegisterService } from 'src/app/core/services/register.service';
 export class CreateCardComponent implements OnInit {
 
   newConsumer!: string;
+  idConsumer!: string; //request
   empresaId!: string;
-  promocaoId!: string;
+  idPromocao!: string; //localstorage request
   espacoTotal!: string;
+  alreadyHave = true
 
   constructor(
     private reg: RegisterService, 
-    private info: LoginService,
+    // private info: UserService,
+    private user: UserService,
     private modalService: NgbModal,
     private router: Router
     ) { }
 
   ngOnInit(): void {
-    this.empresaId = window.localStorage.getItem('userId')!
-    console.log(this.empresaId)
-    this.promocaoId = window.localStorage.getItem('activeCampaign')!
-    this.espacoTotal = window.localStorage.getItem('qtyStamp')!
+    // this.empresaId = window.localStorage.getItem('userId')!
+    // console.log(this.empresaId)
+    this.idPromocao = window.localStorage.getItem('havePromo')!
+    this.espacoTotal = window.localStorage.getItem('carimbos')!
     // this.getCampaignId(this.empresaId)
     // console.log(this.promocaoId)
     // this.haveThisCard(this.newConsumer)
@@ -42,26 +47,33 @@ export class CreateCardComponent implements OnInit {
   }
 
 
-  getCampaignId(id:string){
-    this.info.getAllPromo().subscribe({
-      next: promo => {
-        console.log(promo[0].promocaoId)
-        this.promocaoId = promo[0].promocaoId!
-      }
-    })
-  }
+  // getCampaignId(id:string){
+  //   this.info.getAllPromo().subscribe({
+  //     next: promo => {
+  //       console.log(promo[0].promocaoId)
+  //       this.promocaoId = promo[0].promocaoId!
+  //     }
+  //   })
+  // }
 
   //FUNCAO CONFERIR SE JA POSSUI O CARTAO
-  // haveThisCard(cpf:string){
-  //   this.info.getAllCards().subscribe(response => {
-  //     for(let i = 0; i < 2; i++){
-  //       console.log(response[i])
-  //       if (response[i].promocaoId === this.promocaoId)
-  //         return true
-  //     }
-  //     return false
-  //   })
-  //   }
+  haveThisCard(id:string){
+    let have = false
+    this.user.getCards(id).subscribe(
+      response => {
+      for(let i = 0; i < response.length; i++){
+        if (response[i].idPromocao === this.idPromocao){
+          console.log('ja possui')
+          have = true
+        } else {
+          console.log('senta a bota')
+          have = false
+        }
+      }
+      this.alreadyHave = have
+    }
+  )
+}
 
   generateCard():void{
     if(!this.newConsumer){
@@ -77,32 +89,48 @@ export class CreateCardComponent implements OnInit {
       //   // console.log(this.userId)
       // }, 3000)
     } else {
-      // console.log(this.haveThisCard(this.newConsumer))
       let idUser!:string;
-    // this.info.getConsumer(this.newConsumer).subscribe({
-    //   next: data => idUser = data.usuarioId,
-    //   error: () => this.showModal('Usuário não encontrado')
-    // })
-    if(idUser !== null){
+      this.user.getUser(this.newConsumer).subscribe({
+        next: data => {
+          idUser = data.usuarioId
+          this.haveThisCard(idUser)
+          setTimeout(()=> console.log(this.alreadyHave),100)
+
+        },
+        error: () => this.showModal('Usuário não encontrado')
+      })
     setTimeout(() => {
-       let body = {
-      idPromocao: this.promocaoId,
+      if(this.alreadyHave === true) this.showModal('Usuário já cadastrado nesta promoção')
+      else if(idUser !== null){
+        let body = {
+      idPromocao: this.idPromocao,
       idUsuario: idUser,
       espacoTotal: +this.espacoTotal
     }
     this.reg.createCard(body).subscribe({
       next: response => {
         console.log(response)
+        console.log(body)
         this.showModal('Cartão Gerado com Sucesso')
-        setTimeout(() => this.router.navigate(['/login']),3000)
+        setTimeout(() => this.router.navigate(['/dashboard']),3000)
       },
       error: err => {
         console.log(body)
-        this.showModal(`Erro ao criar nova promoção ${err.status}`)
+        console.log(`Erro ao criar nova promoção ${err.status}`)
+        if(err.status == 403){
+          this.showModal('Faça o login novamente', 'OK', 'Sessão expirada!')
+          setTimeout(() => {
+            window.localStorage.removeItem('token')
+            this.router.navigate(['/'])
+            // console.log(this.userId)
+          }, 3000)
+        }
+        this.showModal('Erro de comunicação com o servidor')
       }
   })
-},1000)
 }
+},1000)
+
     }
   }
 
