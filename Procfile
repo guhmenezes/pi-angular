@@ -1,0 +1,2 @@
+# heroku
+web: npm start
