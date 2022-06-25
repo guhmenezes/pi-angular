@@ -218,8 +218,8 @@ export class UserComponent implements OnInit {
   // }
 
   logout() { 
-    this.login.isntAuth()
-    this.login.clearInfo()
+    // this.login.isntAuth()
+    this.login.logout()
     // window.localStorage.removeItem('activeCampaign')
     // window.localStorage.removeItem('userLogged')
     // window.localStorage.removeItem('userId')

@@ -12,17 +12,18 @@ import { InfoComponent } from './user/components/info/info.component';
 import { CreateCardComponent } from './user/components/create-card/create-card.component';
 import { StampComponent } from './user/components/stamp/stamp.component';
 import { Error404Component } from './core/components/error404/error404.component';
+import { ConfirmStampComponent } from './user/components/stamp/confirm-stamp.component';
 
 const routes: Routes = [
   {
     path: '',
     component: LoginComponent
   },
-  // {
-  //   path: '',
-  //   redirectTo: 'index',
-  //   pathMatch: 'full',
-  // },
+  {
+    path: 'index',
+    redirectTo: '',
+    pathMatch: 'full',
+  },
   {
     path: 'cadastro',
     component: RegisterComponent
@@ -35,32 +36,36 @@ const routes: Routes = [
   {
     path: 'promocoes',
     component: CampaignComponent,
-    // canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
   },
   {
     path: 'cartoes',
     component: CardsComponent,
-    // canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
   },
   {
     path: 'info',
     component: InfoComponent,
-    // canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
   },
   {
     path: 'criar-promocao',
     component: CreateCampaignComponent,
-    // canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
   },
   {
     path: 'gerar-cartao',
     component: CreateCardComponent,
-    // canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
   },
   {
     path: 'carimbar',
     component: StampComponent,
-    // canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'carimbar/:code',
+    component: ConfirmStampComponent
   },
   {
     path: '**',

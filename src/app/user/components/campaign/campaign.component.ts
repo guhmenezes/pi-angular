@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Card } from 'src/app/core/models/card';
 import { Promo } from 'src/app/core/models/promo';
 import { LoginService } from 'src/app/core/services/login.service';
@@ -21,9 +22,11 @@ export class CampaignComponent implements OnInit {
   havePromo = false;
   userId!: string;
 
-  constructor(private user: UserService) { }
+  constructor(private user: UserService, private router: Router) { }
 
   ngOnInit(): void {
+    if(this.user.getInfo().username?.length != 11) this.router.navigate(['/'])
+    
     this.userId = this.user.getId()
     this.havePromo = this.user.havePromo()
     this.retrievePromo()

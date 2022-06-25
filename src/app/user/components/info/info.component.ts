@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { UserPF } from 'src/app/core/models/userPF';
 import { LoginService } from 'src/app/core/services/login.service';
 import { RegisterService } from 'src/app/core/services/register.service';
@@ -17,9 +18,10 @@ export class InfoComponent implements OnInit {
   telefone!: string;
 
 
-  constructor(private user: UserService, private reg: RegisterService) { }
+  constructor(private user: UserService, private router: Router) { }
 
   ngOnInit(): void {
+    if(this.user.getInfo().username?.length != 11) this.router.navigate(['/'])
     // this.username = window.localStorage.getItem('login')!
     // this.getUser()
     let data = this.user.getInfo()

@@ -1,0 +1,24 @@
+<section class="container py-1 px-1 mt-4">
+    <form *ngIf="!userLogged" class="text-center">      
+        <h1 class="h5 mb-3 fw-normal">Faça login para efetuar o carimbo</h1>
+        <div class="form-floating">
+          <input type="text" class="form-control px-4" placeholder=" "
+          [(ngModel)]="userAuth.usuario"
+          name="login"
+          id="cpf-cnpj"
+          mask="CPF_CNPJ"
+          [dropSpecialCharacters]="true"
+          >
+          <label for="floatingInput">CPF ou CNPJ</label>
+        </div>
+        <div class="form-floating">
+          <input type="password" class="form-control px-4" id="floatingPassword" placeholder=" "
+          [(ngModel)]="userAuth.senha"
+          name="password"
+          id="password"
+          maxlength="14">
+          <label for="floatingPassword">Senha</label>
+        </div>
+        <button class="w-100 btn btn-lg btn-primary mt-2" type="submit" (click)="auth()">Entrar</button>
+      </form>
+</section>

@@ -214,7 +214,17 @@ isUserAlreadyRegistered(username: string){
   }
 
   logout(){
-    
+    this.isntAuth()
+    window.localStorage.removeItem('id'),
+    window.localStorage.removeItem('nome'),
+    window.localStorage.removeItem('username'),
+    window.localStorage.removeItem('email'),
+    window.localStorage.removeItem('telefone'),
+    window.localStorage.removeItem('token'),
+    window.localStorage.removeItem('havePromo')
+    window.localStorage.removeItem('carimbos')
+    window.localStorage.removeItem('dataValidade')
+    window.localStorage.removeItem('descricao')
   }
 
 }

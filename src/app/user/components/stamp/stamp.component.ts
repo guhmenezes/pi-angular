@@ -18,6 +18,7 @@ export class StampComponent implements OnInit {
   qtd!: any;
   promocaoId!: string; //localstorage
   stampCode!: string;
+  alreadyHave = false;
 
   constructor(
     private reg: RegisterService,
@@ -27,6 +28,7 @@ export class StampComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
+    if(this.user.getInfo().username?.length != 14) this.router.navigate(['/'])
     this.promocaoId = window.localStorage.getItem('havePromo')!
     console.log(this.promocaoId)
   }
@@ -45,17 +47,22 @@ export class StampComponent implements OnInit {
     modalRef.componentInstance.txtBtn = txtBtn
   }
 
-  stamp(){
-    this.user.stamp(this.stampCode).subscribe({
-      next: () => this.showModal('Carimbado com sucesso'),
-      error: err => {
-        if(err.status == 200)
-        this.showModal('Carimbado com sucesso')
-        else 
-        this.showModal(`Erro ao carimbar ${err.status}`, 'Verificar dados', 'Cartão não carimbado')
+  haveThisCard(id:string){
+    let have = false
+    this.user.getCards(id).subscribe(
+      response => {
+      for(let i = 0; i < response.length; i++){
+        if (response[i].idPromocao === this.promocaoId){
+          console.log('ja possui')
+          have = true
+        } else {
+          console.log('senta a bota')
+        }
       }
-    })
-  }
+      this.alreadyHave = have
+    }
+  )
+}
   
   stampCard(form: NgForm):void{
     console.log(this.qtd, this.cpf)
@@ -81,19 +88,41 @@ export class StampComponent implements OnInit {
     }
     this.reg.stampCard(body).subscribe({
       next: response => {
+        this.user.getUser(this.cpf).subscribe({
+          next: data => {
+            let idUser = data.usuarioId
+            this.haveThisCard(idUser)
+            setTimeout(()=> console.log(this.alreadyHave),100)
+          },
+          error: () => this.showModal('Erro')
+        })
+        setTimeout(() => {
+          if(this.alreadyHave == false){
+            this.showModal('Usuário não possui cartão fidelidade')
+          } else {
         console.log(response)
         this.showModal('Escaneie o QR-Code ou clique sobre ele')
-        this.stampCode = response.urlCarimbo
+        this.stampCode = response.urlCarimbo.replace('http://localhost:8181/v1/stampcard/','')
         form.reset()
         // this.cpf = ''
         // this.qtd = ''
         // this.router.navigate(['/stamp'])
         // setTimeout(() => this.router.navigate(['/login']),3000)
+          }
+        },100)
       },
       error: err => {
+        if (err.status == 403){
+          this.showModal('Faça o login novamente', 'OK', 'Sessão expirada!')
+          setTimeout(() => {
+            this.router.navigate(['/'])
+          //   console.log(this.userId)
+          }, 3000)
+        } else {
         console.log(body)
         this.stampCode = 'hjah'
-        this.showModal(`Erro ao carimbar ${err.status}`, 'Verificar dados', 'Cartão não carimbado')
+        this.showModal(`Erro de comunicação com o servidor! ${err.message}`, 'Tentar novamente', 'Cartão não carimbado')
+        }
       }
     })
   }

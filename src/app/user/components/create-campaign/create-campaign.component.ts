@@ -35,6 +35,8 @@ export class CreateCampaignComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
+    if(this.user.getInfo().username?.length != 14) this.router.navigate(['/'])
+
     this.userId = window.localStorage.getItem('id')! //REMOVER COMANDO E PASSAR VIA ROTA
     this.havePromo = this.user.havePromo()
     console.log(this.userId)
@@ -47,7 +49,7 @@ export class CreateCampaignComponent implements OnInit {
       descricao: window.localStorage.getItem('descricao')!
     }
 
-    if(this.havePromo){
+    if(this.havePromo && this.user.getInfo().username?.length == 14){
       this.showModal('Você já possui uma promoção ativa', 'Ver detalhes')
     }
   }

@@ -1,0 +1,9 @@
+<ngx-qrcode
+  [elementType]="elementType"
+  [errorCorrectionLevel]="correctionLevel"
+  [value]="value"
+  cssClass="bshadow" 
+  class="qr-code" 
+  (click)="stamp()"
+  *ngIf="stampCode">
+</ngx-qrcode>

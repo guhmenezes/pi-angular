@@ -9,6 +9,7 @@ import { NgModule } from '@angular/core';
 import { SharedModule } from './shared/shared.module';
 import { UserModule } from './user/user.module';
 import { NgxMaskModule } from 'ngx-mask';
+import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { NgxMaskModule } from 'ngx-mask';
     BrowserModule,
     CoreModule,
     NgxMaskModule.forRoot(),
+    NgxQRCodeModule,
     SharedModule,
     UserModule,
     AppRoutingModule

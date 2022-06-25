@@ -8,6 +8,7 @@ import { UserPJ } from 'src/app/core/models/userPJ';
 import { LoginService } from 'src/app/core/services/login.service';
 import { RegisterService } from 'src/app/core/services/register.service';
 import { ModalContent } from 'src/app/shared/components/alert-modal/alert-modal.component';
+import { UserService } from 'src/app/user/services/user.service';
 
 @Component({
   templateUrl: './register.component.html',
@@ -24,6 +25,7 @@ export class RegisterComponent implements OnInit {
 
   constructor(private register: RegisterService, 
               private info: LoginService,
+              private userService: UserService,
               private fb: FormBuilder,
               private router: Router,
               private modalService: NgbModal
@@ -101,18 +103,22 @@ export class RegisterComponent implements OnInit {
     this.cpf = undefined;
     this.cnpj = undefined;
     let value = this.registerForm.get('cpforcnpj')?.value.replaceAll('.','').replaceAll('/','').replaceAll('-','')
-    let alreadyRegistered = this.info.isUserAlreadyRegistered(value)
+    // let alreadyRegistered = this.info.isUserAlreadyRegistered(value)
     console.log(value.length)
     if (value.length == 0) this.showModal('Insira seu CPF ou CNPJ')
-    else if (alreadyRegistered){
-          this.showModal('Usuário já cadastrado.', 'Faça seu login')
-          setTimeout(() => {
-            localStorage.setItem('uar',value)
-            window.location.href = ''
-          },3000)
-    } else if (value.length != 11 && value.length != 14) this.showModal('CPF ou CNPJ inválido')
+    else if (value.length != 11 && value.length != 14) this.showModal('CPF ou CNPJ inválido')
     else {
-      console.log(value)
+      this.userService.getUser(value).subscribe({
+        next: () => {
+        this.showModal('Usuário já cadastrado.', 'Faça seu login')
+        setTimeout(() => {
+          localStorage.setItem('uar',value)
+          window.location.href = ''
+        },3000)
+        },
+        error: () => {
+          console.log('nao tem cadastro')
+          console.log(value)
       if (value.length == 11 && this.register.isCpfValid(value)){
         this.cpf = value
         this.registerForm.get('registerPF')?.patchValue({
@@ -123,7 +129,17 @@ export class RegisterComponent implements OnInit {
         this.registerForm.get('registerPJ')?.patchValue({
         cpfcnpj: this.cnpj
         })
-      } else  this.showModal('CPF ou CNPJ inválido2')
+      } else  this.showModal('CPF ou CNPJ inválido')
+        }
+      })
+      // if (alreadyRegistered){
+      //   this.showModal('Usuário já cadastrado.', 'Faça seu login')
+      //   setTimeout(() => {
+      //     localStorage.setItem('uar',value)
+      //     window.location.href = ''
+      //   },3000)
+      // }
+      
     }
     
 

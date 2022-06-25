@@ -74,6 +74,8 @@ export class UserService {
     return false
   }
 
+  
+
   stamp(urlCarimbo:string){
     return this.httpClient.post(urlCarimbo, {})
   }

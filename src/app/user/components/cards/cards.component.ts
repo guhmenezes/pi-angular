@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Card } from 'src/app/core/models/card';
 import { LoginService } from 'src/app/core/services/login.service';
 import Swiper from 'swiper';
@@ -16,9 +17,10 @@ havePromo = false;
 //   espacoTotal: number[] = [];
 //   flip = 'flip'
   
-  constructor(private user: UserService) { }
+  constructor(private user: UserService, private router: Router) { }
   
   ngOnInit(): void {
+    if(this.user.getInfo().username?.length != 11) this.router.navigate(['/'])
     this.havePromo = this.user.havePromo()
     // this.retrieveCards()
   }

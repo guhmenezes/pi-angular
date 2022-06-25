@@ -9,6 +9,7 @@ import { ModalContent } from 'src/app/shared/components/alert-modal/alert-modal.
 import { UserService } from 'src/app/user/services/user.service';
 
 @Component({
+  selector: 'login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
@@ -31,9 +32,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     // if (this.remember) {
       // this.statusServer()
-      if(this.loginService.getToken() && 
-      this.loginService.isAuth() && 
-      this.userService.getInfo().username){
+      if(this.userService.getInfo().username){
         this.router.navigate(['/dashboard'])
       }
       // window.localStorage.removeItem('activeCampaign')

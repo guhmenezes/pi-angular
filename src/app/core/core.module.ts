@@ -30,7 +30,8 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   exports: [
     FooterComponent,
-    HeaderComponent
+    HeaderComponent,
+    LoginComponent
   ]
 })
 export class CoreModule { }

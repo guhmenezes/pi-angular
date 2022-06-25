@@ -1,17 +1,22 @@
 form{
-    width: 320px;
-    min-height: 38vh;
+    width: 310px;
+    min-height: 25vh;
     margin-top: 1rem;
 }
 
-img, .qr-code-btn{
-    width: 160px;
-    height: 160px;
+section{
+    min-height: 50vh;
 }
 
-.qr-code{
-    margin-left: 1rem;
-}
+/* img, .qr-code, ngxqrcode{
+    width: 160px;
+    height: 160px;
+} */
+
+/* .qr-code{
+    margin-left: 1.5rem !important;
+    margin-top: -1rem !important;
+} */
 
 @media (max-width:512px){
     h1{

@@ -30,6 +30,7 @@ export class CreateCardComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
+    if(this.user.getInfo().username?.length != 14) this.router.navigate(['/'])
     // this.empresaId = window.localStorage.getItem('userId')!
     // console.log(this.empresaId)
     this.idPromocao = window.localStorage.getItem('havePromo')!
