@@ -91,6 +91,8 @@ export class StampComponent implements OnInit {
         this.user.getUser(this.cpf).subscribe({
           next: data => {
             let idUser = data.usuarioId
+            let stampUser = data.nome.split(' ')[0]
+            window.localStorage.setItem('stampUser', stampUser)
             this.haveThisCard(idUser)
             setTimeout(()=> console.log(this.alreadyHave),100)
           },
@@ -109,7 +111,7 @@ export class StampComponent implements OnInit {
         // this.router.navigate(['/stamp'])
         // setTimeout(() => this.router.navigate(['/login']),3000)
           }
-        },100)
+        },2000)
       },
       error: err => {
         if (err.status == 403){
@@ -120,7 +122,6 @@ export class StampComponent implements OnInit {
           }, 3000)
         } else {
         console.log(body)
-        this.stampCode = 'hjah'
         this.showModal(`Erro de comunicação com o servidor! ${err.message}`, 'Tentar novamente', 'Cartão não carimbado')
         }
       }

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxQrcodeElementTypes, NgxQrcodeErrorCorrectionLevels } from '@techiediaries/ngx-qrcode';
 import { ModalContent } from 'src/app/shared/components/alert-modal/alert-modal.component';
+import { environment } from 'src/environments/environment';
 import { UserService } from '../../services/user.service';
 
 @Component({
@@ -27,7 +28,7 @@ export class QrCodeComponent implements OnInit {
   ngOnInit(): void {
       this.elementType = NgxQrcodeElementTypes.URL;
       this.correctionLevel = NgxQrcodeErrorCorrectionLevels.HIGH;
-      this.value = `http://192.168.0.15:4200/carimbar/${this.stampCode}`;
+      this.value = `${environment.API}v1/stampcard/${this.stampCode}`;
     }
 
     stamp(){

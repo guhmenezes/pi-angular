@@ -11,9 +11,10 @@ import { UserService } from "../../services/user.service";
 })
 export class ConfirmStampComponent implements OnInit{
 
-    userAuth = new Login()
+    userAuth = new Login();
     stampCode!: string;
-    userLogged = true
+    userLogged = true;
+    stampUser!:string;
     
     constructor(
         private user: UserService, 
@@ -24,6 +25,7 @@ export class ConfirmStampComponent implements OnInit{
         ){}
 
     ngOnInit(): void {
+        this.stampUser = window.localStorage.getItem('userStamp') || 'Cliente'
         this.stampCode = this.actRouter.snapshot.paramMap.get('code')!
         console.log(this.stampCode)
         // if(this.login.getToken())
@@ -35,7 +37,7 @@ export class ConfirmStampComponent implements OnInit{
     stamp(){
         this.user.stamp(`http://localhost:8181/v1/stampcard/${this.stampCode}`).subscribe({
             next: () => {
-                this.showModal('Carimbado com sucesso')
+                this.showModal(`${this.stampUser} teve seu cartão carimbado com sucesso`)
                 setTimeout(() => {
                     this.router.navigate(['/'])
                 },3000)
@@ -53,6 +55,8 @@ export class ConfirmStampComponent implements OnInit{
                     },3000)
                 } else if (err.status == 403){
                     this.showModal('Faça seu login para efetuar o carimbo', 'OK')
+                    this.userLogged = false;
+                    this.login.logout()
                     setTimeout(() => {
                     //   this.router.navigate(['/'])
                     //   console.log(this.userId)
@@ -75,6 +79,41 @@ export class ConfirmStampComponent implements OnInit{
     }
 
     auth(){
-
+    if(this.userAuth.usuario == undefined  && this.userAuth.senha == undefined) 
+    this.showModal('Informe seu CPF/CNPJ para efetuar o carimbo')
+    else if(this.userAuth.usuario.length != 11 && this.userAuth.usuario.length != 14)
+    this.showModal('Usuário inválido')
+    // else if(this.userAuth.usuario == undefined && this.userAuth.senha != undefined)
+    // this.showModal('Informe seu CPF/CNPJ')
+    else if(this.userAuth.senha == undefined)
+    this.showModal('Informe sua senha')
+    else if(this.userAuth.senha.length < 4 || this.userAuth.senha.length > 14)
+    this.showModal('Usuário e/ou senha inválidos')
+    else{
+    this.login.login(this.userAuth).subscribe({
+      next: response => {
+        console.log(response)
+        // window.localStorage.setItem('userAuthId', response.id)
+        // window.localStorage.setItem('userAuthLogged', response.usuario)
+        // window.localStorage.setItem('nome', response.nome)
+        // window.localStorage.setItem('email', response.email)
+        // window.localStorage.setItem('telefone', response.telefone)
+        // window.localStorage.setItem('token', response.token)
+        window.localStorage.setItem('username', this.userAuth.usuario)
+        this.login.setToken(response.token)
+        this.login.userAuthenticated(true)
+        this.userLogged = true
+        
+        setTimeout(()=>{
+            this.stamp()
+        },2000)
+      }
+      ,error: err => {
+        if(err.status == 403)
+        this.showModal('Usuário e/ou senha inválidos')
+        else this.showModal(`Erro de comunicação com o servidor! ${err.message}`)
+      }
+    })
+  }
     }
 }
