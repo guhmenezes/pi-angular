@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { retry } from "rxjs";
 import { Login } from "src/app/core/models/login";
 import { LoginService } from "src/app/core/services/login.service";
 import { ModalContent } from "src/app/shared/components/alert-modal/alert-modal.component";
@@ -15,6 +16,7 @@ export class ConfirmStampComponent implements OnInit{
     stampCode!: string;
     userLogged = true;
     stampUser!:string;
+    status = 'Validando carimbo ...'
     
     constructor(
         private user: UserService, 
@@ -25,18 +27,23 @@ export class ConfirmStampComponent implements OnInit{
         ){}
 
     ngOnInit(): void {
-        this.stampUser = window.localStorage.getItem('userStamp') || 'Cliente'
         this.stampCode = this.actRouter.snapshot.paramMap.get('code')!
+        console.log(this.stampCode.indexOf('-'))
+        if(this.stampCode.indexOf('-') == -1 || this.stampCode.length < 20)
+        this.router.navigate(['/error404'])
+        else{
+        this.stampUser = window.localStorage.getItem('userStamp') || 'Cliente'
         console.log(this.stampCode)
         // if(this.login.getToken())
         this.stamp()
-
+        }
 
     }
 
     stamp(){
         this.user.stamp(`http://localhost:8181/v1/stampcard/${this.stampCode}`).subscribe({
             next: () => {
+                this.status = 'Efetuando carimbo ...'
                 this.showModal(`${this.stampUser} teve seu cartão carimbado com sucesso`)
                 setTimeout(() => {
                     this.router.navigate(['/'])
@@ -44,16 +51,25 @@ export class ConfirmStampComponent implements OnInit{
             },
             error: err => {
                 if(err.status == 200){
-                  this.showModal('Carimbado com sucesso')
+                  this.status = 'Efetuando carimbo ...'
+                  this.showModal(`${this.stampUser} teve seu cartão carimbado com sucesso`)
                   setTimeout(() => {
                     this.router.navigate(['/'])
                 },3000)
                 } else if (err.status == 422){
+                    this.status = ''
                     this.showModal('Carimbo já efetuado')
                     setTimeout(() => {
                         this.router.navigate(['/'])
                     },3000)
+                } else if (err.status == 404){
+                    this.status = 'Ops! carimbo inválido...'
+                    this.showModal('Carimbo inválido')
+                    setTimeout(() => {
+                        this.router.navigate(['/'])
+                    },3000)
                 } else if (err.status == 403){
+                    this.status = ''
                     this.showModal('Faça seu login para efetuar o carimbo', 'OK')
                     this.userLogged = false;
                     this.login.logout()
@@ -62,11 +78,12 @@ export class ConfirmStampComponent implements OnInit{
                     //   console.log(this.userId)
                     }, 3000)
                 } else 
-                this.showModal(`Erro ao carimbar ${err.status}`, 'Verificar dados', 'Cartão não carimbado')
+                this.showModal(`Erro de comunicação com o servidor! ${err.message}`, 'Tentar novamente', 'Cartão NÃO Carimbado')
                 // this.stampCode = ''
-                // setTimeout(() => {
-                //     window.locati
-                // },3000)
+                    this.status = 'Erro ao efetuar carimbo !'
+                    setTimeout(() => {
+                        this.router.navigate(['/'])
+                    },5000)
             }
         })
     }
@@ -103,7 +120,7 @@ export class ConfirmStampComponent implements OnInit{
         this.login.setToken(response.token)
         this.login.userAuthenticated(true)
         this.userLogged = true
-        
+        this.status = 'Efetuando carimbo ...'
         setTimeout(()=>{
             this.stamp()
         },2000)

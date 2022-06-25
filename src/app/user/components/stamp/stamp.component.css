@@ -8,6 +8,11 @@ section{
     min-height: 50vh;
 }
 
+.loadingStamp{
+    width: 400px;
+    text-align: center;
+}
+
 /* img, .qr-code, ngxqrcode{
     width: 160px;
     height: 160px;
