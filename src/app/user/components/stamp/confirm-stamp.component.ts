@@ -5,6 +5,7 @@ import { retry } from "rxjs";
 import { Login } from "src/app/core/models/login";
 import { LoginService } from "src/app/core/services/login.service";
 import { ModalContent } from "src/app/shared/components/alert-modal/alert-modal.component";
+import { environment } from "src/environments/environment";
 import { UserService } from "../../services/user.service";
 @Component({
     templateUrl: './confirm-stamp.component.html',
@@ -41,7 +42,7 @@ export class ConfirmStampComponent implements OnInit{
     }
 
     stamp(){
-        this.user.stamp(`http://localhost:8181/v1/stampcard/${this.stampCode}`).subscribe({
+        this.user.stamp(`${environment.API}v1/stampcard/${this.stampCode}`).subscribe({
             next: () => {
                 this.status = 'Efetuando carimbo ...'
                 this.showModal(`${this.stampUser} teve seu cartão carimbado com sucesso`)
