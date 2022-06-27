@@ -1,11 +1,10 @@
 import { Component, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { map } from 'rxjs/operators';
 import { UserPF } from 'src/app/core/models/userPF';
 import { UserPJ } from 'src/app/core/models/userPJ';
-import { LoginService } from 'src/app/core/services/login.service';
 import { RegisterService } from 'src/app/core/services/register.service';
 import { ModalContent } from 'src/app/shared/components/alert-modal/alert-modal.component';
 import { UserService } from 'src/app/user/services/user.service';
@@ -15,6 +14,7 @@ import { UserService } from 'src/app/user/services/user.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
+  
   registerForm: FormGroup;
   user: UserPF[] | UserPJ[] = [];
   input!:string ;
@@ -24,7 +24,6 @@ export class RegisterComponent implements OnInit {
   passwordValid: boolean = false; 
 
   constructor(private register: RegisterService, 
-              private info: LoginService,
               private userService: UserService,
               private fb: FormBuilder,
               private router: Router,
@@ -57,9 +56,7 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-    // console.log(this.validDate)
-  }
+  ngOnInit(): void { }
 
   birthValid(input:string){
     let date = input.split('/')
@@ -87,13 +84,10 @@ export class RegisterComponent implements OnInit {
     let currentMonth = currentDate.getMonth() +1 
     let currentDay = currentDate.getDate()
       if (+date[2] < currentYear && +date[2] > 1998){
-         console.log('oiii')
        return true
    } if (+date[2] == currentYear && +date[1] < currentMonth - 3){ 
-      console.log('segundo')
        return true}
     if (+date[1] == currentMonth - 3 && +date[0] <= currentDay){
-    console.log('ue')
        return true
     }
   return false
@@ -104,7 +98,6 @@ export class RegisterComponent implements OnInit {
     this.cnpj = undefined;
     let value = this.registerForm.get('cpforcnpj')?.value.replaceAll('.','').replaceAll('/','').replaceAll('-','')
     // let alreadyRegistered = this.info.isUserAlreadyRegistered(value)
-    console.log(value.length)
     if (value.length == 0) this.showModal('Insira seu CPF ou CNPJ')
     else if (value.length != 11 && value.length != 14) this.showModal('CPF ou CNPJ inválido')
     else {
@@ -117,8 +110,6 @@ export class RegisterComponent implements OnInit {
         },3000)
         },
         error: () => {
-          console.log('nao tem cadastro')
-          console.log(value)
       if (value.length == 11 && this.register.isCpfValid(value)){
         this.cpf = value
         this.registerForm.get('registerPF')?.patchValue({
@@ -130,7 +121,7 @@ export class RegisterComponent implements OnInit {
         cpfcnpj: this.cnpj
         })
       } else  this.showModal('CPF ou CNPJ inválido')
-        }
+    }
       })
       // if (alreadyRegistered){
       //   this.showModal('Usuário já cadastrado.', 'Faça seu login')
@@ -141,52 +132,6 @@ export class RegisterComponent implements OnInit {
       // }
       
     }
-    
-
-    // switch (value.length) {
-    //   case 0:
-    //     this.showModal('Insira seu CPF ou CNPJ')
-    //     break
-    //   case 11:
-    //     let cpfValid = this.register.isCpfValid(value)
-    //     if(cpfValid && !alreadyRegistered){
-    //     this.cpf = value.replaceAll('.','').replaceAll('-','');
-    //     console.log('é cpf')
-    //     this.registerForm.get('registerPF')?.patchValue({
-    //       cpf: this.cpf
-    //     })
-    //   } else if(alreadyRegistered){
-    //     this.showModal('Usuário já cadastrado.', 'Faça seu login')
-    //     setTimeout(() => {
-    //       localStorage.setItem('uar',value)
-    //       window.location.href = ''
-    //     },3000)
-        
-    //   } else {
-    //     this.showModal('CPF Inválido !')
-    //   }
-    //     break
-    //   case 14:
-    //     console.log('é cnpj')
-    //     let cnpjValid = this.register.isCnpjValid(value)
-    //     if(cnpjValid && !alreadyRegistered){
-    //       this.cnpj = value;
-    //       this.registerForm.get('registerPJ')?.patchValue({
-    //         cnpj: value.replaceAll('.','').replaceAll('/','').replaceAll('-','')
-    //       })
-    //     } else if(alreadyRegistered){
-    //       this.showModal('Usuário já cadastrado.', 'Faça seu login')
-    //       setTimeout(() => {
-    //         localStorage.setItem('uar',value)
-    //         window.location.href = ''
-    //       },3000)
-    //     } else {
-    //       this.showModal('CNPJ Inválido !')
-    //   }
-    //     break
-    //   default:
-    //     this.showModal('CPF ou CNPJ inválido')
-    // }
   }
 
   showModal(msg:string, txtBtn:string = 'OK', title?:string,){
@@ -220,7 +165,6 @@ export class RegisterComponent implements OnInit {
     let createPassword = this.registerForm.get('createPassword')?.value
     let confirmPassword = this.registerForm.get('confirmPassword')?.value
     if (createPassword.length >= 4 && createPassword === confirmPassword){
-      console.log('bingo');
       if (this.cpf) {        
         this.registerForm.get('registerPF')?.patchValue({
           senha: confirmPassword  
@@ -251,7 +195,6 @@ export class RegisterComponent implements OnInit {
   treatingInfo(){
     let name = this.registerForm.get('registerPF')?.get('nome')?.value.toLowerCase();
     let birthDate = this.registerForm.get('registerPF')?.get('dataNascimento')?.value.split('/');
-    console.log(birthDate)
     this.registerForm.get('registerPF')?.patchValue({
       nome: name,
       data_nascimento: birthDate.reverse().join('-')
@@ -259,7 +202,6 @@ export class RegisterComponent implements OnInit {
     let corporateName = this.registerForm.get('registerPJ')?.get('nome')?.value.toLowerCase();
     let tradeName = this.registerForm.get('registerPJ')?.get('contatoNome')?.value.toLowerCase();
     let startDate = this.registerForm.get('registerPJ')?.get('data_criacao')?.value.split('/');
-    console.log(startDate)
     this.registerForm.get('registerPJ')?.patchValue({
       nome: corporateName,
       contatoNome: tradeName,
@@ -270,60 +212,28 @@ export class RegisterComponent implements OnInit {
   createUser(){
     if(this.cpf && (this.registerForm.get('registerPF')?.invalid || 
     !this.birthValid(this.registerForm.get('registerPF')?.get('dataNascimento')?.value))){
-      console.log('moiou')
       this.showModal('Erro ao realizar cadastro','OK','Verifique suas informações',)
     } else if(this.cnpj  && (this.registerForm.get('registerPJ')?.invalid ||
     !this.dateValid(this.registerForm.get('registerPJ')?.get('data_criacao')?.value))){
-      console.log('moiou')
-      console.log(this.cnpj)
       this.showModal('Erro ao realizar cadastro','OK','Verifique suas informações',)
     }else if(!this.registerForm.get('accept')?.valid) {
       this.showModal('Você precisa aceitar os termos de uso.')
     } else {
-    this.treatingInfo()
-    // let bodyPF = this.registerForm.get('registerPF');
-    // console.log(bodyPF)
-    // let bodyPJ = this.registerForm.get('registerPJ');
-    let body = this.registerForm.get('registerPF')?.valid ?
-    this.registerForm.get('registerPF') :
-    this.registerForm.get('registerPJ')
-
-    if(body?.valid){
-      console.log(body.value)
-    }
-    // if(bodyPF?.valid){
+      this.treatingInfo()
+      let body = this.registerForm.get('registerPF')?.valid ?
+      this.registerForm.get('registerPF') :
+      this.registerForm.get('registerPJ')
       this.register.createUser(body?.value).subscribe({
         next: () => {
-            // console.log('usou o createconsumer');
-            console.log(body?.value)
-            console.log(body?.valid)
-            this.showModal('Usuário cadastrado com sucesso');
-            this.registerForm.reset();
-            this.router.navigate(['/'])
-          },
-          error: err => {
-            console.log('nao enviado', err)
-            // this.showModal(`Erro ao realizar cadastro ${err.status}`)
-            this.showModal(`Erro de comunicação com o servidor! ${err.message}`, 'Tente novamente')
+          this.showModal('Usuário cadastrado com sucesso');
+          this.registerForm.reset();
+          this.router.navigate(['/'])
+        },
+        error: err => {
+          this.showModal(`Erro de comunicação com o servidor! ${err.message}`, 'Tente novamente')
         }
-        }
-      )
-    // } else if(bodyPJ?.valid){
-    //   this.register.createCorporate(bodyPJ?.value).subscribe({
-    //     next: () => {
-    //         console.log('usou o createcorporate');
-    //         console.log(bodyPJ?.value)
-    //         console.log(bodyPJ?.valid)
-    //         alert('Empresa cadastrada com sucesso');
-    //         this.registerForm.reset();
-    //         this.router.navigate(['/'])
-    //     },
-    //     error: err => {
-    //       console.log('nao enviado', err)
-    //       this.showModal(`Erro ao realizar cadastro ${err.status}`)
-    //   }
-    // })
-    // }
+      })
+    }
   }
-  }
+
 }

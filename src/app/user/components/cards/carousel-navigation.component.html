@@ -16,7 +16,9 @@
             <div class="col mx-auto">
               <ul class="d-grid row g-0">
                 <li class="stampfield">
-                  <i class="fa-solid fa-check" *ngIf="card.espacoCarimbado > 0"></i>
+                  <div *ngIf="card.espacoCarimbado > 0">OK <!-- FONTAWESOME OFF ? DIV PINTADA-->
+                    <i class="fa-solid fa-check"></i>
+                  </div>
                 </li>
                 <li class="stampfield">
                   <i class="fa-solid fa-check" *ngIf="card.espacoCarimbado > 1"></i>

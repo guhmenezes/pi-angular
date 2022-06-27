@@ -1,10 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxQrcodeElementTypes, NgxQrcodeErrorCorrectionLevels } from '@techiediaries/ngx-qrcode';
 import { ModalContent } from 'src/app/shared/components/alert-modal/alert-modal.component';
-import { environment } from 'src/environments/environment';
-import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'qr-code',
@@ -20,46 +19,25 @@ export class QrCodeComponent implements OnInit {
   correctionLevel!: NgxQrcodeErrorCorrectionLevels;
   value!: string;
 
-  constructor(
-    private user: UserService, 
-    private modalService: NgbModal,
-    private router: Router) { }
+  constructor(private modalService: NgbModal, private router: Router) { }
   
   ngOnInit(): void {
-      this.elementType = NgxQrcodeElementTypes.URL;
-      this.correctionLevel = NgxQrcodeErrorCorrectionLevels.HIGH;
-      this.value = `${environment.API}v1/stampcard/${this.stampCode}`;
-    }
 
-    stamp(){
-      this.router.navigate(['/carimbar/',this.stampCode])
-        // this.user.stamp(this.stampCode).subscribe({
-        //     next: () => this.showModal('Carimbado com sucesso'),
-        //     error: err => {
-        //         if(err.status == 200){
-        //           this.showModal('Carimbado com sucesso')
-        //         } else if (err.status == 422){
-        //             this.showModal('Carimbo já efetuado')
-        //         } else if (err.status == 403){
-        //             this.showModal('Faça seu login para efetuar o carimbo', 'OK')
-        //             setTimeout(() => {
-        //               this.router.navigate(['/'])
-        //             //   console.log(this.userId)
-        //             }, 3000)
-        //         } else 
-        //         this.showModal(`Erro ao carimbar ${err.status}`, 'Verificar dados', 'Cartão não carimbado')
-        //         // this.stampCode = ''
-        //         setTimeout(() => {
-        //             window.location.reload()
-        //         },3000)
-        //     }
-        // })
-      }
+    this.elementType = NgxQrcodeElementTypes.URL;
+    this.correctionLevel = NgxQrcodeErrorCorrectionLevels.HIGH;
+    this.value = `${location.href}/${this.stampCode}`;
+    
+  }
 
-    showModal(msg:string, txtBtn:string = 'OK', title?:string,){
-        const modalRef = this.modalService.open(ModalContent);
-        modalRef.componentInstance.msg = msg;
-        modalRef.componentInstance.title = title
-        modalRef.componentInstance.txtBtn = txtBtn
-    }
+  toStamp(){
+    this.router.navigate(['/carimbar/',this.stampCode])
+  }
+
+  showModal(msg:string, txtBtn:string = 'OK', title?:string,){
+    const modalRef = this.modalService.open(ModalContent);
+    modalRef.componentInstance.msg = msg;
+    modalRef.componentInstance.title = title
+    modalRef.componentInstance.txtBtn = txtBtn
+  }
+
 }

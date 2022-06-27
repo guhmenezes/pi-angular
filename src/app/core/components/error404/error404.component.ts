@@ -11,14 +11,15 @@ export class Error404Component implements OnInit {
   constructor(private router: Router, private login: LoginService) { }
 
   ngOnInit(): void {
+
     setTimeout(() => this.toIndex(), 3000)
+
   }
 
   toIndex(){
-    console.log(this.login.isAuth())
     if(this.login.isAuth())
-    this.router.navigate(['/dashboard'])
+      this.router.navigate(['/dashboard'])
     else
-    this.router.navigate(['/'])
+      this.router.navigate(['/'])
   }
 }

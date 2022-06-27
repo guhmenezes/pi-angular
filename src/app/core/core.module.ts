@@ -1,14 +1,14 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { Error404Component } from './components/error404/error404.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { ForgotPasswordComponent } from './components/login/forgot-password/forgot-password.component';
 import { HeaderComponent } from './components/header/header.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
-import { ForgotPasswordComponent } from './components/login/forgot-password/forgot-password.component';
 import { SharedModule } from '../shared/shared.module';
-import { HttpClientModule } from '@angular/common/http';
 
+import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
+import { NgModule } from '@angular/core';
 
 
 @NgModule({
@@ -24,9 +24,6 @@ import { HttpClientModule } from '@angular/common/http';
     CommonModule,
     SharedModule,
     HttpClientModule
-    // NgxMaskModule.forChild(),
-    // FormsModule,
-    // ReactiveFormsModule
   ],
   exports: [
     FooterComponent,

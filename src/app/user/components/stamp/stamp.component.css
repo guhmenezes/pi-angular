@@ -4,6 +4,11 @@ form{
     margin-top: 1rem;
 }
 
+form input{
+    background-color: var(--input-color) !important;
+    color: var(---text-color);
+}
+
 section{
     min-height: 50vh;
 }

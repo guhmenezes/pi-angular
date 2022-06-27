@@ -21,6 +21,9 @@ export class AuthInterceptor implements HttpInterceptor{
 
             return next.handle(authRequest)
         }
+        // const cors = req.clone({
+        //     headers: req.headers.set('Access-Control-Allow-Origin', '*')
+        // })
 
         return next.handle(req)
     }

@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+
 import { Card } from 'src/app/core/models/card';
-import { Promo } from 'src/app/core/models/promo';
-import { LoginService } from 'src/app/core/services/login.service';
 import { UserService } from '../../services/user.service';
 
 @Component({
-  selector: 'app-campaign',
   templateUrl: './campaign.component.html',
   styleUrls: ['./campaign.component.css']
 })
@@ -25,6 +23,7 @@ export class CampaignComponent implements OnInit {
   constructor(private user: UserService, private router: Router) { }
 
   ngOnInit(): void {
+
     if(this.user.getInfo().username?.length != 11) this.router.navigate(['/'])
     
     this.userId = this.user.getId()
@@ -50,26 +49,12 @@ export class CampaignComponent implements OnInit {
   }
 
   retrievePromo(){
-    // this.service.getAllPromo().subscribe(response => {
-    //   for(let i = 0; i<=2; i++){
-    //   this.promoList.push(response[i]);
-    //   this.validade = Date.parse(response[i].dataValidade)
-    //   console.log(this.validade)
-    //   }
-    //   console.log(this.promoList)
-    //   console.log(this.date)
-  
-    // })
     this.user.getCards(this.userId).subscribe({
       next: response => {
-        // this.havePromo = false
         for(let i = 0; i< response.length; i++){
           this.promoList.unshift(response[i]);
           this.validade = Date.parse(response[i].validade)
-          console.log(this.validade)
           }
-          console.log(this.promoList)
-          console.log(this.date)
         }
     })
   }

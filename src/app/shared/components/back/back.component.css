@@ -10,6 +10,11 @@ i{
     /* margin-bottom: -50px; */
 }
 
+/* span{
+    color: red;
+    display: block;
+} */
+
 button, .btn-secondary:focus, .btn-secondary:hover{
     background-color: transparent;
     border-style: 0 none !important;

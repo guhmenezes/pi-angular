@@ -1,89 +1,32 @@
-import { EventEmitter, Injectable, Input } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient, HttpHeaderResponse, HttpHeaders, HttpResponse } from '@angular/common/http'
-import { Observable, Subject, map } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http'
 
-import { UserPF } from '../models/userPF';
-import { UserPJ } from '../models/userPJ';
 import { Login } from '../models/login';
-import { Card } from '../models/card';
-import { Promo } from '../models/promo';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
+
   private API_URL = environment.API 
-  // private getUsersUrl = 'http://localhost:3100/api/users'
-  // private loginUrl = 'http://192.168.0.15:8080/login'
-  // private getConsumerInfo = `${this.API_URL}v1/usuario`
-  // private getConsumerCards = `${this.API_URL}v1/ /cartoes`
-  // private getCorporateInfo = `${this.API_URL}v1/empresa`
-  // private getCorporatePromo = `${this.API_URL}v1/ /promocoes`
+
   private loginTokenUrl = `${this.API_URL}login`
-  // private getCardsUrl = 'http://localhost:8080/v1/usuarios/thiscpf/cartoes'
-  // private getPromoUrl = 'http://localhost:8080/v1/promocao/promocaoid'
+
   private userAuth: boolean = false;
-  // static emitUserLogged = new EventEmitter()
-  // private subject = new Subject<string>();
 
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json;charset=UTF-8',
       'Accept-Language': '1',
-      // 'Access-Control-Allow-Origin': '*',
-      // 'Access-Control-Allow-Origin': '*',
-      // 'Access-Control-Allow-Methods': 'GET,POST,OPTIONS,DELETE,PUT'
     }),
-    // observe: 'response'
   };
 
-  // showMenuEmitter = new EventEmitter<boolean>();
-
   constructor(private httpClient: HttpClient , private router: Router) { }
-  
-  // login(user: Login, userRegistered: Login){
-    // var username, password = '';
-    // console.log(user.usuario.length)
-    // if(user.username.length === 11){
-      // this.getUser(user.username).subscribe({
-      //   next: response => {
-      //     if(response.cnpj)
-      //     var username = response.cnpj
-      //     else username = response.cpf
-      //     var password = response.senha
-      //   }
-      // })
-    // } else if(user.username.length === 14){
-    //   username = userRegisteredPJ!.cnpj
-    //   password = userRegisteredPJ!.password
-    // }
-    // console.log(user,userRegistered)
-    // this.emitUserLogged.emit(userRegistered.username)
-    // if (user.usuario === userRegistered.usuario && user.senha === userRegistered.senha){
-      // this.userAuth = true;
-    //   // this.showMenuEmitter.emit(true);
-      // this.router.navigate(['/login'])
-    // } else {
-      // this.userAuth = true;
-    //   // this.showMenuEmitter.emit(false);
-      // alert('Usuário e/ou senha incorretos.')
-    // }
-  // }
 
-  // getUser(user: Login): Observable<Login>{
-  //   return this.httpClient.post<Login>(this.loginUrl, user)
-  // }
-
-  userAuthenticated(condition: boolean){
-    if (condition){
-      this.userAuth = true;
-        this.router.navigate(['/dashboard'])
-    } else {
-      this.userAuth = false;
-      this.router.navigate(['/'])
-    }
+  login(user: Login){
+    return this.httpClient.post<any>(this.loginTokenUrl, user, this.httpOptions)
   }
 
   getToken(){
@@ -94,34 +37,17 @@ export class LoginService {
     window.localStorage.setItem('token',token)
   }
 
-  login(user: Login){
-    return this.httpClient.post<any>(this.loginTokenUrl, user)
+  userAuthenticated(condition: boolean, redirect: boolean){
+    if (condition){
+      this.userAuth = true;
+        if(redirect)
+        this.router.navigate(['/dashboard'])
+    } else {
+      this.userAuth = false;
+      this.router.navigate(['/'])
+    }
   }
-
-  // loginAPI(user:Login){
-    // return this.httpClient.post<any>(this.loginUrl, user)
-    // return user;
-      // login successful if there's a jwt token in the response
-      // console.log("USER: " + user);
-
-        // if (user) {
-        //     // store user details and jwt token in local storage to keep user logged in between page refreshes
-        //     localStorage.setItem('currentUser', JSON.stringify(user));
-        //     this.currentUserSubject.next(user);
-        // }
-
-    
-  // }
-
   
-isUserAlreadyRegistered(username: string){
-  // if(username === '00000000000' || username === '00000000000000'){
-  //   // this.getConsumer().subscribe()
-  //   return true
-  // }
-  return false
-}
-
   isAuth(){
     return this.userAuth;
   }
@@ -130,87 +56,9 @@ isUserAlreadyRegistered(username: string){
     this.userAuth = false
   }
 
-  // getAllConsumers(): {
-    // return this.httpClient.get<UserPF[]>(this.getUsersUrl)
-  // }
-
-  // getConsumer(username: string): Observable<any>{
-  //   return this.httpClient.get<any>(`${this.getConsumerInfo}/${username}`, this.httpOptions)
-  //   // return this.httpClient.get<UserPF>('http://localhost:8080/v1/usuarios/thiscpf')
-  // }
-
-  getInfo(){
-    return {
-      id: window.localStorage.getItem('userId'),
-      nome: window.localStorage.getItem('nome'),
-      email: window.localStorage.getItem('email'),
-      telefone: window.localStorage.getItem('telefone')
-    }
-  }
-
-  // getAllCorporates(): Observable<UserPJ[]>{
-  //   return this.httpClient.get<UserPJ[]>(this.getUsersUrl)
-  // }
-
-  // getCorporate(username:string): Observable<any>{
-  //   return this.httpClient.get<any>(`${this.getCorporateInfo}/${username}`)
-  //   // return this.httpClient.get<UserPJ>('http://localhost:8080/v1/usuarios/thiscnpj')
-  // }
-
-  // getAllCards(): Observable<Card[]>{
-  // return this.httpClient.get<Card[]>(this.getCardsUrl)
-  // }
-
-  // getCards(idConsumer:string){
-  //   return this.httpClient.get<any>(this.getConsumerCards.replace(' ', idConsumer))
-  // }
-
-  // getInfoCard(idPromocao:string){
-  //   return this.httpClient.get<Card>(this.)
-  // }
-
-  // getAllPromo(): Observable<Promo[]>{
-  //   return this.httpClient.get<Promo[]>(this.getPromoUrl)
-  //   }
-
-  // getPromo(idCorporate:string){
-  //   return this.httpClient.get<any>(this.getCorporatePromo.replace(' ', idCorporate))
-  // }
-
-  // getUser(username:string): Observable<any>{
-  //   if (username.length == 11) return this.httpClient.get<any>(`${this.getConsumerInfo}/${username}`)
-  //   return this.httpClient.get<any>(`${this.getCorporateInfo}/${username}`)
-    // correto return this.httpClient.get<UserPF>(`${this.getUserInfo}/${username}`)
-  // }
-
-//   setUsername(username: string) {
-//     LoginService.emitUserLogged.emit({username: username})
-// }
-
-//   getUsername(): Observable<string> {
-//     return this.subject.asObservable();
-// }
-
-// setInfo(
-//   id: string, 
-//   nome: string, 
-//   email?: string, 
-//   telefone?: string) 
-//   {
-//     window.localStorage.setItem('id', id)
-//     window.localStorage.setItem('nome', nome)
-//     window.localStorage.setItem('email', email? email : '')
-//     window.localStorage.setItem('telefone', telefone? telefone : '')
-//   }
-
-  clearInfo(){
-    window.localStorage.removeItem('id'),
-    window.localStorage.removeItem('nome'),
-    window.localStorage.removeItem('username'),
-    window.localStorage.removeItem('email'),
-    window.localStorage.removeItem('telefone'),
-    window.localStorage.removeItem('token'),
-    window.localStorage.removeItem('havePromo')
+  isUserAlreadyRegistered(username: string){
+    //IMPLEMENTAR FUNÇÃO
+    return false
   }
 
   logout(){
@@ -225,6 +73,7 @@ isUserAlreadyRegistered(username: string){
     window.localStorage.removeItem('carimbos')
     window.localStorage.removeItem('dataValidade')
     window.localStorage.removeItem('descricao')
+    window.localStorage.removeItem('stampUser')
   }
 
 }

@@ -14,6 +14,7 @@ export class AccessibilityComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+
     if(window.localStorage.getItem('fontSize')){
       this.fontSize = window.localStorage.getItem('fontSize')!
       this.zoom = +this.fontSize.split('p')[0]
@@ -21,25 +22,22 @@ export class AccessibilityComponent implements OnInit {
     document.querySelector('html')?.style.setProperty('--font-size', this.fontSize)
     this.dark = window.localStorage.getItem('dark') == 'true'!
     if (this.dark)
-    document.body.classList.add('dark-theme') 
+      document.body.classList.add('dark-theme') 
   }
   
   toggleTheme() { 
     document.body.classList.toggle('dark-theme')
     if (document.body.classList.contains('dark-theme'))
-    window.localStorage.setItem('dark', 'true')
+      window.localStorage.setItem('dark', 'true')
     else window.localStorage.setItem('dark', 'false')
   }
   
   zoomIn(){
     if(this.zoom >= 20) this.zoom = 12
-    else 
-    this.zoom += 4
-    {
+    else this.zoom += 4
     this.fontSize = `${this.zoom}px`
     document.querySelector('html')?.style.setProperty('--font-size', this.fontSize)
     window.localStorage.setItem('fontSize', this.fontSize)
   }
-}
 
 }

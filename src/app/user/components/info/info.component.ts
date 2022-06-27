@@ -1,60 +1,55 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserPF } from 'src/app/core/models/userPF';
-import { LoginService } from 'src/app/core/services/login.service';
-import { RegisterService } from 'src/app/core/services/register.service';
+
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalContent } from 'src/app/shared/components/alert-modal/alert-modal.component';
 import { UserService } from '../../services/user.service';
 
 @Component({
-  selector: 'app-info',
   templateUrl: './info.component.html',
   styleUrls: ['./info.component.css']
 })
 export class InfoComponent implements OnInit {
-  // user!: UserPF;
   username: string = '';
   nome!: string;
   email!: string;
   telefone!: string;
 
 
-  constructor(private user: UserService, private router: Router) { }
+  constructor(
+    private user: UserService, 
+    private router: Router, 
+    private modalService: NgbModal
+    ) { }
 
   ngOnInit(): void {
-    if(this.user.getInfo().username?.length != 11) this.router.navigate(['/'])
-    // this.username = window.localStorage.getItem('login')!
-    // this.getUser()
-    let data = this.user.getInfo()
-    if(data.id){
-    this.nome = data.nome!.toUpperCase()
-    this.email = data.email!
-    this.telefone = data.telefone!
-    } else {
-      console.log('sessao expirada')
-      console.log('erro ao carregar dados')
-    }
-    // this.nome = 'TESTE DA SILVA SAURO'
-    // this.email = 'teste@teste.com.br'
-    // this.telefone = '19987654321'
-  }
 
-  // getUser(): void {
-  //   this.info.getUser(this.username)?.subscribe({
-  //     next: (data:any) => {
-  //       this.user = data;
-  //       this.nome = data.nome.toUpperCase();
-  //       this.email = data.email;
-  //       this.telefone = data.telefone
-  //       console.log(data);
-  //       console.log(this.user)
-  //     }
-  //   })
-  // }
+    if(this.user.getInfo().username?.length != 11) this.router.navigate(['/'])
+      let data = this.user.getInfo()
+    if(data.id && data.nome && data.email && data.telefone){
+      this.nome = data.nome!.toUpperCase()
+      this.email = data.email!
+      this.telefone = data.telefone!
+    } else {
+      this.showModal('Erro ao carregar dados !')
+      setTimeout(()=>
+      this.router.navigate(['/'])
+      , 3000)
+    }
+    
+  }
 
   updateData():void{
     // this.user.email = this.email;
     // this.user.telefone = this.telefone;
     // this.reg.editConsumer(this.user.cpf, this.user)
     // console.log(this.user)
+  }
+
+  showModal(msg:string, txtBtn:string = 'OK', title?:string,){
+    const modalRef = this.modalService.open(ModalContent);
+    modalRef.componentInstance.msg = msg;
+    modalRef.componentInstance.title = title
+    modalRef.componentInstance.txtBtn = txtBtn
   }
 }

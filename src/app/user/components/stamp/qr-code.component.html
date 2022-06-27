@@ -4,6 +4,8 @@
   [value]="value"
   cssClass="bshadow" 
   class="qr-code" 
-  (click)="stamp()"
+  (click)="toStamp()"
   *ngIf="stampCode">
 </ngx-qrcode>
+
+<div><h1>{{value}}</h1></div>
