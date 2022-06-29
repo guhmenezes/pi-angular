@@ -22,6 +22,8 @@ export class RegisterComponent implements OnInit {
   cnpj?: string;
   validDate = false;
   passwordValid: boolean = false; 
+  password = 'password'
+  icon = 'fa-eye'
 
   constructor(private register: RegisterService, 
               private userService: UserService,
@@ -141,17 +143,14 @@ export class RegisterComponent implements OnInit {
     modalRef.componentInstance.txtBtn = txtBtn
   }
 
-  showPass(){
-    console.log('ver')
-    console.log(document.getElementsByName('password'))
-    document.getElementsByName('password')[0].attributes[1].nodeValue = 'text'
-  }
-
-  hidePass(){
-    console.log('esconder')
-    if( document.getElementsByName('password')[0].attributes[1].nodeValue=== 'text')
-    console.log(document.getElementsByName('password'))
-    document.getElementsByName('password')[0].attributes[1].nodeValue = 'password'
+  passVisibility(){
+    if(this.password == 'password'){
+      this.password = 'text';
+      this.icon = 'fa-eye-slash';
+    } else {
+      this.password = 'password';
+      this.icon = 'fa-eye'
+    }
   }
 
   back(){
@@ -230,7 +229,14 @@ export class RegisterComponent implements OnInit {
           this.router.navigate(['/'])
         },
         error: err => {
-          this.showModal(`Erro de comunicação com o servidor! ${err.message}`, 'Tente novamente')
+          if(err.status == 500) {
+            this.showModal('Usuário já cadastrado.', 'Faça seu login')
+            setTimeout(() => {
+              localStorage.setItem('uar',body?.get('cpfcnpj')?.value)
+              window.location.href = ''
+            },3000)
+          } else
+            this.showModal(`Erro de comunicação com o servidor!`, 'Tente novamente')
         }
       })
     }

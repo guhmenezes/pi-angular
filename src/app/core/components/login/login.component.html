@@ -1,7 +1,7 @@
 <main class="border border-secondary rounded py-1 px-1 mt-4">
   <div class="container d-flex justify-content-center border border-secondary py-5 px-5">
     <form class="text-center">
-      <h1 class="h3 mb-3 fw-normal">Acesse a plataforma</h1>
+      <h1 class="h3 mb-3 fw-normal"><label for="cpf-cnpj">Acesse a plataforma</label></h1>
     
       <div class="form-floating">
         <input type="text" class="form-control px-4" placeholder=" "
@@ -11,7 +11,7 @@
         mask="CPF_CNPJ"
         [dropSpecialCharacters]="true"
         >
-        <label for="floatingInput">CPF ou CNPJ</label>
+        <label for="cpf-cnpj">CPF ou CNPJ</label>
       </div>
       <div class="form-floating">
         <input type="password" class="form-control px-4" id="floatingPassword" placeholder=" "
@@ -19,7 +19,7 @@
         name="password"
         id="password"
         maxlength="14">
-        <label for="floatingPassword">Senha</label>
+        <label for="password">Senha</label>
       </div>
     
       <div class="options mb-3 mt-1 d-flex justify-content-between mx-1">
@@ -30,7 +30,7 @@
         <app-forgot-password></app-forgot-password>
       </div>
       <button class="w-100 btn btn-lg btn-primary" type="submit" (click)="login()">Entrar</button>
-      <button class="w-100 btn btn-lg btn-secondary mt-2" type="button" (click)="cadastro()" >Cadastre-se</button>
+      <button class="w-100 btn btn-lg btn-secondary mt-2" type="button" [routerLink]="['/cadastro']">Cadastre-se</button>
     </form>
   </div>
 </main>

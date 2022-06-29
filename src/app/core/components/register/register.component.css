@@ -15,16 +15,19 @@ form{
 .cpforcnpj input{
   border-radius: 20px !important;
   padding-left: 1.75rem;
+  /* height: 1rem; */
 }
 
 .btn-value{
   background: transparent;
+  width: 60px;
+  height: 55px;
   border: none;
-  font-size: 48px;
+  font-size: 52px;
   position: absolute;
   color: #0275d8 !important;
-  right: -.7rem;
-  bottom: -.3rem;
+  right: -.4rem;
+  bottom: -.5rem;
   user-select: none;
 }
 
@@ -57,9 +60,9 @@ form input[id="passwordConfirm"] {
 }
 
 .btn-value:hover{
-  right: -.75rem;
+  right: -.3rem;
   bottom: -.33rem;
-  font-size: 49px;
+  font-size: 55px;
   color: rgb(9, 97, 173) !important;
 }
 
@@ -69,6 +72,14 @@ form input[id="passwordConfirm"] {
   border-color: transparent;
   box-shadow: 0 0 !important;
   outline: 0 !important;
+}
+
+.show-pass{
+  position: absolute;
+  z-index: 1;
+  right: 2rem;
+  top: 1.3rem;
+  font-size: 1.2rem;
 }
 
 .checkbox{

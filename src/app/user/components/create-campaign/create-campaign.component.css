@@ -7,6 +7,11 @@ label{
     text-align: right;
 }
 
+input, textarea{
+  background-color: var(--input-color) !important;
+  color: var(---text-color) !important;
+}
+
 textarea{
     resize: none;
     height: 6rem;

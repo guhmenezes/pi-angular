@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { LoginService } from 'src/app/core/services/login.service';
+import { ModalContent } from 'src/app/shared/components/alert-modal/alert-modal.component';
 import { UserService } from '../../services/user.service';
 
 @Component({
@@ -18,7 +20,11 @@ export class UserComponent implements OnInit {
   userId!:string;
   lastPromo: string[] = [];
 
-  constructor(private login: LoginService, private user: UserService) { }
+  constructor(
+    private login: LoginService, 
+    private user: UserService,
+    private modalService: NgbModal
+    ) { }
 
   ngOnInit(): void {
 
@@ -64,12 +70,19 @@ export class UserComponent implements OnInit {
       },
       error: err => {
         if (err.status == 403){
-          console.log('token invalido')
-          console.log('sessoa expierada')
-        } else if (err.status > 400 ){
-          console.log('erro 400')
+          this.showModal('Faça o login novamente', 'OK', 'Sessão expirada!')
+          this.login.logout()
+          setTimeout(() => {
+            window.location.reload()
+          }, 3000)
+        } else {
+          this.showModal('Erro ao carregar dados', 'Tentar novamente')
+          this.login.logout()
+          setTimeout(() => {
+            window.location.reload()
+          }, 3000)
         }
-        this.login.logout()
+        
       }
   })
   }
@@ -98,6 +111,13 @@ export class UserComponent implements OnInit {
 
   logout() { 
     this.login.logout()
+  }
+
+  showModal(msg:string, txtBtn:string = 'OK', title?:string,){
+    const modalRef = this.modalService.open(ModalContent);
+    modalRef.componentInstance.msg = msg;
+    modalRef.componentInstance.title = title
+    modalRef.componentInstance.txtBtn = txtBtn
   }
 
 }

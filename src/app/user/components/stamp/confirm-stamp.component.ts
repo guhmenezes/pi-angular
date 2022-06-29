@@ -93,7 +93,7 @@ export class ConfirmStampComponent implements OnInit{
                     this.login.logout()
                     }
                 } else {
-                this.showModal(`Erro de comunicação com o servidor! ${err.message}`, 'Tentar novamente', 'Cartão NÃO Carimbado')
+                this.showModal(`Erro de comunicação com o servidor!`, 'Tentar novamente', 'Cartão NÃO Carimbado')
                     this.status = 'Erro ao efetuar carimbo !'
                 }
             }
@@ -134,7 +134,7 @@ export class ConfirmStampComponent implements OnInit{
                         this.showModal('Usuário e/ou senha inválidos')
                         this.userLogged = false
                     },1000)
-                } else this.showModal(`Erro de comunicação com o servidor! ${err.message}`)
+                } else this.showModal(`Erro de comunicação com o servidor!`)
             }
             })
         }

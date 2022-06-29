@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { Card } from 'src/app/core/models/card';
+import { LoginService } from 'src/app/core/services/login.service';
+import { ModalContent } from 'src/app/shared/components/alert-modal/alert-modal.component';
 import { UserService } from '../../services/user.service';
 
 @Component({
@@ -20,7 +23,12 @@ export class CampaignComponent implements OnInit {
   havePromo = false;
   userId!: string;
 
-  constructor(private user: UserService, private router: Router) { }
+  constructor(
+    private user: UserService, 
+    private router: Router,
+    private modalService: NgbModal,
+    private login: LoginService
+    ) { }
 
   ngOnInit(): void {
 
@@ -55,7 +63,18 @@ export class CampaignComponent implements OnInit {
           this.promoList.unshift(response[i]);
           this.validade = Date.parse(response[i].validade)
           }
+        },
+      error: err => {
+        if (err.status == 403){
+          this.showModal('Faça o login novamente', 'OK', 'Sessão expirada!')
+          this.login.logout()
+          setTimeout(() => {
+            this.router.navigate(['/'])
+          }, 3000)
+        } else {
+          this.showModal(`Erro de comunicação com o servidor!`, 'Tentar novamente', 'Erro ao carregar promoções')
         }
+      }
     })
   }
 
@@ -75,5 +94,12 @@ export class CampaignComponent implements OnInit {
       document.getElementById('active')?.classList.remove('fw-normal')
       document.getElementById('closed')?.classList.add('fw-normal')
     }
+  }
+
+  showModal(msg:string, txtBtn:string = 'OK', title?:string,){
+    const modalRef = this.modalService.open(ModalContent);
+    modalRef.componentInstance.msg = msg;
+    modalRef.componentInstance.title = title
+    modalRef.componentInstance.txtBtn = txtBtn
   }
 }

@@ -4,7 +4,7 @@ form{
     margin-top: 1rem;
 }
 
-form input{
+input, select{
     background-color: var(--input-color) !important;
     color: var(---text-color);
 }
@@ -17,16 +17,6 @@ section{
     width: 400px;
     text-align: center;
 }
-
-/* img, .qr-code, ngxqrcode{
-    width: 160px;
-    height: 160px;
-} */
-
-/* .qr-code{
-    margin-left: 1.5rem !important;
-    margin-top: -1rem !important;
-} */
 
 @media (max-width:512px){
     h1{
@@ -47,5 +37,10 @@ section{
 
     label.col-2{
         width: 30px;
+    }
+
+    .auth{
+        min-width: 310px;
+        width: 100% !important;
     }
 }

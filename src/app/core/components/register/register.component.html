@@ -10,7 +10,7 @@
       <div class="form-group cpforcnpj col-7 mx-auto">
         <input type="text" class="form-control" name="cpforcnpj" formControlName="cpforcnpj" 
         mask="CPF_CNPJ" [dropSpecialCharacters]="false">        
-        <button class="btn-primary btn-value fa-solid fa-circle-arrow-right" type="submit" (click)="getCpfOrCnpj()">
+        <button class="btn-primary btn-value fa-solid fa-circle-arrow-right" type="submit" (click)="getCpfOrCnpj()"><caption>Próximo</caption>
         </button>
       </div>
       </div>
@@ -25,15 +25,16 @@
             <span class="w-50 value">{{ registerForm.get('cpforcnpj')?.value }}</span>
           </div>
           <div class="form-floating w-75 mt-3 mx-5">
-            <input type="password" class="form-control px-4" placeholder=" "
+            <input [type]="password" class="form-control px-4" placeholder=" "
             name="password"
             id="password"
             formControlName="createPassword"
             maxlength="12">
+            <i class="fa-solid show-pass" [ngClass]="icon" (click)="passVisibility()"><caption>Mostrar ou ocultar senha</caption></i>
             <label for="floatingInput" class="mx-3" >Senha</label>
           </div>
           <div class="form-floating w-75 mx-5 mb-3">
-            <input type="password" class="form-control px-4" id="floatingPassword" placeholder=" "
+            <input [type]="password" class="form-control px-4" id="floatingPassword" placeholder=" "
             name="passwordConfirm"
             id="passwordConfirm"
             formControlName="confirmPassword"

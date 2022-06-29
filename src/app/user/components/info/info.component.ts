@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { LoginService } from 'src/app/core/services/login.service';
 import { ModalContent } from 'src/app/shared/components/alert-modal/alert-modal.component';
 import { UserService } from '../../services/user.service';
 
@@ -18,6 +19,7 @@ export class InfoComponent implements OnInit {
 
   constructor(
     private user: UserService, 
+    private login: LoginService,
     private router: Router, 
     private modalService: NgbModal
     ) { }
@@ -31,7 +33,8 @@ export class InfoComponent implements OnInit {
       this.email = data.email!
       this.telefone = data.telefone!
     } else {
-      this.showModal('Erro ao carregar dados !')
+      this.showModal('Erro ao carregar dados!','Tentar novamente')
+      this.login.logout()
       setTimeout(()=>
       this.router.navigate(['/'])
       , 3000)

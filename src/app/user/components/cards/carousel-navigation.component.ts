@@ -1,7 +1,10 @@
 import {Component, OnInit} from '@angular/core';
+import { Router } from '@angular/router';
 
-import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
+import { NgbCarouselConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Card } from 'src/app/core/models/card';
+import { LoginService } from 'src/app/core/services/login.service';
+import { ModalContent } from 'src/app/shared/components/alert-modal/alert-modal.component';
 import { UserService } from '../../services/user.service';
 
 @Component({
@@ -19,7 +22,12 @@ export class NgbdCarouselNavigation implements OnInit {
   userId!:string;
   card = new Card()
 
-  constructor(private user: UserService) {
+  constructor(
+    private user: UserService,
+    private login: LoginService,
+    private router: Router,
+    private modalService: NgbModal
+    ) {
     
   }
 
@@ -46,12 +54,30 @@ export class NgbdCarouselNavigation implements OnInit {
         this.cards.reverse()
       }
       },
+      error: err => {
+        if (err.status == 403){
+          this.showModal('Faça o login novamente', 'OK', 'Sessão expirada!')
+          this.login.logout()
+          setTimeout(() => {
+            this.router.navigate(['/'])
+          }, 3000)
+        } else {
+          this.showModal(`Erro de comunicação com o servidor!`, 'Tentar novamente', 'Erro ao carregar cartões')
+        }
+      }
     })
   }
 
   flipCard(){
     if (this.flip === 'flip') this.flip = ''
     else this.flip = 'flip' 
+  }
+
+  showModal(msg:string, txtBtn:string = 'OK', title?:string,){
+    const modalRef = this.modalService.open(ModalContent);
+    modalRef.componentInstance.msg = msg;
+    modalRef.componentInstance.title = title
+    modalRef.componentInstance.txtBtn = txtBtn
   }
 
 }

@@ -116,7 +116,7 @@ export class CreateCampaignComponent implements OnInit {
               this.router.navigate(['/'])
             }, 3000)
           } else {
-          this.showModal(`Erro de comunicação com o servidor! ${err.message}`, 'Tentar novamente', 'Erro ao criar nova promoção')
+          this.showModal(`Erro de comunicação com o servidor!`, 'Tentar novamente', 'Erro ao criar nova promoção')
           }
         }
       })

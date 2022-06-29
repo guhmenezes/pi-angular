@@ -6,6 +6,11 @@ form{
   width: 70%;
 }
 
+input{
+    background-color: var(--input-color) !important;
+    color: var(---text-color) !important;
+  }
+
 label{
   min-width: 165px;
 }

@@ -41,13 +41,6 @@ export class StampComponent implements OnInit {
     this.stampCard(form)
   }
 
-  showModal(msg:string, txtBtn:string = 'OK', title?:string,){
-    const modalRef = this.modalService.open(ModalContent);
-    modalRef.componentInstance.msg = msg;
-    modalRef.componentInstance.title = title
-    modalRef.componentInstance.txtBtn = txtBtn
-  }
-
   haveThisCard(id:string){
     let have = false
     this.user.getCards(id).subscribe(
@@ -58,7 +51,7 @@ export class StampComponent implements OnInit {
       this.alreadyHave = have
     }
   )
-}
+  }
   
   stampCard(form: NgForm):void{
     
@@ -96,7 +89,7 @@ export class StampComponent implements OnInit {
                 this.router.navigate(['/'])
               }, 3000)
             } else {
-              this.showModal(`Erro de comunicação com o servidor! ${err.message}`, 'Tentar novamente', 'Erro ao gerar carimbo')
+              this.showModal(`Erro de comunicação com o servidor!`, 'Tentar novamente', 'Erro ao gerar carimbo')
             }
           }
         })
@@ -118,11 +111,18 @@ export class StampComponent implements OnInit {
             this.router.navigate(['/'])
           }, 3000)
         } else {
-          this.showModal(`Erro de comunicação com o servidor! ${err.message}`, 'Tentar novamente', 'Cartão não carimbado')
+          this.showModal(`Erro de comunicação com o servidor!`, 'Tentar novamente', 'Cartão não carimbado')
         }
       }
     })
   }
-}
+  }
+
+  showModal(msg:string, txtBtn:string = 'OK', title?:string,){
+    const modalRef = this.modalService.open(ModalContent);
+    modalRef.componentInstance.msg = msg;
+    modalRef.componentInstance.title = title
+    modalRef.componentInstance.txtBtn = txtBtn
+  }
 
 }

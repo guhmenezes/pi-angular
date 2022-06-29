@@ -35,6 +35,11 @@ a {
   color: var(--text-color);
 }
 
+caption{
+  font-size: 0.1px;
+  width: 0.1px;
+}
+
 /* input .form-control{
   color: var(--text-color) !important;
 } */

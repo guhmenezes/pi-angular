@@ -15,8 +15,7 @@ import { UserService } from 'src/app/user/services/user.service';
 export class LoginComponent implements OnInit {
 
   user: Login = new Login();
-  remember = false;
-  serverOn = false;
+  remember!: boolean;
 
   constructor(
     private loginService: LoginService, 
@@ -44,6 +43,7 @@ export class LoginComponent implements OnInit {
   }
 
   login(){
+    if(this.remember == false) this.rememberMe(this.user.usuario, this.user.senha)
     if(this.user.usuario == undefined  && this.user.senha == undefined) 
       this.showModal('Informe seu CPF/CNPJ e senha para acessar')
     else if(this.user.usuario.length != 11 && this.user.usuario.length != 14)
@@ -58,14 +58,13 @@ export class LoginComponent implements OnInit {
           window.localStorage.setItem('username', this.user.usuario)
           this.loginService.setToken(response.token)
           this.loginService.userAuthenticated(true,true)
-          if (this.remember)
-          this.remember = true;
+          if (this.remember) this.remember = true;
           this.rememberMe(this.user.usuario,this.user.senha);
         }
         ,error: err => {
           if(err.status == 403)
           this.showModal('Usuário e/ou senha inválidos')
-          else this.showModal(`Erro de comunicação com o servidor! ${err.message}`)
+          else this.showModal(`Erro de comunicação com o servidor!`)
         }
       })
     }
@@ -79,28 +78,6 @@ export class LoginComponent implements OnInit {
       window.localStorage.removeItem('login')
       window.localStorage.removeItem('pass')
     } 
-  }
-
-  statusServer(){
-    let tryCommunication = new Login()
-    this.loginService.login(tryCommunication).subscribe({
-      next: () => this.showModal('Erro desconhecido'),
-      error: err => {
-        if (err.status == 0){
-          this.showModal(`Erro de comunicação com o servidor! ${err.message}`, 'Tente novamente')
-          this.serverOn = false
-        } else {
-          this.serverOn = true
-        }
-      }
-    })
-  }
-
-  cadastro(){
-    this.statusServer()
-    setTimeout(()=> {
-    if(this.serverOn) this.router.navigate(['/cadastro'])
-    }, 100)
   }
 
   showModal(msg:string, txtBtn:string = 'OK', title?:string,){

@@ -94,7 +94,7 @@ export class CreateCardComponent implements OnInit {
             this.router.navigate(['/'])
           }, 3000)
         } else {
-        this.showModal(`Erro de comunicação com o servidor! ${err.message}`, 'Tentar novamente', 'Erro ao gerar cartão')
+        this.showModal(`Erro de comunicação com o servidor!`, 'Tentar novamente', 'Erro ao gerar cartão')
         }
       }
       })
