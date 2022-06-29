@@ -1,22 +1,19 @@
 form{
   width: 500px;
-}
-
-.form-control{
-  width: 70%;
+  min-height: 38vh;
 }
 
 input{
-    background-color: var(--input-color) !important;
-    color: var(---text-color) !important;
-  }
+  background-color: var(--input-color) !important;
+  color: var(---text-color) !important;
+}
 
 label{
   min-width: 165px;
 }
 
-form{
-  min-height: 38vh;
+.form-control{
+  width: 70%;
 }
 
 @media (max-width:600px) and (min-width:513px){

@@ -18,9 +18,11 @@ export class NgbdCarouselNavigation implements OnInit {
   showNavigationArrows = true;
   showNavigationIndicators = true;
   cards:any[] = [];
-  flip = 'flip'
   userId!:string;
   card = new Card()
+  flip = 'flip'
+  pulse = ''
+  date: number | Date = new Date(Date.now());
 
   constructor(
     private user: UserService,
@@ -43,16 +45,16 @@ export class NgbdCarouselNavigation implements OnInit {
       next: response => {
       for(let i = 0; i< response.length; i++){
         this.card = response[i]
-        this.cards.unshift(this.card)
-      }
-      if (response.length <= 1){
+        if (this.compare(this.card.validade, this.date))
+          this.cards.unshift(this.card)
+      } if (this.cards.length <= 1){
         this.showNavigationArrows = false;
         this.showNavigationIndicators = false;
       } else if(response.length > 3){
         while(this.cards.length > 3)
         this.cards.reverse().pop()
         this.cards.reverse()
-      }
+      } else if (this.cards.length == 0 && response.length > 0) this.showModal('Você não possui cartão ativo')
       },
       error: err => {
         if (err.status == 403){
@@ -71,6 +73,16 @@ export class NgbdCarouselNavigation implements OnInit {
   flipCard(){
     if (this.flip === 'flip') this.flip = ''
     else this.flip = 'flip' 
+  }
+
+  compare(date1: string, date2: number | Date){
+    let promoDate: number = Date.parse(date1)
+      if (promoDate >= date2) {
+      return true
+    }
+
+    return false
+
   }
 
   showModal(msg:string, txtBtn:string = 'OK', title?:string,){

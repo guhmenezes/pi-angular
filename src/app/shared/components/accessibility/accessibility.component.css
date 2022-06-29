@@ -1,21 +1,21 @@
-#access{
-    width: 400px;
-    margin-bottom: -16px;
-}
-
 button{
     border-radius: 10px;
     height: 40px;
+}
+
+#access{
+    width: 400px;
+    margin-bottom: -16px;
 }
 
 @media (max-width:539px){
     #access{
         width: 360px;
     }
-  }
+}
 
 @media (max-width:400px){
     #access{
         width: 340px;
     }
- }
+}

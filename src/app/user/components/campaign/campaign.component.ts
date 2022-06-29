@@ -17,7 +17,6 @@ export class CampaignComponent implements OnInit {
   activeList: boolean = true;
   closedList: boolean = false;
   date: number | Date = new Date(Date.now());
-  validade: number | Date =new Date();
   active: boolean = true;
   closed: boolean = false;
   havePromo = false;
@@ -61,7 +60,6 @@ export class CampaignComponent implements OnInit {
       next: response => {
         for(let i = 0; i< response.length; i++){
           this.promoList.unshift(response[i]);
-          this.validade = Date.parse(response[i].validade)
           }
         },
       error: err => {

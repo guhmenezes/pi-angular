@@ -1,38 +1,10 @@
+h2{
+  font-size: var(--font-size);
+}
+
 form{
   width: 400px;
   min-height: 49vh;
-}
-
-.create-password{
-  width: 300px;
-  position: relative;
-}
-
-.cpforcnpj {
-  position: relative;
-}
-
-.cpforcnpj input{
-  border-radius: 20px !important;
-  padding-left: 1.75rem;
-  /* height: 1rem; */
-}
-
-.btn-value{
-  background: transparent;
-  width: 60px;
-  height: 55px;
-  border: none;
-  font-size: 52px;
-  position: absolute;
-  color: #0275d8 !important;
-  right: -.4rem;
-  bottom: -.5rem;
-  user-select: none;
-}
-
-form .form-floating:focus-within {
-  z-index: 2;
 }
 
 form input{
@@ -55,23 +27,39 @@ form input[id="passwordConfirm"] {
   border-top-right-radius: 0;
 }
 
+form .form-floating:focus-within {
+  z-index: 2;
+}
+
+.cpforcnpj input{
+  border-radius: 20px !important;
+  padding-left: 1.75rem;
+}
+
+.cpforcnpj {
+  position: relative;
+}
+
 .value{
   padding-left: 16px;
 }
 
-.btn-value:hover{
-  right: -.3rem;
-  bottom: -.33rem;
-  font-size: 55px;
-  color: rgb(9, 97, 173) !important;
+.btn-value{
+  background: transparent;
+  width: 60px;
+  height: 55px;
+  border: none;
+  font-size: 52px;
+  position: absolute;
+  color: #0275d8 !important;
+  right: -.4rem;
+  bottom: -.5rem;
+  user-select: none;
 }
 
-
-.btn-value:focus{
-  border-style: 0 none !important;
-  border-color: transparent;
-  box-shadow: 0 0 !important;
-  outline: 0 !important;
+.create-password{
+  width: 300px;
+  position: relative;
 }
 
 .show-pass{
@@ -86,8 +74,18 @@ form input[id="passwordConfirm"] {
   margin-right: .5rem;
 }
 
-h2{
-  font-size: var(--font-size);
+.btn-value:hover{
+  right: -.3rem;
+  bottom: -.33rem;
+  font-size: 55px;
+  color: rgb(9, 97, 173) !important;
+}
+
+.btn-value:focus{
+  border-style: 0 none !important;
+  border-color: transparent;
+  box-shadow: 0 0 !important;
+  outline: 0 !important;
 }
 
 @media(max-width:450px){

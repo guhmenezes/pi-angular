@@ -6,7 +6,7 @@ form{
 input{
     background-color: var(--input-color) !important;
     color: var(---text-color) !important;
-  }
+}
 
 @media (max-width:512px){
     h1{

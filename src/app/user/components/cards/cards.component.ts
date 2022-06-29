@@ -16,6 +16,7 @@ havePromo = false;
   ngOnInit(): void {
 
     if(this.user.getInfo().username?.length != 11) this.router.navigate(['/'])
+    if(!window.localStorage.getItem('noActive'))
     this.havePromo = this.user.havePromo()
     
   }

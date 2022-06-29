@@ -5,7 +5,7 @@ form{
 
 span{
   float: right !important;
-  }
+}
       
 form .form-floating:focus-within {
   z-index: 2;

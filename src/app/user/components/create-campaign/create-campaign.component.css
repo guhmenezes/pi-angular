@@ -1,10 +1,14 @@
+section{
+  min-height: 55vh;
+}
+
 form{
-    width: 500px;
+  width: 500px;
 }
 
 label{
-    margin-right: 8px;
-    text-align: right;
+  margin-right: 8px;
+  text-align: right;
 }
 
 input, textarea{
@@ -13,58 +17,54 @@ input, textarea{
 }
 
 textarea{
-    resize: none;
-    height: 6rem;
+  resize: none;
+  height: 6rem;
 }  
 
-section{
-    min-height: 55vh;
-}
-
 .container{
-    min-width: 512px;
+  min-width: 512px;
 }
 
 @media (max-width:512px){
-    .container{
-        min-width: 340px;
-    }
+  .container{
+    min-width: 340px;
+  }
 
-    form{
-        width: 320px;
-      }
-    
-      input{
-        width: 100% !important;
-        margin-top: 0 !important;
-        margin-bottom: 1rem !important; 
-      }
-      
-      label{
-        display: block;
-        width: 100%;
-        margin-bottom: .25rem;
-        padding-left: 10px;
-        text-align: left;
-      }
+  form{
+    width: 320px;
+  }
 
-      form div{
-        flex-direction: column;
-      }
+  input{
+    width: 100% !important;
+    margin-top: 0 !important;
+    margin-bottom: 1rem !important; 
+  }
 
-      button{
-        width: 60%;
-      }
-      
-      .dbtn{
-        align-items: center;
-      }
+  label{
+    display: block;
+    width: 100%;
+    margin-bottom: .25rem;
+    padding-left: 10px;
+    text-align: left;
+  }
 
-    th{
-        min-width: 70px;
-    }
+  form div{
+    flex-direction: column;
+  }
 
-    th,td{
-        border: 2px solid var(--text-color);
-    }
+  button{
+    width: 60%;
+  }
+
+  .dbtn{
+    align-items: center;
+  }
+
+  th{
+    min-width: 70px;
+  }
+
+  th,td{
+    border: 2px solid var(--text-color);
+  }
 }

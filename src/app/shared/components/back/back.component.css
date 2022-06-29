@@ -4,16 +4,7 @@ i{
     border: 1px solid var(--text-color);
     background-color: var(--text-color);
     color: var(--bg-color);
-    /* background: transparent; */
-    /* margin-left: 0.5rem;
-    position: fixed; */
-    /* margin-bottom: -50px; */
 }
-
-/* span{
-    color: red;
-    display: block;
-} */
 
 button, .btn-secondary:focus, .btn-secondary:hover{
     background-color: transparent;

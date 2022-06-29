@@ -1,3 +1,7 @@
+section{
+    min-height: 50vh;
+}
+
 form{
     width: 310px;
     min-height: 25vh;
@@ -7,10 +11,6 @@ form{
 input, select{
     background-color: var(--input-color) !important;
     color: var(---text-color);
-}
-
-section{
-    min-height: 50vh;
 }
 
 .loadingStamp{
