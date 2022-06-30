@@ -11,7 +11,7 @@ import { UserService } from '../../services/user.service';
   styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
-  username: string = ''
+  username: string = 'cpfcnpj'
   cpf: string = ''
   cnpj: string = ''
   firstName: string = '';
@@ -29,7 +29,7 @@ export class UserComponent implements OnInit {
   ngOnInit(): void {
 
     this.userId = window.localStorage.getItem('id')!
-    this.username = window.localStorage.getItem('username')!
+    this.username = window.localStorage.getItem('username') || 'false'
     if(this.username.length == 11) this.cpf = this.username
     else if (this.username.length == 14) this.cnpj = this.username
     this.getUser()

@@ -6,10 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  // title = 'clube-de-vantagens';
-  // fontSize = document.getElementsByClassName('container-xxl');
+  title = 'clube-de-vantagens';
   ngOnInit(): void {
-    
-    // console.log(this.fontSize)
+  
   }
 }
